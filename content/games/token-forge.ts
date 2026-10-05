@@ -5,6 +5,7 @@ const scoreRule =
 
 const tokenForge: GameDefinition = {
   id: "token-forge",
+  status: "implemented",
   title: "Token Forge",
   tier: 1,
   order: 1,

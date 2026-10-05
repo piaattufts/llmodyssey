@@ -1,33 +1,25 @@
-import { motion, useReducedMotion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { Link } from "react-router";
-import { referenceById } from "@content/references.ts";
 import { Button } from "@/components/ui/button.tsx";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog.tsx";
-import { Progress } from "@/components/ui/progress.tsx";
 import { initialAction, evaluateRound, type Evaluation, type GameAction } from "../../game-engine/evaluate.ts";
 import { courseGames, recommendedNext, thresholdFor } from "../../game-engine/prerequisites.ts";
 import { blankGameRecord, projectRecord } from "../../game-engine/records.ts";
 import { games } from "../../content/load-games.ts";
-import type { GameDefinition } from "../../game-engine/schema.ts";
-import { applyHintPenalty, gradeBandLabel, letterGrade, MAX_HINTS, ROUND_MAX_POINTS } from "../../game-engine/scoring.ts";
+import { completionAllowed, type GameDefinition } from "../../game-engine/schema.ts";
+import { applyHintPenalty, ROUND_MAX_POINTS } from "../../game-engine/scoring.ts";
 import { useLearner } from "../../hooks/use-learner.tsx";
 import type { RoundRecord } from "../../storage/types.ts";
+import { ConceptGuide, WorkedExample } from "./ConceptGuide.tsx";
+import { FeedbackPanel } from "./FeedbackPanel.tsx";
+import { GameCompletion } from "./GameCompletion.tsx";
+import { GameHeader } from "./GameHeader.tsx";
+import { HintPanel } from "./HintPanel.tsx";
 import { InteractionHost } from "./InteractionHost.tsx";
-
-const hintLabels = ["Conceptual cue", "Directional guidance", "Partial solution"];
-
-function GuideButton({ children }: { children: string }) {
-  return (
-    <DialogTrigger className="inline-flex min-h-11 items-center justify-center rounded-lg border border-border bg-background px-4 text-sm font-medium hover:bg-muted focus-visible:ring-3 focus-visible:ring-ring/50">
-      {children}
-    </DialogTrigger>
-  );
-}
+import { LearningObjectives } from "./LearningObjectives.tsx";
+import { RoundProgress } from "./RoundProgress.tsx";
+import { ScorePanel } from "./ScorePanel.tsx";
 
 export function GameShell({ game, basePath }: { game: GameDefinition; basePath: string }) {
   const learner = useLearner();
-  const reduceMotion = useReducedMotion();
   const threshold = thresholdFor(game);
   const [phase, setPhase] = useState<"intro" | "round" | "feedback" | "reflection" | "complete">("intro");
   const [roundIndex, setRoundIndex] = useState(0);
@@ -126,6 +118,7 @@ export function GameShell({ game, basePath }: { game: GameDefinition; basePath: 
   }
 
   async function finish(skip: boolean) {
+    if (!completionAllowed(game.status)) return;
     const text = skip ? "" : reflection;
     await learner.update((state) => {
       const current = state.games[game.id] ?? blankGameRecord(game.id);
@@ -141,39 +134,29 @@ export function GameShell({ game, basePath }: { game: GameDefinition; basePath: 
   const percent = possible === 0 ? 0 : Math.round((earned / possible) * 100);
   const nextGame = learner.state ? recommendedNext(courseGames(games), learner.state, learner.bypassLocks) : null;
 
+  const following = nextGame && nextGame.id !== game.id ? nextGame : null;
+
   return (
     <div className="space-y-6">
-      <header className="space-y-3">
-        <p className="text-sm text-muted-foreground">Tier {game.tier} · {game.estimatedMinutes} min · mastery {threshold}%</p>
-        <h1 className="text-3xl font-semibold tracking-tight" data-testid="game-title">{game.title}</h1>
-        <p>{game.summary}</p>
-        <p className="rounded-xl border border-primary/40 bg-primary/10 p-3 text-sm">
-          <strong>Implementation. </strong>{game.implementation.label}. {game.implementation.whatIsReal} {game.implementation.whatIsSimulated}
-        </p>
-        <Progress value={((roundIndex + (phase === "intro" ? 0 : 1)) / game.rounds.length) * 100} aria-label="Round progress" />
-      </header>
+      <GameHeader game={game} threshold={threshold} />
+      <RoundProgress
+        value={((roundIndex + (phase === "intro" ? 0 : 1)) / game.rounds.length) * 100}
+        label="Round progress"
+      />
 
       {phase === "intro" ? (
-        <section className="space-y-4">
-          <h2 className="text-xl font-semibold">Learning objectives</h2>
-          <ul className="list-disc space-y-1 pl-5">{game.learningObjectives.map((objective) => <li key={objective}>{objective}</li>)}</ul>
-          <p><strong>Bloom levels. </strong>{game.bloomLevels.join(", ")}</p>
-          <p><strong>Misconception in view. </strong>{game.misconception}</p>
-          <div className="flex flex-wrap gap-2">
-            <Dialog>
-              <GuideButton>Worked example</GuideButton>
-              <DialogContent>
-                <DialogHeader>
-                  <DialogTitle>{game.workedExample.title}</DialogTitle>
-                  <DialogDescription>A worked example before you start. It does not reveal later answers.</DialogDescription>
-                </DialogHeader>
-                <ol className="list-decimal space-y-2 pl-5">{game.workedExample.steps.map((step) => <li key={step}>{step}</li>)}</ol>
-              </DialogContent>
-            </Dialog>
-            <ConceptGuide game={game} />
-            <Button className="min-h-11" data-testid="start-game" onClick={() => void start()}>Start game</Button>
-          </div>
-        </section>
+        <LearningObjectives
+          game={game}
+          actions={
+            <>
+              <WorkedExample game={game} />
+              <ConceptGuide game={game} />
+              <Button className="min-h-11" data-testid="start-game" onClick={() => void start()}>
+                Start game
+              </Button>
+            </>
+          }
+        />
       ) : null}
 
       {phase === "round" || phase === "feedback" ? (
@@ -183,52 +166,49 @@ export function GameShell({ game, basePath }: { game: GameDefinition; basePath: 
               <h2 className="text-xl font-semibold">{round.title}</h2>
               <p className="text-sm text-muted-foreground">Concept: {round.concept}</p>
             </div>
-            <p className="text-sm">Score so far {earned}/{possible} · {percent}% · {gradeBandLabel(letterGrade(percent))}</p>
+            <ScorePanel earned={earned} possible={possible} percent={percent} />
           </div>
           <p>{round.scenario}</p>
-          <p><strong>Task. </strong>{round.learnerTask}</p>
+          <p>
+            <strong>Task. </strong>
+            {round.learnerTask}
+          </p>
           <details className="rounded-lg border border-border p-3 text-sm">
             <summary className="cursor-pointer font-medium">How this round is scored</summary>
             <p className="mt-2">{round.scoringRule}</p>
             <p className="mt-2">Expected reasoning, visible to you before you answer: {round.expectedReasoning}</p>
           </details>
           <InteractionHost round={round} action={action} disabled={phase === "feedback"} onChange={setAction} />
-          <div className="rounded-xl border border-border p-4">
-            <h3 className="font-medium">Hints</h3>
-            <p className="text-sm text-muted-foreground">Hints used {hints}/{MAX_HINTS}. Each hint subtracts {1} point from this round after scoring, to a floor of 0.</p>
-            <ol className="mt-2 space-y-2">
-              {round.hints.slice(0, hints).map((hint, index) => (
-                <li key={hint}><strong>{hintLabels[index]}. </strong>{hint}</li>
-              ))}
-            </ol>
-            {phase === "round" && hints < MAX_HINTS ? (
-              <Button variant="outline" className="mt-3 min-h-11" onClick={() => {
-                setHints(hints + 1);
-                void learner.track({ gameId: game.id, roundId: round.id, actionType: "hint", success: null, durationMs: null, metadata: { level: hints + 1 } });
-              }}>Reveal next hint</Button>
-            ) : null}
-          </div>
+          <HintPanel
+            hints={[...round.hints]}
+            revealed={hints}
+            canReveal={phase === "round" && hints < round.hints.length}
+            onReveal={() => {
+              setHints(hints + 1);
+              void learner.track({
+                gameId: game.id,
+                roundId: round.id,
+                actionType: "hint",
+                success: null,
+                durationMs: null,
+                metadata: { level: hints + 1 },
+              });
+            }}
+          />
           {phase === "round" ? (
-            <Button className="min-h-11" data-testid="submit-round" disabled={action === null} onClick={() => void submit()}>Lock in this round</Button>
+            <Button className="min-h-11" data-testid="submit-round" disabled={action === null} onClick={() => void submit()}>
+              Lock in this round
+            </Button>
           ) : null}
           {phase === "feedback" && evaluation && lockedScore !== null ? (
-            <motion.div
-              className="space-y-3 rounded-xl border border-border p-4"
-              data-testid="feedback"
-              aria-live="polite"
-              initial={reduceMotion ? false : { opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-            >
-              <p className="text-lg font-semibold">{evaluation.success ? "Met the round target" : evaluation.partial ? "Partly met" : "Not met"}</p>
-              <p>{evaluation.feedback}</p>
-              <p>{evaluation.explanation}</p>
-              <ul className="list-disc pl-5 text-sm">{evaluation.breakdown.map((line) => <li key={line.detail}>{line.detail}</li>)}</ul>
-              <p className="text-sm">Raw points {evaluation.rawPoints}. Hint penalty {hints}. Round score {lockedScore} / {ROUND_MAX_POINTS}.</p>
-              <div className="flex flex-wrap gap-2">
-                <Button variant="outline" className="min-h-11" onClick={retry}>Retry this round</Button>
-                <Button className="min-h-11" onClick={next}>{roundIndex < game.rounds.length - 1 ? "Next round" : "Continue to reflection"}</Button>
-              </div>
-            </motion.div>
+            <FeedbackPanel
+              evaluation={evaluation}
+              hints={hints}
+              score={lockedScore}
+              isLastRound={roundIndex >= game.rounds.length - 1}
+              onRetry={retry}
+              onNext={next}
+            />
           ) : null}
         </section>
       ) : null}
@@ -237,46 +217,25 @@ export function GameShell({ game, basePath }: { game: GameDefinition; basePath: 
         <section className="space-y-3">
           <h2 className="text-xl font-semibold">Reflection</h2>
           <p>{game.reflectionPrompt}</p>
-          <textarea className="min-h-32 w-full rounded-lg border border-border bg-background p-3" value={reflection} onChange={(event) => setReflectionDraft(event.target.value)} />
+          <textarea
+            className="min-h-32 w-full rounded-lg border border-border bg-background p-3"
+            value={reflection}
+            onChange={(event) => setReflectionDraft(event.target.value)}
+          />
           <div className="flex flex-wrap gap-2">
-            <Button className="min-h-11" onClick={() => void finish(false)}>Save reflection</Button>
-            <Button variant="outline" className="min-h-11" onClick={() => void finish(true)}>Skip for now</Button>
+            <Button className="min-h-11" onClick={() => void finish(false)}>
+              Save reflection
+            </Button>
+            <Button variant="outline" className="min-h-11" onClick={() => void finish(true)}>
+              Skip for now
+            </Button>
           </div>
         </section>
       ) : null}
 
       {phase === "complete" ? (
-        <section className="space-y-3" data-testid="game-complete">
-          <h2 className="text-xl font-semibold">{record?.mastered ? "Mastered" : "Completed, not yet mastered"}</h2>
-          <p>Best score {record?.bestPercent ?? percent}%. Letter {letterGrade(record?.bestPercent ?? percent)}. Mastery threshold {threshold}%.</p>
-          <p>You can retry any time. The best round scores are kept.</p>
-          {nextGame && nextGame.id !== game.id ? <Link className="inline-flex min-h-11 items-center underline" to={`${basePath}/play/${nextGame.id}`}>Next recommended: {nextGame.title}</Link> : <Link className="inline-flex min-h-11 items-center underline" to={`${basePath}/progress`}>Review progress</Link>}
-        </section>
+        <GameCompletion game={game} record={record} percent={percent} threshold={threshold} nextGame={following} basePath={basePath} />
       ) : null}
     </div>
-  );
-}
-
-function ConceptGuide({ game }: { game: GameDefinition }) {
-  const refs = game.furtherReadingIds.map((id) => referenceById(id)).filter((item) => item !== undefined);
-  return (
-    <Dialog>
-      <GuideButton>Concept guide</GuideButton>
-      <DialogContent className="max-h-[80vh] overflow-y-auto sm:max-w-2xl">
-        <DialogHeader>
-          <DialogTitle>{game.title} concept guide</DialogTitle>
-          <DialogDescription>{game.purpose}</DialogDescription>
-        </DialogHeader>
-        <p>{game.whyItMatters}</p>
-        <p><strong>Concepts. </strong>{game.concepts.join(", ")}</p>
-        <ul className="space-y-2 text-sm">
-          {refs.map((reference) => (
-            <li key={reference.id}>
-              <a className="underline" href={reference.url}>{reference.authors} ({reference.year}). {reference.title}.</a>
-            </li>
-          ))}
-        </ul>
-      </DialogContent>
-    </Dialog>
   );
 }

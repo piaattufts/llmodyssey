@@ -5,6 +5,7 @@ const scoreRule =
 
 const agentArchitect: GameDefinition = {
   id: "agent-architect",
+  status: "prototype",
   title: "Agent Architect",
   tier: 2,
   order: 9,

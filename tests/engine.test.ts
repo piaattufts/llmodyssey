@@ -11,7 +11,7 @@ import { odysseyConfig } from "../src/game-engine/config.ts";
 import { unlockStatus } from "../src/game-engine/prerequisites.ts";
 import { blankGameRecord, projectRecord } from "../src/game-engine/records.ts";
 import { applyHintPenalty, gamePercent, isMastered, letterGrade } from "../src/game-engine/scoring.ts";
-import { parseGame } from "../src/game-engine/schema.ts";
+import { completionAllowed, parseGame } from "../src/game-engine/schema.ts";
 import { createLlmProvider } from "../src/llm/providers.ts";
 import { researchModeEnabled } from "../src/research/mode.ts";
 import { progressCsv } from "../src/storage/export.ts";
@@ -91,6 +91,44 @@ describe("course content", () => {
       const action = representativeSuccessAction(round);
       expect(action).toEqual({ type: "attention", tokenIndex: result.winner });
     }
+  });
+
+  it("marks only Token Forge implemented and keeps prototypes playable", () => {
+    const implemented = games.filter((game) => game.status === "implemented").map((game) => game.id);
+    const prototypes = games.filter((game) => game.status === "prototype");
+    expect(implemented).toEqual(["token-forge"]);
+    expect(prototypes).toHaveLength(12);
+    expect(games.some((game) => game.status === "planned")).toBe(false);
+    for (const game of games) {
+      expect(game.learningObjectives.length).toBeGreaterThan(0);
+      expect(game.concepts.length).toBeGreaterThan(0);
+      expect(completionAllowed(game.status)).toBe(true);
+    }
+  });
+
+  it("refuses completion for a planned game", () => {
+    const forge = games.find((game) => game.id === "token-forge");
+    if (!forge) throw new Error("forge");
+    const planned = { ...forge, id: "planned-example", status: "planned" as const };
+    const record = blankGameRecord(planned.id);
+    record.completedAt = "2026-01-01T00:00:00.000Z";
+    for (const round of planned.rounds) {
+      record.rounds[round.id] = {
+        roundId: round.id,
+        bestScore: 10,
+        maxScore: 10,
+        hintsOnBestAttempt: 0,
+        totalHints: 0,
+        attempts: 1,
+        lastSuccess: true,
+      };
+    }
+    const projected = projectRecord(planned, record, 70);
+    expect(completionAllowed("planned")).toBe(false);
+    expect(projected.mastered).toBe(false);
+    expect(projected.completedAt).toBeNull();
+    expect(projected.rounds).toEqual({});
+    expect(projected.bestPercent).toBe(0);
   });
 
   it("rejects a broken educator file with a path", () => {

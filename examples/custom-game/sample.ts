@@ -2,6 +2,7 @@ import { parseGame } from "../../src/game-engine/schema.ts";
 
 const sample = {
   id: "example-custom-game",
+  status: "prototype",
   title: "Example custom game",
   tier: 1,
   order: 99,

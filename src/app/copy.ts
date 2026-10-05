@@ -21,7 +21,7 @@ export const tourSteps = [
     id: 1,
     title: "Tier structure",
     path: "/demo",
-    body: "Odyssey is three tiers. Cognitive Core is mechanism. Systems Forge is production structure. Foundry Arena is a constrained design brief. This bar is the guided tour. Plan on about one minute per step, roughly six minutes in all.",
+    body: "Odyssey is three tiers and thirteen games. Cognitive Core is mechanism. Systems Forge is production structure. Foundry Arena is a constrained design brief. Cards mark Token Forge as the reference implementation and the other games as prototypes. Plan on about one minute per step.",
   },
   {
     id: 2,
@@ -64,5 +64,11 @@ export const tourSteps = [
     title: "Educator dashboard",
     path: "/demo/educator",
     body: "Educator mode has no login. It lists objectives, Bloom levels, prerequisites, times, and assessments from the same content the games use. Export stays on this machine. Reset Classroom Demo restores the sample demo record.",
+  },
+  {
+    id: 9,
+    title: "Roadmap",
+    path: "/demo",
+    body: "This release does not pretend every game is equally finished. Token Forge is implemented. The other twelve are playable prototypes with real scores, hints, and local progress. A future game marked Planned would show its description only and could not be marked complete. After this page has loaded, the tour does not need Wi-Fi, an account, or an API key.",
   },
 ] as const;

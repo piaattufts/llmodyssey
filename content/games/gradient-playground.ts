@@ -14,6 +14,7 @@ const sharedScenario = {
 
 const gradientPlayground: GameDefinition = {
   id: "gradient-playground",
+  status: "prototype",
   title: "Gradient Playground",
   tier: 1,
   order: 5,

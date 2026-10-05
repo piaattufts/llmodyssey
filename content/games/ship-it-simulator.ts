@@ -5,6 +5,7 @@ const scoreRule =
 
 const shipIt: GameDefinition = {
   id: "ship-it-simulator",
+  status: "prototype",
   title: "Ship-It Simulator",
   tier: 2,
   order: 8,

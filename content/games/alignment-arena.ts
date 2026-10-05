@@ -5,6 +5,7 @@ const scoreRule =
 
 const alignmentArena: GameDefinition = {
   id: "alignment-arena",
+  status: "prototype",
   title: "Alignment Arena",
   tier: 1,
   order: 7,

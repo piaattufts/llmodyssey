@@ -5,6 +5,7 @@ const scoreRule =
 
 const reasoningReactor: GameDefinition = {
   id: "reasoning-reactor",
+  status: "prototype",
   title: "Reasoning Reactor",
   tier: 1,
   order: 6,

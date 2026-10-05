@@ -1,10 +1,32 @@
 # LLM Odyssey
 
-LLM Odyssey is an open-source, browser-based game-based learning platform for teaching Large Language Model engineering through 13 interactive learning experiences.
+LLM Odyssey is an open-source, browser-based, local-first curriculum of 13 games for teaching Large Language Model engineering. Educators can reuse the content without a backend. The default experience does not call a paid API.
 
 13 games · 3 learning tiers · No API key required · Open source · Instructor customizable
 
+**Current release:** Token Forge is the reference implementation. The other twelve games are playable prototypes. Their scores are calculated from the learner’s answers. They are labeled Prototype in the app and in the status table below. This README does not treat those prototypes as finished reference implementations.
+
 The course is three tiers. Cognitive Core covers mechanisms. Systems Forge covers production structure. Foundry Arena is a constrained design brief. The default install is local. Scoring, hints, progress, assessments, and the demo run in the browser with no database and no paid model API. Educational simulations are labeled in the interface. Educator content is data, validated at startup. Research collection is optional and off unless you turn it on.
+
+## Current implementation status
+
+| Game | Tier | Status |
+|---|---|---|
+| Token Forge | Cognitive Core | Implemented (reference) |
+| Attention Architect | Cognitive Core | Prototype |
+| Context Compression | Cognitive Core | Prototype |
+| Promptsmith | Cognitive Core | Prototype |
+| Gradient Playground | Cognitive Core | Prototype |
+| Reasoning Reactor | Cognitive Core | Prototype |
+| Alignment Arena | Cognitive Core | Prototype |
+| Ship-It Simulator | Systems Forge | Prototype |
+| Agent Architect | Systems Forge | Prototype |
+| Retrieval Lab | Systems Forge | Prototype |
+| System Composer | Systems Forge | Prototype |
+| ProdOps Gauntlet | Systems Forge | Prototype |
+| Foundry Arena | Foundry Arena | Prototype |
+
+A game whose registry status is `planned` renders a description page only. The progress record refuses completion and mastery for that status. Version 0.1.0 has no planned entries. Prototype games are still playable: hints, feedback, and scores are real arithmetic on the scenario, not decorative numbers.
 
 This repository does not use Base44, and it does not require an account. The earlier classroom app was exported from Base44 (`llm-odyssey-0544b844`). Its teaching aims were reviewed for this release. Its SDK, accounts, and character-slice tokenizer were not carried over. The review is in `docs/migration-audit.md`.
 
@@ -86,9 +108,13 @@ Tasks get more open because the earlier games have already made the parts inspec
 
 Individual games record their own Bloom labels. Those labels are the author's classification of the task.
 
-## Complete guide to all 13 games
+## Guide to all 13 games
+
+Token Forge is the reference implementation and the only game marked Implemented. The notes below for games 2–13 describe playable prototypes. Each prototype has rounds, hints, feedback, and a score computed in the browser. The guide is not a claim that those prototypes are finished reference designs.
 
 ### Game 1 — Token Forge
+
+**Release status.** Implemented. This is the reference game.
 
 **Purpose.** Token Forge makes segmentation visible, because model APIs bill and attend over tokens rather than characters.
 
@@ -575,7 +601,7 @@ The optional backend does not add gameplay. It can store anonymous events if you
 
 Default local mode stores a random session id, game progress, scores, attempts, hints, reflections, assessment answers, and anonymous interaction events. Settings such as Practice ahead are in the same record. Research consent, only relevant if you enable research mode, is a separate localStorage flag, `llmodyssey.researchConsent`.
 
-That data remains in the browser. Export it from `/progress` or `/educator` as progress CSV, assessment CSV, events CSV, or events JSON. Delete it with "Delete local data" on the progress page. That control deletes the record for the mode you are in. Deleting the learner record does not delete the demo record, and the reverse is also true.
+That data remains in the browser. Export it from `/progress` or `/educator` as progress CSV, assessment CSV, events CSV, or events JSON. Delete it with "Reset progress" on the progress page. The button asks for confirmation before it clears the record. That control deletes the record for the mode you are in. Deleting the learner record does not delete the demo record, and the reverse is also true.
 
 Using this public repository does not make a player a research participant. The app does not ask for a name or an email.
 
@@ -589,7 +615,7 @@ Consent in the dialog is not an ethics approval. This repository does not state 
 
 | Game | Implementation type | What is real | What is simulated |
 | --- | --- | --- | --- |
-| Token Forge | Precomputed segmentations | Counts and cost arithmetic on the pieces shown | The pieces themselves; not a live tokenizer |
+| Token Forge (implemented) | Precomputed segmentations | Counts, efficiency, and cost arithmetic on the pieces shown | The pieces themselves; not a live tokenizer |
 | Attention Architect | Simplified computation | Scaled dot-product and softmax on the given vectors | A transformer; the vectors are hand-written |
 | Context Compression | Deterministic simulation | Budget, relevance, and must-keep checks | Abstractive summary text, which is prewritten |
 | Promptsmith | Deterministic simulation | The comparison among authored strategies | Any model response; none is requested |
@@ -645,7 +671,7 @@ It is for conferences, faculty demonstrations, classroom previews, and workshops
 
 Demo mode uses a separate browser record, so it does not overwrite a learner who later uses the same machine. It opens every tier. It loads a sample record the first time the demo store is empty: Token Forge and Attention Architect mastered, Context Compression started, a sample pre-assessment, and three sample events. Reset Classroom Demo on `/educator` or `/demo/educator` restores that sample.
 
-The guided tour is eight steps, meant to take about five to eight minutes. Start it from the demo home.
+The guided tour is nine steps, meant to take about six to nine minutes. Start it from the demo home. It walks through the three tiers, the thirteen-game list, Token Forge feedback and hints, local progress, an educator view, and the difference between the reference game and the prototypes. It does not ask for login, Supabase, Wi-Fi after the app has loaded, or an API key.
 
 1. Show the three tiers.
 2. Open Token Forge.

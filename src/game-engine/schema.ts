@@ -9,6 +9,8 @@ export const bloomLevelSchema = z.enum([
   "create",
 ]);
 
+export const releaseStatusSchema = z.enum(["implemented", "prototype", "planned"]);
+
 export const qualitySchema = z.enum(["best", "acceptable", "poor"]);
 
 export const metricToneSchema = z.enum(["good", "poor", "neutral"]);
@@ -351,6 +353,7 @@ export const roundSchema = z.object({
 
 export const gameDefinitionSchema = z.object({
   id: z.string().min(1),
+  status: releaseStatusSchema,
   title: z.string().min(1),
   tier: z.union([z.literal(1), z.literal(2), z.literal(3)]),
   order: z.number().int().positive(),
@@ -380,6 +383,18 @@ export type RoundDefinition = z.infer<typeof roundSchema>;
 export type Interaction = RoundDefinition["interaction"];
 export type BloomLevel = z.infer<typeof bloomLevelSchema>;
 export type Quality = z.infer<typeof qualitySchema>;
+export type ReleaseStatus = z.infer<typeof releaseStatusSchema>;
+
+export function releaseStatusLabel(status: ReleaseStatus): string {
+  if (status === "implemented") return "Implemented";
+  if (status === "prototype") return "Prototype";
+  return "Planned";
+}
+
+/** Planned games stay descriptive. They do not record completion or mastery. */
+export function completionAllowed(status: ReleaseStatus): boolean {
+  return status !== "planned";
+}
 
 export function formatZodError(error: z.ZodError): string {
   return error.issues

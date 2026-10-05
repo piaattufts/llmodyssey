@@ -105,12 +105,12 @@ export function ProgressPage({ basePath }: { basePath: string }) {
           type="button"
           className="min-h-11 rounded-lg border border-destructive px-4 text-destructive"
           onClick={() => {
-            if (window.confirm("Delete this browser’s learner record for the current mode? This cannot be undone.")) {
+            if (window.confirm("Reset progress on this device for the current mode? Scores, attempts, and reflections in this record will be deleted.")) {
               void learner.clear();
             }
           }}
         >
-          Delete local data
+          Reset progress
         </button>
       </section>
     </div>

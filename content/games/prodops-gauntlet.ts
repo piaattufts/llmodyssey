@@ -5,6 +5,7 @@ const scoreRule =
 
 const prodops: GameDefinition = {
   id: "prodops-gauntlet",
+  status: "prototype",
   title: "ProdOps Gauntlet",
   tier: 2,
   order: 12,

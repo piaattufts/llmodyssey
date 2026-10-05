@@ -5,6 +5,7 @@ const scoreRule =
 
 const promptsmith: GameDefinition = {
   id: "promptsmith",
+  status: "prototype",
   title: "Promptsmith",
   tier: 1,
   order: 4,

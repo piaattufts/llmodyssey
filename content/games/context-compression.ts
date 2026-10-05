@@ -5,6 +5,7 @@ const scoreRule =
 
 const contextCompression: GameDefinition = {
   id: "context-compression",
+  status: "prototype",
   title: "Context Compression",
   tier: 1,
   order: 3,

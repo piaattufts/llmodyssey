@@ -1,7 +1,10 @@
 import { Menu } from "lucide-react";
 import { useState } from "react";
 import { NavLink, Outlet } from "react-router";
+import { games } from "../content/load-games.ts";
 import { odysseyConfig } from "../game-engine/config.ts";
+import { courseGames } from "../game-engine/prerequisites.ts";
+import { releaseStatusLabel } from "../game-engine/schema.ts";
 import { researchModeEnabled, runtimeWarnings } from "../research/mode.ts";
 import { citation } from "../site.ts";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet.tsx";
@@ -36,6 +39,7 @@ export function AppShell({ basePath, mode }: { basePath: string; mode: "learner"
                 {link.label}
               </SideLink>
             ))}
+            <GameLinks basePath={basePath} />
           </nav>
         </aside>
         <div>
@@ -55,6 +59,7 @@ export function AppShell({ basePath, mode }: { basePath: string; mode: "learner"
                       {link.label}
                     </SideLink>
                   ))}
+                  <GameLinks basePath={basePath} onNavigate={() => setMenuOpen(false)} />
                 </nav>
               </SheetContent>
             </Sheet>
@@ -100,6 +105,19 @@ function Brand() {
       <p className="text-lg font-semibold">{odysseyConfig.title}</p>
       {odysseyConfig.institution ? <p className="text-sm text-muted-foreground">{odysseyConfig.institution}</p> : null}
       <p className="mt-2 text-xs text-muted-foreground">{odysseyConfig.tagline}</p>
+    </div>
+  );
+}
+
+function GameLinks({ basePath, onNavigate }: { basePath: string; onNavigate?: () => void }) {
+  return (
+    <div className="mt-4 space-y-1 border-t border-border pt-3">
+      <p className="px-3 text-xs font-medium text-muted-foreground">Games</p>
+      {courseGames(games).map((game) => (
+        <SideLink key={game.id} to={`${basePath}/play/${game.id}`} end={false} onClick={onNavigate}>
+          {`${game.title} · ${releaseStatusLabel(game.status)}`}
+        </SideLink>
+      ))}
     </div>
   );
 }

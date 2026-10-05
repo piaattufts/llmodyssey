@@ -1,5 +1,5 @@
 import { gamePercent, isMastered, ROUND_MAX_POINTS } from "./scoring.ts";
-import type { GameDefinition } from "./schema.ts";
+import { completionAllowed, type GameDefinition } from "./schema.ts";
 import type { GameRecord, RoundRecord } from "../storage/types.ts";
 
 export function blankGameRecord(gameId: string): GameRecord {
@@ -17,6 +17,15 @@ export function blankGameRecord(gameId: string): GameRecord {
 }
 
 export function projectRecord(game: GameDefinition, record: GameRecord, threshold: number): GameRecord {
+  if (!completionAllowed(game.status)) {
+    return {
+      ...record,
+      completedAt: null,
+      bestPercent: 0,
+      mastered: false,
+      rounds: {},
+    };
+  }
   const earned = game.rounds.reduce((sum, round) => sum + (record.rounds[round.id]?.bestScore ?? 0), 0);
   const bestPercent = gamePercent(earned, game.rounds.length);
   const completed = game.rounds.every((round) => record.rounds[round.id]);

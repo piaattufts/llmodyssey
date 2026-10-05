@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes } from "react-router";
+import { Route, Routes } from "react-router";
 import { AppShell } from "./app/AppShell.tsx";
 import { DemoSeed } from "./app/DemoSeed.tsx";
 import { AssessmentPage } from "./app/pages/AssessmentPage.tsx";
@@ -6,6 +6,7 @@ import { EducatorPage } from "./app/pages/EducatorPage.tsx";
 import { GamePage } from "./app/pages/GamePage.tsx";
 import { GuidePage } from "./app/pages/GuidePage.tsx";
 import { HomePage } from "./app/pages/HomePage.tsx";
+import { NotFoundPage } from "./app/pages/NotFoundPage.tsx";
 import { ProgressPage } from "./app/pages/ProgressPage.tsx";
 import { LearnerProvider } from "./hooks/use-learner.tsx";
 
@@ -44,7 +45,7 @@ export default function App() {
         <Route path="assess/:kind" element={<AssessmentPage basePath="" />} />
         <Route path="guide" element={<GuidePage basePath="" />} />
       </Route>
-      <Route path="*" element={<Navigate to="/" replace />} />
+      <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
 }

@@ -1,6 +1,7 @@
 import { Link } from "react-router";
 import { games } from "../../content/load-games.ts";
 import { odysseyConfig } from "../../game-engine/config.ts";
+import { releaseStatusLabel } from "../../game-engine/schema.ts";
 import { countMastered, courseGames, recommendedNext, unlockStatus } from "../../game-engine/prerequisites.ts";
 import { useLearner } from "../../hooks/use-learner.tsx";
 import { tierCopy } from "../copy.ts";
@@ -21,7 +22,7 @@ export function HomePage({ basePath, demo = false }: { basePath: string; demo?: 
         <p className="text-sm text-muted-foreground">{odysseyConfig.tagline}</p>
         <h1 className="text-4xl font-semibold tracking-tight">{odysseyConfig.title}</h1>
         <p className="max-w-3xl text-lg">
-          Thirteen browser games for LLM engineering. Scoring, hints, and progress stay on this machine. No model API key is required.
+          Thirteen browser games for LLM engineering. Token Forge is the reference implementation. The other twelve are playable prototypes with calculated scores. Nothing here calls a paid model API.
         </p>
         <p>
           {mastered} of {visible.length} games mastered
@@ -74,7 +75,15 @@ export function HomePage({ basePath, demo = false }: { basePath: string; demo?: 
                       </span>
                       <span className="mt-1 block text-sm text-muted-foreground">{game.summary}</span>
                       <span className="mt-2 block text-sm">
-                        {record?.mastered ? `Mastered · ${record.bestPercent}%` : record ? `In progress · ${record.bestPercent}%` : "Not started"}
+                        {releaseStatusLabel(game.status)}
+                        {game.status === "implemented" ? " · Reference" : ""}
+                        {game.status === "planned"
+                          ? " · Not playable"
+                          : record?.mastered
+                            ? ` · Mastered · ${record.bestPercent}%`
+                            : record
+                              ? ` · In progress · ${record.bestPercent}%`
+                              : " · Not started"}
                         {gate.unlocked ? "" : ` · Locked. ${gate.reason}`}
                         <span className="sr-only">{record?.mastered ? " Status mastered." : " Status open."}</span>
                       </span>

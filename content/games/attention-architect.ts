@@ -5,6 +5,7 @@ const scoreRule =
 
 const attentionArchitect: GameDefinition = {
   id: "attention-architect",
+  status: "prototype",
   title: "Attention Architect",
   tier: 1,
   order: 2,

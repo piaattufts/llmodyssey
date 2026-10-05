@@ -5,6 +5,7 @@ const scoreRule =
 
 const systemComposer: GameDefinition = {
   id: "system-composer",
+  status: "prototype",
   title: "System Composer",
   tier: 2,
   order: 11,

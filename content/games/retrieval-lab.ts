@@ -5,6 +5,7 @@ const scoreRule =
 
 const retrievalLab: GameDefinition = {
   id: "retrieval-lab",
+  status: "prototype",
   title: "Retrieval Lab",
   tier: 2,
   order: 10,

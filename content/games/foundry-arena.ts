@@ -8,6 +8,7 @@ const selfCheck = { id: "self-assessment", label: "Self-assessment completed", p
 
 const foundryArena: GameDefinition = {
   id: "foundry-arena",
+  status: "prototype",
   title: "Foundry Arena",
   tier: 3,
   order: 13,
