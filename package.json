@@ -12,7 +12,7 @@
   "bugs": {
     "url": "https://github.com/piaattufts/llmodyssey/issues"
   },
-  "homepage": "https://github.com/piaattufts/llmodyssey",
+  "homepage": "https://piaattufts.github.io/llmodyssey/",
   "author": "Priyamvada Tripathi",
   "scripts": {
     "dev": "vite",

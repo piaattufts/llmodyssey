@@ -24,4 +24,8 @@ test("prototype label, demo tour, and unknown route", async ({ page }) => {
   await expect(page.getByText("Demo mode uses a separate local record")).toBeVisible();
   await page.goto("/this-route-is-not-real");
   await expect(page.getByRole("heading", { name: "That page is not in LLM Odyssey" })).toBeVisible();
+  await page.goto("/games/token-forge");
+  await expect(page.getByTestId("game-title")).toHaveText("Token Forge");
+  await page.goto("/educator");
+  await expect(page.getByRole("heading", { level: 1, name: "Educator guide" })).toBeVisible();
 });

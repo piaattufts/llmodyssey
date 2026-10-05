@@ -18,26 +18,43 @@ export function HomePage({ basePath, demo = false }: { basePath: string; demo?: 
 
   return (
     <div className="space-y-8">
-      <header className="space-y-3">
+      <header className="space-y-4">
         <p className="text-sm text-muted-foreground">{odysseyConfig.tagline}</p>
         <h1 className="text-4xl font-semibold tracking-tight">{odysseyConfig.title}</h1>
+        <p className="max-w-3xl text-2xl font-medium tracking-tight">Master LLM Engineering Through Interactive Games</p>
+        <ul className="flex flex-wrap gap-2 text-sm">
+          {["13 games", "3 learning tiers", "No API key required", "Open source"].map((item) => (
+            <li key={item} className="rounded-full border border-border px-3 py-1">
+              {item}
+            </li>
+          ))}
+        </ul>
         <p className="max-w-3xl text-lg">
-          Thirteen browser games for LLM engineering. Token Forge is the reference implementation. The other twelve are playable prototypes with calculated scores. Nothing here calls a paid model API.
+          Token Forge is the reference implementation. The other twelve games are playable prototypes. Their scores are calculated, and each card shows that status. Nothing here calls a paid model API.
         </p>
+        <div className="flex flex-wrap gap-3">
+          <Link className="inline-flex min-h-11 items-center rounded-lg bg-primary px-4 text-primary-foreground" to={`${basePath}/play/token-forge`}>
+            Start Learning
+          </Link>
+          <Link className="inline-flex min-h-11 items-center rounded-lg border border-border px-4" to={`${basePath}/educator`}>
+            Educator Guide
+          </Link>
+          <Link className="inline-flex min-h-11 items-center rounded-lg border border-border px-4" to={demo ? "/demo?tour=1" : "/demo"}>
+            Demo Tour
+          </Link>
+          {next ? (
+            <Link className="inline-flex min-h-11 items-center rounded-lg border border-border px-4" to={`${basePath}/play/${next.id}`}>
+              Continue: {next.title}
+            </Link>
+          ) : null}
+        </div>
         <p>
           {mastered} of {visible.length} games mastered
           {next ? `. Recommended next: ${next.title}.` : "."}
         </p>
-        <div className="flex flex-wrap gap-3">
-          {next ? (
-            <Link className="inline-flex min-h-11 items-center rounded-lg bg-primary px-4 text-primary-foreground" to={`${basePath}/play/${next.id}`}>
-              Continue: {next.title}
-            </Link>
-          ) : null}
-          <Link className="inline-flex min-h-11 items-center rounded-lg border border-border px-4" to={`${basePath}/assess/pre`}>
-            {state.assessments.pre ? "Review pre-assessment" : "Optional pre-assessment"}
-          </Link>
-        </div>
+        <Link className="inline-flex min-h-11 items-center text-sm underline" to={`${basePath}/assess/pre`}>
+          {state.assessments.pre ? "Review pre-assessment" : "Optional pre-assessment"}
+        </Link>
         <label className="flex min-h-11 items-center gap-3 text-sm">
           <input
             type="checkbox"

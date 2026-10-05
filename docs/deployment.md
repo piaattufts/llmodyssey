@@ -17,7 +17,7 @@ The site for this repository is served from `/llmodyssey/`.
 VITE_BASE_PATH=/llmodyssey/ npm run build
 ```
 
-The Vite build copies `dist/index.html` to `dist/404.html` so a refresh on `/play/token-forge` still loads the app. Publish the `dist` directory with GitHub Pages. Do not set a Supabase key unless you intend to collect events.
+The Vite build copies `dist/index.html` to `dist/404.html` so a refresh on `/play/token-forge` or `/games/token-forge` still loads the app. `.github/workflows/deploy-pages.yml` builds with `VITE_BASE_PATH=/llmodyssey/` and deploys `dist` to GitHub Pages from `main`. Local `npm run dev` and `npm run build` keep the site at `/`. Do not set a Supabase key unless you intend to collect events.
 
 ## Vercel
 

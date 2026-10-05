@@ -25,8 +25,9 @@ export default function App() {
       >
         <Route index element={<HomePage basePath="/demo" demo />} />
         <Route path="play/:gameId" element={<GamePage basePath="/demo" />} />
+        <Route path="games/:gameId" element={<GamePage basePath="/demo" />} />
         <Route path="progress" element={<ProgressPage basePath="/demo" />} />
-        <Route path="educator" element={<EducatorPage />} />
+        <Route path="educator" element={<EducatorPage basePath="/demo" />} />
         <Route path="assess/:kind" element={<AssessmentPage basePath="/demo" />} />
         <Route path="guide" element={<GuidePage basePath="/demo" />} />
       </Route>
@@ -40,8 +41,9 @@ export default function App() {
       >
         <Route index element={<HomePage basePath="" />} />
         <Route path="play/:gameId" element={<GamePage basePath="" />} />
+        <Route path="games/:gameId" element={<GamePage basePath="" />} />
         <Route path="progress" element={<ProgressPage basePath="" />} />
-        <Route path="educator" element={<EducatorPage />} />
+        <Route path="educator" element={<EducatorPage basePath="" />} />
         <Route path="assess/:kind" element={<AssessmentPage basePath="" />} />
         <Route path="guide" element={<GuidePage basePath="" />} />
       </Route>

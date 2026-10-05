@@ -1,637 +1,434 @@
+[![Launch LLM Odyssey](https://img.shields.io/badge/LAUNCH-LLM%20ODYSSEY-15803d?style=for-the-badge)](https://piaattufts.github.io/llmodyssey/)
+[![GitHub Release](https://img.shields.io/github/v/release/piaattufts/llmodyssey?style=flat-square)](https://github.com/piaattufts/llmodyssey/releases/latest)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue?style=flat-square)](https://github.com/piaattufts/llmodyssey/blob/main/LICENSE)
+[![CI](https://github.com/piaattufts/llmodyssey/actions/workflows/ci.yml/badge.svg)](https://github.com/piaattufts/llmodyssey/actions/workflows/ci.yml)
+
 # LLM Odyssey
 
-LLM Odyssey is an open-source, browser-based, local-first curriculum of 13 games for teaching Large Language Model engineering. Educators can reuse the content without a backend. The default experience does not call a paid API.
+**Learn LLM engineering through interactive games.**
 
-13 games · 3 learning tiers · No API key required · Open source · Instructor customizable
+LLM Odyssey is an open-source, browser-based educational platform that teaches Large Language Model engineering through 13 interactive learning experiences spanning foundational concepts, system design, and applied LLM engineering.
 
-**Current release:** Token Forge is the reference implementation. The other twelve games are playable prototypes. Their scores are calculated from the learner’s answers. They are labeled Prototype in the app and in the status table below. This README does not treat those prototypes as finished reference implementations.
+[Launch LLM Odyssey](https://piaattufts.github.io/llmodyssey/)
+· [Educator Guide](https://piaattufts.github.io/llmodyssey/educator)
+· [Demo](https://piaattufts.github.io/llmodyssey/demo)
+· [GitHub Release](https://github.com/piaattufts/llmodyssey/releases/latest)
 
-The course is three tiers. Cognitive Core covers mechanisms. Systems Forge covers production structure. Foundry Arena is a constrained design brief. The default install is local. Scoring, hints, progress, assessments, and the demo run in the browser with no database and no paid model API. Educational simulations are labeled in the interface. Educator content is data, validated at startup. Research collection is optional and off unless you turn it on.
+13 games · 3 learning tiers · Browser-based · No paid API required · Open source · Educator reusable
 
-## Current implementation status
+Token Forge is the reference implementation in v0.1.0. The remaining games are playable educational prototypes. Prototype status is shown on every game card and in the table below.
 
-| Game | Tier | Status |
-|---|---|---|
-| Token Forge | Cognitive Core | Implemented (reference) |
-| Attention Architect | Cognitive Core | Prototype |
-| Context Compression | Cognitive Core | Prototype |
-| Promptsmith | Cognitive Core | Prototype |
-| Gradient Playground | Cognitive Core | Prototype |
-| Reasoning Reactor | Cognitive Core | Prototype |
-| Alignment Arena | Cognitive Core | Prototype |
-| Ship-It Simulator | Systems Forge | Prototype |
-| Agent Architect | Systems Forge | Prototype |
-| Retrieval Lab | Systems Forge | Prototype |
-| System Composer | Systems Forge | Prototype |
-| ProdOps Gauntlet | Systems Forge | Prototype |
-| Foundry Arena | Foundry Arena | Prototype |
+## Why LLM Odyssey?
 
-A game whose registry status is `planned` renders a description page only. The progress record refuses completion and mastery for that status. Version 0.1.0 has no planned entries. Prototype games are still playable: hints, feedback, and scores are real arithmetic on the scenario, not decorative numbers.
+Students can finish a machine learning course and still have little practice with the decisions that appear once a language model is part of a system. Those decisions include:
 
-This repository does not use Base44, and it does not require an account. The earlier classroom app was exported from Base44 (`llm-odyssey-0544b844`). Its teaching aims were reviewed for this release. Its SDK, accounts, and character-slice tokenizer were not carried over. The review is in `docs/migration-audit.md`.
+- tokenization
+- attention
+- context limitations
+- prompting
+- fine-tuning
+- retrieval-augmented generation
+- agent design
+- alignment
+- production deployment
+- latency
+- reliability
+- cost
+- monitoring
 
-## If you use LLM Odyssey in teaching or research, please cite
+A lecture can name each of those topics. It is harder, on a slide, to show that a segmentation changed a bill, that two attention patterns can disagree, or that a retry loop multiplied a vendor invoice while the status page stayed green.
 
-Priyamvada Tripathi. *LLM Odyssey: A Game-Based Platform for Teaching LLM Engineering Concepts.* Software, version 0.1.0. <https://github.com/piaattufts/llmodyssey>
+LLM Odyssey turns those situations into short exercises. Learners make an engineering choice and see an immediate result: a score, an explanation, and, where the round computes something, a number they can recompute. The platform is designed to support that kind of practice. It is not evidence, by itself, that the practice improves learning. A formal estimate of learning outcomes remains an empirical research question for anyone who studies a particular course.
 
-Priyamvada Tripathi. *WIP: LLM Odyssey: A Game-Based Platform for Teaching LLM Engineering Concepts.* arXiv:2608.16924, 2026. <https://arxiv.org/abs/2608.16924>. DOI: 10.48550/arXiv.2608.16924.
+## Start Here
 
-`CITATION.cff` carries the same metadata. The author is Priyamvada Tripathi at the Tufts Institute for Artificial Intelligence, Tufts University. Original development and the Winter 2026 classroom deployment were conducted while the author was at Durham College. That historical note is not a claim that the present repository, or your deployment of it, is covered by any ethics approval.
+### I am a student
 
-## Why LLM Odyssey exists
+Open **[Launch LLM Odyssey](https://piaattufts.github.io/llmodyssey/)** and begin with [Token Forge](https://piaattufts.github.io/llmodyssey/play/token-forge). It is the reference game in this release. You need a modern browser. You do not need an account or an API key.
 
-Students can finish a general machine learning course and still have little practice with the decisions that show up once a language model is part of a system. Those decisions include how text is segmented into tokens, what a context window will actually hold, how a prompt constrains a parser, what a learning-rate choice does to a validation curve, how a retriever can miss the passage the answer depends on, and what latency, retries, and cost do to a service that looked fine in a notebook.
+### I am an educator
 
-LLM-specific work also includes alignment tradeoffs, tool permissions, and incident response. A lecture can name those topics. It is harder, in a slide, to show that a segmentation changed a bill, that two attention heads can disagree, or that a retry loop multiplied a vendor invoice while the status page stayed green.
+Open **[Educator Mode](https://piaattufts.github.io/llmodyssey/educator)**. You can inspect learning objectives, concepts, Bloom mapping, implementation status, expected time, and course-integration ideas. You do not have to assign all 13 games.
 
-Odyssey turns each of those situations into a short exercise with an immediate result. The result is a score, an explanation, and, where the round computes something, a number the learner can recompute. The platform is designed to support that kind of practice. It is not evidence, by itself, that the practice improves learning. A formal estimate of learning effectiveness remains an empirical question for anyone who studies a particular deployment.
+### I am demonstrating the project
 
-## Pedagogical design
+Open **[Demo Mode](https://piaattufts.github.io/llmodyssey/demo)**. It is a short guided walkthrough on a separate sample record. It does not change a student’s own progress, and it does not call a model API.
 
-### 1. Immediate formative feedback
+### I am a developer
 
-Learners should not wait until the end of a game to learn whether a decision did what they thought. After each action, the shell updates a readout. After the learner locks the round, the score, the explanation, and a short breakdown appear before the next round.
+Local setup is in [Run locally](#run-locally) and [For developers](#for-developers), after the teaching sections.
 
-In Token Forge, choosing a tokenizer family updates the segmentation, the token count, the efficiency figure, and the estimated cost before the round is locked. The feedback after locking says whether that family was the best, acceptable, or poor fit for the authored comparison.
+## The learning journey
 
-### 2. Scaffolded hints
+The course is three tiers. Early tasks ask students to inspect a mechanism. Later tasks ask them to judge a system against a constraint. The last task asks them to propose a design. The questions get more open because the earlier games have already made the parts visible.
 
-A hint should narrow the problem without replacing the decision. Each round has three hints. The first is a conceptual cue. The second is directional. The third is a stronger explanation or a partial view of the reasoning. The third hint still does not select the answer.
-
-In Attention Architect, the first hint points at the query-key comparison, the second points at softmax, and the third points at which head the question asked about. The learner still clicks a token.
-
-### 3. Progressive difficulty
-
-Early rounds use a small case and name the feature that matters. Later rounds add a constraint: a mixed-script string, a budget that cannot hold every relevant span, a serving limit and a cost limit together.
-
-Context Compression starts by asking which spans fit a small budget and later asks for a hierarchical cut where a flat summary drops a required fact.
-
-### 4. Worked examples
-
-A worked example shows the shape of a good solution on a problem that is not the graded round. Every game has one, opened from the introduction, before Start.
-
-Gradient Playground's worked example walks through reading a training curve and a validation curve on a tiny setting before the learner changes learning rate, epochs, batch size, or method.
-
-### 5. Authentic engineering scenarios
-
-The fiction is specific: a support macro, a clinic note, a robot tray, a hiring packet, an invoice that tripled at 14:10. The scenario says who is affected and which constraint is in force.
-
-Ship-It Simulator's first rounds are a latency and error budget on a service that already has a cache, a fallback model, and a retry policy. The learner changes those levers. The page projects the metrics. It does not claim to be a cluster.
-
-### 6. Mastery-oriented retries
-
-A missed round can be retried. Hints reset on the retry. The best score for that round is kept, and the hint count on that best attempt is the one that matters for the independent-mastery achievement. Total hints are still stored.
-
-Promptsmith uses this directly. A learner can submit a vague instruction, read why a schema would have been a better fit, and submit again without losing the rest of the game.
-
-### 7. Reflection
-
-After the last round, the game asks a question that the score cannot answer. The text is stored on the local record and included in the progress CSV. Skipping is allowed and stores an empty reflection.
-
-Foundry Arena also has a reflection inside the round, because the brief asks the learner to name a tradeoff in the design they actually selected. That in-round reflection is part of the rubric. The end-of-game reflection is separate.
-
-### 8. Tiered progression
-
-The course is ordered so that mechanisms come before systems, and systems come before an open brief. Systems Forge opens after four Cognitive Core games are mastered. Foundry Arena opens after three Systems Forge games are mastered. Practice ahead, and demo mode, open the later games without those counts. Listed per-game prerequisites are shown to instructors. They are advisory. The lock that blocks play is the tier count, the enabled-game list, and the Foundry switch.
-
-## Learning model and Bloom's taxonomy
-
-Tier 1, Cognitive Core, emphasizes remember, understand, and apply. Learners name a mechanism and use it on a small case. Tier 2, Systems Forge, emphasizes apply, analyze, and evaluate. Learners compare designs against constraints that can conflict. Tier 3, Foundry Arena, emphasizes analyze, evaluate, and create. The brief no longer has a single labeled architecture.
-
-Tasks get more open because the earlier games have already made the parts inspectable. Foundry still scores constraint coverage. It does not pretend that coverage is the only professional judgment.
-
-| Tier | Games | Primary learning goal | Bloom levels |
+| Tier | Games | Learning focus | Bloom emphasis |
 | --- | --- | --- | --- |
-| 1 Cognitive Core | Token Forge, Attention Architect, Context Compression, Promptsmith, Gradient Playground, Reasoning Reactor, Alignment Arena | Make the mechanisms visible and usable on a small case | Remember, understand, apply |
-| 2 Systems Forge | Ship-It Simulator, Agent Architect, Retrieval Lab, System Composer, ProdOps Gauntlet | Judge a system against cost, latency, grounding, and failure | Apply, analyze, evaluate |
-| 3 Foundry Arena | Foundry Arena | Produce a constrained design and name the tradeoff | Analyze, evaluate, create |
+| Cognitive Core | 1–7 | foundations | Remember, Understand, Apply |
+| Systems Forge | 8–12 | system design and production | Apply, Analyze, Evaluate |
+| Foundry Arena | 13 | synthesis | Analyze, Evaluate, Create |
 
-Individual games record their own Bloom labels. Those labels are the author's classification of the task.
+Individual games also record their own Bloom labels. Those labels are the author’s classification of the task.
 
-## Guide to all 13 games
+## The 13 games
 
-Token Forge is the reference implementation and the only game marked Implemented. The notes below for games 2–13 describe playable prototypes. Each prototype has rounds, hints, feedback, and a score computed in the browser. The guide is not a claim that those prototypes are finished reference designs.
+| # | Game | Tier | What students learn | Status |
+| --- | --- | --- | --- | --- |
+| 1 | Token Forge | Cognitive Core | How subword segmentation changes token count and cost | Implemented |
+| 2 | Attention Architect | Cognitive Core | How a tiny attention pattern chooses a token | Prototype |
+| 3 | Context Compression | Cognitive Core | How to fit a needed fact inside a token budget | Prototype |
+| 4 | Promptsmith | Cognitive Core | How prompting strategies trade quality against cost and failure | Prototype |
+| 5 | Gradient Playground | Cognitive Core | How learning-rate and fine-tuning choices move a loss curve | Prototype |
+| 6 | Reasoning Reactor | Cognitive Core | How a visible check-and-sample workflow is assembled | Prototype |
+| 7 | Alignment Arena | Cognitive Core | How a rubric ranks helpfulness, safety, and factuality | Prototype |
+| 8 | Ship-It Simulator | Systems Forge | How serving levers move latency, cost, and reliability | Prototype |
+| 9 | Agent Architect | Systems Forge | How an agent loop limits tools, checks work, and stops | Prototype |
+| 10 | Retrieval Lab | Systems Forge | How keyword, vector, and hybrid search change what is retrieved | Prototype |
+| 11 | System Composer | Systems Forge | How grounding, safety, latency, and operations fit in one design | Prototype |
+| 12 | ProdOps Gauntlet | Systems Forge | How to respond to cost, regression, drift, and audit cases | Prototype |
+| 13 | Foundry Arena | Foundry Arena | How to design under a brief that has no single correct architecture | Prototype |
+
+Prototype games are playable. Their scores are calculated. They are not reference implementations of equal maturity to Token Forge.
+
+## Detailed game explanations
 
 ### Game 1 — Token Forge
 
-**Release status.** Implemented. This is the reference game.
+**Students learn.** What a token is, how subword families segment the same string differently, and how token count relates to API cost.
 
-**Purpose.** Token Forge makes segmentation visible, because model APIs bill and attend over tokens rather than characters.
+**What they do.** They compare authored segmentations, read the pieces on the screen, and choose the segmentation that fits the round.
 
-**Concepts.** Tokens, byte-pair encoding (BPE), WordPiece, SentencePiece, Unigram, vocabulary tradeoffs, multilingual segmentation, token cost.
+**Why it matters.** Model APIs bill and attend over tokens, not characters. A string that looks cheap in an editor can be expensive after segmentation.
 
-**Why this matters.** A string that looks cheap in a text editor can be expensive after segmentation. Rare words, code, and mixed scripts often split into more pieces than a word count suggests. At a million calls, a small difference in tokens is a real invoice difference.
+**Example activity.** For a plain English sentence, compare a compact segmentation with one that splits common words into extra pieces, then read the token count and the estimated cost.
 
-**What the learner does.** The learner receives a text sample, selects a tokenizer family, and sees the authored pieces, the count, an efficiency figure, and a cost computed as tokens times price per million times the number of calls. The learner can open hints and then lock the round. Later rounds use code, a less common word, a mixed-script string, and a clause at high volume.
+**Implementation status.** Implemented. This is the reference game in v0.1.0.
 
-**Example challenge.** Round 5 uses the sentence "The contractor's aggregate liability under this schedule is limited to fees paid in the prior three months." The authored SentencePiece row has 19 pieces. The authored WordPiece row has 23. At one million calls and 10 dollars per million tokens, the learner can compute both bills from the counts on the cards.
-
-**Feedback.** Before locking, the readout shows the count and the estimated cost. After locking, the round says whether the family was the best, acceptable, or poor fit, and it explains the linguistic feature the comparison was written to show.
-
-**Common misconception addressed.** A token is not a word, and a shorter character string is not automatically cheaper.
-
-**Learning objectives.** Compare BPE, WordPiece, SentencePiece, and Unigram segmentations of the same string. Compute a token count from a displayed segmentation. Estimate call cost from a token count and a per-million-token price. Explain one case where a morphologically rich or mixed-script string changes the preferred segmentation.
+**Estimated time.** 20 minutes.
 
 **Bloom level.** Remember, understand, apply.
 
-**Estimated time.** 20 minutes.
-
-**Implementation note.** Precomputed educational segmentations. Token counts, efficiency figures, and dollar estimates are arithmetic on the segments shown. The segments are authored illustrations of how these families often behave. They are not the output of a production tokenizer library. A real Unigram or SentencePiece model can segment the same string differently.
-
-What a token is, in this course, is one piece from the model's segmentation. Vocabulary size and the training text change which pieces exist. BPE repeatedly merges the most frequent pair. WordPiece is the subword family associated with that line of work and often marks continuations. SentencePiece treats the input as a raw stream and can keep a visible marker for whitespace, which is why the pieces in this game often start with U+2581. Unigram is a language-model tokenizer that can keep a frequent piece when that piece has high probability. Those are the teaching distinctions used in the cards. They are not a claim that the card was produced by the reference implementation of each paper.
-
 ### Game 2 — Attention Architect
 
-**Purpose.** Show query, key, value, scores, and softmax on vectors small enough to inspect, including a case where two heads disagree.
+**Students learn.** The roles of query, key, and value, and how a scaled dot-product plus softmax decides which token receives the weight.
 
-**Concepts.** Query, key, value, attention score, softmax, self-attention, multi-head attention, positional information.
+**What they do.** They inspect a tiny, fully visible attention example and identify the token the pattern selects.
 
-**Why this matters.** Attention is the operation that lets a position gather information from other positions. If learners only see a heatmap from a black-box demo, they cannot tell a score from a weight, or a head from the whole layer.
+**Why it matters.** Attention is easier to talk about than to read. A small computed pattern shows that “the model looks at the important word” is a weighted choice, not a metaphor.
 
-**What the learner does.** The learner reads a short sentence whose tokens have hand-authored vectors. They click the token they think receives the highest weight for the head the question names. The page computes scaled dot-product scores and the softmax, and it draws a bar for each weight. One round asks the learner to notice that head A and head B do not highlight the same token. Positional information is discussed as something the toy vectors do not learn: the vectors were written, so position is not emerging from training.
+**Example activity.** Given a short token list and hand-written vectors, find the token with the highest attention weight.
 
-**Example challenge.** A sentence contains two mentions that could be antecedents. The learner selects the token with the largest softmax weight for the named head. The correct index is the argmax of the computed weights, not a separately stored answer key.
-
-**Feedback.** The readout lists scores and weights before submit. After submit, the feedback says whether the selected index was the unique winner and restates the formula used.
-
-**Common misconception addressed.** Attention weights are not the value vectors, and two heads are not required to agree.
-
-**Learning objectives.** Compute the relationship between a query, keys, and softmax weights on a given set of vectors. Identify the token with the highest weight. Explain a case where two heads highlight different tokens.
-
-**Bloom level.** Understand, apply.
+**Implementation status.** Prototype. The arithmetic is live. The vectors are written for the lesson. This is not a transformer.
 
 **Estimated time.** 25 minutes.
 
-**Implementation note.** Simplified dot-product attention on toy vectors. Scores and softmax weights are computed in the browser. The vectors are tiny and hand-authored. There is no trained transformer, no residual stream, and no claim that these weights match any production model.
-
-A query is the vector for the position that is gathering context. A key is the vector each position offers for comparison. The score is the dot product of the query and a key, divided by the scale stored on the round. Softmax turns the scores into weights that sum to one. The value is what would be mixed by those weights. This game asks which key wins. It does not multiply the weights by values and it does not run a stack of layers. Calling that a transformer inference would be false, so the page does not say that.
+**Bloom level.** Understand, apply.
 
 ### Game 3 — Context Compression
 
-**Purpose.** Practice fitting a source into a token budget without dropping a fact the question needs.
+**Students learn.** The difference between keeping a needed fact and merely shortening a passage, under a hard token budget.
 
-**Concepts.** Context window, token budget, relevance, information loss, extractive compression, abstractive compression, hierarchical summarization.
+**What they do.** They choose what to keep, summarize, or drop so the task still has the fact it needs.
 
-**Why this matters.** A context window is finite. Stuffing a document until the call fails, or summarizing so hard that the answer's evidence disappears, are both production failures.
+**Why it matters.** A context window is a budget. Cutting tokens can also cut the sentence the answer depends on.
 
-**What the learner does.** The learner sees spans with token counts, relevance scores, and a must-keep flag, plus a budget. Some strategies are "select these spans." Others are a prewritten abstractive or hierarchical summary with its own token count and relevance. The learner picks a strategy and, when the strategy says so, the spans to keep. The readout sums tokens and relevance and flags a dropped must-keep span.
+**Example activity.** Fit a source passage into a stated budget without dropping the required fact.
 
-**Example challenge.** A budget cannot hold every high-relevance span. An extractive selection that keeps the must-keep spans and stays under the budget beats a shorter abstractive summary that omits one of them. The summary text is prewritten. The game does not call a model to write it.
-
-**Feedback.** The learner sees the total tokens against the budget and which required spans survived. The explanation distinguishes "shorter" from "still answers the question."
-
-**Common misconception addressed.** The shortest summary is not automatically the best compression.
-
-**Learning objectives.** Stay inside a stated token budget. Preserve required evidence. Distinguish extractive selection from a prewritten abstractive summary.
-
-**Bloom level.** Understand, apply.
+**Implementation status.** Prototype. Budget checks are calculated. Summary text in the exercise is written ahead of time.
 
 **Estimated time.** 20 minutes.
 
-**Implementation note.** Deterministic budget arithmetic. Token sums, budget checks, and relevance totals are computed from the numbers in the round. Abstractive summaries are prewritten.
+**Bloom level.** Understand, apply.
 
 ### Game 4 — Promptsmith
 
-**Purpose.** Compare prompt designs on a task that has a checkable output, including quality and token cost.
+**Students learn.** When a direct instruction, a role, a few examples, a structured output, or a decomposed task is the better fit.
 
-**Concepts.** Instruction specificity, role and context, few-shot examples, structured output, task decomposition, evaluation, quality and cost.
+**What they do.** They match a prompting strategy to a task and read the quality, token, and failure tradeoff printed for that choice.
 
-**Why this matters.** A prompt is an interface. A persona line does not name the fields a parser needs. A long few-shot prompt can raise quality and also raise the bill. Decomposition helps when the intermediate results are things a person can check.
+**Why it matters.** Prompting is a design choice with a cost, not a magic phrase.
 
-**What the learner does.** The learner reads a task and several authored prompt strategies. Each card describes the strategy and shows a token estimate and a quality label. The learner selects one. The outcome text is written for the exercise. No model is called. The game does not ask the learner to extract a hidden chain of thought, and it does not treat private model reasoning as something a product should demand.
+**Example activity.** Choose a strategy for a task that needs a predictable format, then read why a cheaper prompt can fail the format.
 
-**Example challenge.** An invoice must yield total, currency, and due date. A schema that names the three fields is the better fit. "You are a helpful assistant" does not name the fields. A few-shot card may be acceptable and more expensive.
-
-**Feedback.** The feedback says what the selected strategy made easy or left unspecified, and it shows the quality points before the hint penalty.
-
-**Common misconception addressed.** A polite or role-heavy prompt is not a specification.
-
-**Learning objectives.** Choose a prompt that names the required output. Compare a short instruction with a few-shot or structured alternative on quality and cost. Use a visible decomposition when the task has checkable steps.
-
-**Bloom level.** Apply, analyze.
+**Implementation status.** Prototype. The comparison is among authored strategies. No model is called.
 
 **Estimated time.** 25 minutes.
 
-**Implementation note.** Deterministic prompt cases. The comparison among authored strategies is real. No live language model is called.
+**Bloom level.** Apply, analyze.
 
 ### Game 5 — Gradient Playground
 
-**Purpose.** Let learners see how learning rate, epochs, batch size, and full fine-tuning versus LoRA move a training curve and a validation curve, including overfitting and a simple picture of catastrophic forgetting.
+**Students learn.** How learning rate, epochs, batch size, and full fine-tuning versus LoRA move training loss, validation loss, overfitting, and forgetting on a teaching model.
 
-**Concepts.** Learning rate, epochs, batch size, training loss, validation loss, full fine-tuning, LoRA, parameter-efficient fine-tuning, overfitting, catastrophic forgetting.
+**What they do.** They set those controls and read the resulting curve.
 
-**Why this matters.** Fine-tuning advice is full of curves. Learners need a picture of divergence, of a widening train-validation gap, and of why a low-rank update is sometimes chosen when a full update would move more weights.
+**Why it matters.** Fine-tuning conversations often jump to a recipe. The curve is a way to see the failure mode before anyone rents a GPU.
 
-**What the learner does.** The learner sets learning rate, epochs, batch size, and method. A chart updates from the formula in `src/game-engine/models/loss-curve.ts`. The round is met when the final validation loss, the gap, divergence, and forgetting flags satisfy the round's targets. Some rounds require LoRA. Some forbid a learning rate above the scenario's stable maximum.
+**Example activity.** Compare a learning rate that settles with one that overshoots, using the documented loss formula.
 
-**Example challenge.** A high learning rate is marked divergent and the curves climb. A moderate learning rate with too many epochs can drive training loss down while validation loss rises after the overfitting epoch. LoRA in this model approaches a higher floor and grows the overfitting gap more slowly than full fine-tuning. Full fine-tuning can add a forgetting penalty on and after `forgettingEpoch`.
+**Implementation status.** Prototype. The chart uses an educational formula. No parameters are trained and no dataset is loaded.
 
-**Feedback.** The chart is the feedback before submit. After submit, the breakdown lists final validation loss, gap, and whether the run diverged or forgot, against the targets.
-
-**Common misconception addressed.** A falling training loss is not, by itself, a successful fine-tune.
-
-**Learning objectives.** Relate learning rate to stability. Read a train-validation gap as overfitting in this model. Choose LoRA or full fine-tuning when the round requires one of them. Explain forgetting as an extra penalty this model applies only to full fine-tuning.
+**Estimated time.** 25 minutes.
 
 **Bloom level.** Understand, apply, analyze.
 
-**Estimated time.** 25 minutes.
-
-**Implementation note.** Educational loss curves. The plotted numbers are computed from a documented formula. Nothing is trained. There are no gradients, parameters, or datasets behind the curves. The progress term is `1 - exp(-learningRate * 4000 * epoch)`. Training loss moves from a base toward a method floor, plus a small batch-size noise term. Validation loss adds an overfitting gap after `overfitEpoch`. Learning rates above `lrStableMax` are treated as divergent.
-
 ### Game 6 — Reasoning Reactor
 
-**Purpose.** Practice a visible reasoning workflow: which steps to include, which temperature to use, and how to read agreement across prewritten samples.
+**Students learn.** How to assemble a visible workflow: break a problem down, check a step, draw more than one sample, and choose a temperature.
 
-**Concepts.** Decomposition, verification, sampling, self-consistency, search, temperature, structured reasoning.
+**What they do.** They build that workflow from the pieces on the screen and read what the checklist scores.
 
-**Why this matters.** Teams sometimes ask a model to "think step by step" and then treat the paragraph as if it were a trace of hidden computation. A workflow a person can check is a different object. Sampling several answers and looking for agreement is also different from believing one fluent answer.
+**Why it matters.** A displayed step is not the same thing as a model’s hidden computation. Students practice the workflow they can actually specify.
 
-**What the learner does.** The learner selects steps, including required steps and avoiding steps marked harmful, and selects a temperature. The temperature row shows prewritten samples, an agreement figure, and a note. The samples do not change if you click twice. They were written for the row.
+**Example activity.** Add a verification step to a workflow that otherwise accepts the first sample.
 
-**Example challenge.** A brainstorm wants a higher temperature and a diversity step, and it does not want a factuality verifier that the task did not require. A later round wants a low temperature and a verification step when the output must be stable.
+**Implementation status.** Prototype. Scoring uses the checklist and a written sample table. Nothing is sampled from a live model.
 
-**Feedback.** The breakdown lists missing required steps, included harmful steps, and the quality of the temperature row.
-
-**Common misconception addressed.** An educational reasoning script is not a window onto a model's private computation. This game never asks for hidden chain-of-thought extraction.
-
-**Learning objectives.** Assemble a workflow whose steps match the task. Choose a temperature whose prewritten sample behavior matches the goal. Distinguish agreement across samples from truth.
+**Estimated time.** 25 minutes.
 
 **Bloom level.** Apply, analyze.
 
-**Estimated time.** 25 minutes.
-
-**Implementation note.** Precomputed samples and a workflow checklist. No model was sampled at runtime.
-
 ### Game 7 — Alignment Arena
 
-**Purpose.** Make preference comparisons explicit: helpfulness, safety, and factuality have weights, and the winner is the weighted sum.
+**Students learn.** How a weighted rubric for helpfulness, safety, and factuality changes which reply ranks first.
 
-**Concepts.** Preference data, response ranking, reward modeling as an idea, RLHF as an idea, helpfulness, safety, factuality, tradeoffs.
+**What they do.** They rank replies and see the weighted result of the printed scores.
 
-**Why this matters.** A more helpful reply can be the wrong one to prefer if the weights put safety or factuality higher. Learners should see that a preference is a decision with a rubric, not a vibe, and that a rubric is not yet a trained reward model.
+**Why it matters.** Alignment choices are tradeoffs. A reply can be helpful and still fail a safety or factuality weight the instructor cares about.
 
-**What the learner does.** The learner reads a user request and several replies. Each reply has authored scores from 0 to 5 on helpfulness, safety, and factuality. The round prints the weights. The learner ranks by selecting the reply they would prefer. The page computes the weighted sum.
+**Example activity.** Rank two replies when safety is weighted more heavily than fluency.
 
-**Example challenge.** One reply is friendly and concrete but repeats an unsafe instruction. Another is less complete and refuses the unsafe part. If safety has a high weight, the refusal wins even when its helpfulness score is lower.
+**Implementation status.** Prototype. The sum is live. The scores and replies are written for the case. No reward model is trained.
 
-**Feedback.** The breakdown shows each reply's weighted total and the weights that produced it.
-
-**Common misconception addressed.** The highest helpfulness score does not automatically win, and clicking a winner does not train a reward model.
-
-**Learning objectives.** Compute a weighted preference. Explain a case where safety or factuality outranks helpfulness. Describe RLHF as a pipeline that uses preferences, without claiming this page ran that pipeline.
+**Estimated time.** 25 minutes.
 
 **Bloom level.** Understand, analyze, evaluate.
 
-**Estimated time.** 25 minutes.
-
-**Implementation note.** Educational preference simulation. The weighted sum is computed from the printed scores and weights. No preference model is trained, no human raters were collected for this app, and the scores are authored for the lesson. InstructGPT and the earlier preference-learning papers are cited as background, not as something this browser session reproduced.
-
 ### Game 8 — Ship-It Simulator
 
-**Purpose.** Practice serving choices: latency, throughput, retries, backoff, caching, fallback models, rate limits, cost, and a service-level target.
+**Students learn.** How caching, retries, backoff, fallback models, and replicas move latency, cost, and reliability together.
 
-**Concepts.** Latency, throughput, retries, exponential backoff, caching, fallback models, rate limits, cost, availability, service-level objectives.
+**What they do.** They set serving levers against a latency, cost, and reliability target.
 
-**Why this matters.** A model that is accurate and slow, or cheap and failing open, does not meet a service objective. Retries without backoff can turn a blip into an outage and a bill.
+**Why it matters.** A demo that looks fine in a notebook can miss a service objective once retries and cache misses are counted.
 
-**What the learner does.** The learner toggles levers. Each lever has an authored effect on baseline metrics. The readout projects latency, error rate, cost, and the other metrics the round names. The round is met when every metric lands inside its bound. The arithmetic is real. The cluster is not.
+**Example activity.** Lower tail latency without letting retries multiply the bill.
 
-**Example challenge.** A product page must stay under a latency objective during a traffic spike without blowing a cost budget. Caching repeated prompts and backing off retries can meet the objective. Tight retries with no delay, or sending every call to the largest model, miss it. One concrete picture used in the course: a client deploy retries immediately, the provider status page is green, and the bill moves because the client multiplied calls.
+**Implementation status.** Prototype. The numbers are a baseline plus authored lever effects. There is no cluster behind the page.
 
-**Feedback.** Each metric is marked met or not met in text, not only in color.
-
-**Common misconception addressed.** Retrying faster is not the same thing as becoming more reliable.
-
-**Learning objectives.** Project a metric from a baseline and a lever. Meet a latency and cost bound together. Explain why backoff and a cache change call volume.
+**Estimated time.** 25 minutes.
 
 **Bloom level.** Apply, analyze, evaluate.
-
-**Estimated time.** About 25 minutes.
-
-**Implementation note.** Parameterized serving simulation. The arithmetic from baseline and lever effects is computed. There is no cluster, queue, or live API. Effect sizes are authored.
 
 ### Game 9 — Agent Architect
 
-**Purpose.** Separate an agent loop from "a model with several tools." The loop has state, permissions, a plan, a check, a retry, and a point where a person takes over.
+**Students learn.** That an agent is a loop with tools, permissions, checks, and a stop condition.
 
-**Concepts.** Agent loop, tool selection, tool permissions, state, memory, planning, verification, retries, graceful degradation, human escalation.
+**What they do.** They choose which tools are allowed, what gets checked, and when a person should take over.
 
-**Why this matters.** A tool the model can call is also a tool it can call at the wrong time. Permission, a stopping rule, and a person in the path are part of the design. Memory is not free: storing the wrong thing is its own failure.
+**Why it matters.** Turning on every tool is not a design. The harm is often a permission the task never needed.
 
-**What the learner does.** The learner selects tools and control steps. Each item is flagged needed or harmful for that scenario. The score requires the needed items and rejects the harmful ones. No tool is invoked.
+**Example activity.** Remove a tool the task does not need and add a check before a write action.
 
-**Example challenge.** A refund agent may look up an order and draft a reply. It may not issue the refund itself. The needed controls include a verification step and an escalation. A "retry forever" control is harmful.
-
-**Feedback.** The breakdown names missing needed items and any harmful item that was selected.
-
-**Common misconception addressed.** An agent is not defined by the number of tools. It is defined by the loop: observe, choose, act within permission, check, and stop.
-
-**Learning objectives.** Select tools that match the task. Leave out tools that exceed permission. Include a check and an escalation where the scenario requires them.
-
-**Bloom level.** Apply, analyze, evaluate.
+**Implementation status.** Prototype. Needed and harmful flags are scored locally. No tool is executed.
 
 **Estimated time.** 25 minutes.
 
-**Implementation note.** Agent-loop checklist. The scoring of needed and harmful items is real. No agent runs and no tools are called.
+**Bloom level.** Apply, analyze, evaluate.
 
 ### Game 10 — Retrieval Lab
 
-**Purpose.** Show retrieval-augmented generation as a retrieval decision: chunking is given, the query is a small vector, and the learner chooses keyword, vector, or hybrid search, plus an optional metadata filter.
+**Students learn.** How chunking, keyword search, vector search, hybrid search, and a metadata filter change precision, recall, and grounding.
 
-**Concepts.** RAG, chunking, embeddings as an idea, vector search, keyword search, hybrid retrieval, metadata filtering, reranking as top-k on a score, recall, precision, grounding.
+**What they do.** They compare those methods on a tiny corpus they can read.
 
-**Why this matters.** A fluent answer that is not grounded in the retrieved text is a different system from one that cites a passage. Recall asks whether the needed chunks came back. Precision asks whether the returned chunks were needed.
+**Why it matters.** A generated answer cannot cite a passage the retriever never returned.
 
-**What the learner does.** The learner picks a method and whether to apply the metadata filter. The page scores every chunk. Keyword overlap is a token overlap with the query string. Vector score is cosine similarity on a 3-dimensional vector. Hybrid is the average of those two scores. Chunks are ranked by score, with id as a tie break. Precision and recall are computed against the chunks marked relevant, inside the top-k window. There is no separate neural reranker.
+**Example activity.** Compare keyword and hybrid search on a question whose answer is in a short passage with different wording.
 
-**Example challenge.** A query shares words with a distractor chunk and is geometrically closer to a relevant chunk. Keyword search ranks the distractor highly. Vector search ranks the relevant chunk highly. A later round needs the metadata filter because an unfiltered vector search returns a passage from the wrong document. The walkthrough on the page lists the ranked chunks and the precision and recall figures before the learner locks the round.
-
-**Feedback.** The list of chunks is the live feedback. After submit, the breakdown states precision and recall against the round's thresholds.
-
-**Common misconception addressed.** Embedding search is not automatically better than keyword search. It depends on whether the needed text is the nearest vector in this toy space.
-
-**Learning objectives.** Compute or read cosine and overlap scores. Choose keyword, vector, or hybrid for a given failure. Use a metadata filter when the relevant text is not the globally nearest chunk. Define precision and recall for a top-k list.
-
-**Bloom level.** Apply, analyze, evaluate.
+**Implementation status.** Prototype. Cosine, overlap, precision, and recall are computed. The vectors are small teaching examples, not the output of an embedding model.
 
 **Estimated time.** 30 minutes.
 
-**Implementation note.** Local retrieval over toy vectors. Cosine similarity, keyword overlap, hybrid scores, precision, and recall are computed in the browser. The vectors are 3-dimensional teaching examples, not the output of an embedding model.
+**Bloom level.** Apply, analyze, evaluate.
 
 ### Game 11 — System Composer
 
-**Purpose.** Move from one component to a small architecture: model, retrieval, router, verification, guardrail, cache, tool, and a trace.
+**Students learn.** How to place retrieval, guardrails, verification, caching, and tool use in one small design.
 
-**Concepts.** Model routing, retrieval, guardrails, verification, caching, tool use, observability.
+**What they do.** They assemble blocks so the design covers the constraints named in the round.
 
-**Why this matters.** A larger model does not replace a source of truth, a refusal rule, or a log. Systems fail when a concern is nobody's component.
+**Why it matters.** A technique that worked in an earlier game can still leave a hole when the system has to ground, refuse, and stay within a latency budget at once.
 
-**What the learner does.** The learner toggles blocks. Each block covers zero or more named concerns and adds authored cost and latency. Some blocks conflict. The round is met when the required concerns are covered, cost and latency stay inside the budget, and no conflict pair is both selected.
+**Example activity.** Add a grounding step to a design that otherwise answers from the model alone.
 
-**Example challenge.** A policy FAQ must ground answers in a manual and refuse a class of requests. Retrieval plus a guardrail covers those concerns. Selecting only a larger model covers neither. A later round wants a cache on repeated lookups, and another wants a trace so an operator can see which document was used.
+**Implementation status.** Prototype. Coverage is calculated from the blocks the student selects. No service is deployed.
 
-**Feedback.** Covered and missing concerns, total cost, total latency, and conflicts are listed before and after submit.
-
-**Common misconception addressed.** Adding a larger model is not a substitute for retrieval, a guardrail, or a log.
-
-**Learning objectives.** Cover each named concern with a component. Stay inside a cost and latency budget. Avoid a pair of blocks the round marks as conflicting.
+**Estimated time.** 25 minutes.
 
 **Bloom level.** Analyze, evaluate.
-
-**Estimated time.** About 25 minutes.
-
-**Implementation note.** Architecture assembly with relative units. Sums of authored cost and latency, and set coverage, are computed. No services are deployed. The units are teaching numbers, not a cloud quote.
 
 ### Game 12 — ProdOps Gauntlet
 
-**Purpose.** Practice the first move in an incident: read the signal, then choose a response that matches the failure rather than a generic restart.
+**Students learn.** How to respond when cost spikes, a prompt regresses, behavior drifts, or an audit asks what the system did.
 
-**Concepts.** Monitoring, cost anomalies, model drift as a change in what the system serves, prompt regressions, incident response, evaluation, compliance, observability.
+**What they do.** They choose an operational action and read the labeled consequence.
 
-**Why this matters.** Production language-model systems fail in ways that look like product bugs and are actually client retries, stale indexes, prompt edits, or logs that kept data they should not have kept.
+**Why it matters.** Monitoring and incident response are part of LLM engineering, not a separate course that starts after the demo works.
 
-**What the learner does.** The learner reads a short incident and selects a response card. Each card states what happens to the signal. The best card is the one that matches the cause written in the scenario.
+**Example activity.** Choose a response to a cost spike that does not hide the regression that caused it.
 
-**Example challenge.** At 14:10 the bill tripled. A client deploy at 14:08 retries with no delay. The provider status page is green. Capping retries and restoring backoff is the response that matches the evidence. Flushing a healthy cache or switching to a larger model does not. Another round is an evaluation drop right after a prompt-template edit: roll back the template. Another is a handbook that changed while the index still serves the old chunk: reindex and gate on version. A compliance round asks for a log of the decision, the policy version, and a hash, not a second copy of the raw prompt.
+**Implementation status.** Prototype. The comparison is among written responses. The metrics are part of the case, not a live dashboard.
 
-**Feedback.** The card's outcome is restated, and the explanation names the signal that should have driven the choice.
-
-**Common misconception addressed.** Restarting the model is not the response to every incident, and a compliance log should not become a second copy of private prompts.
-
-**Learning objectives.** Match a response to a cost anomaly, a prompt regression, a stale index, an instruction in retrieved text, and a logging constraint.
+**Estimated time.** 25 minutes.
 
 **Bloom level.** Analyze, evaluate.
 
-**Estimated time.** About 25 minutes.
-
-**Implementation note.** Authored incident cases. The comparison among written responses is the exercise. No production system is being monitored. The metrics on each card are part of the case.
-
 ### Game 13 — Foundry Arena
 
-**Purpose.** Foundry is the synthesis tier. The learner gets a problem and constraints rather than a single prescribed architecture.
+**Students learn.** How to combine earlier ideas when the brief no longer has one labeled answer.
 
-**Concepts.** System design, constraints, tradeoffs, reflection, rubric, self-assessment.
+**What they do.** They design against a constraint set for industry, healthcare, robotics, ethics, education, or a sandbox brief, then name a tradeoff.
 
-**Why this matters.** Course problems often end when a component is correct. A deployment brief ends when someone can say which constraint each choice carries and what was given up.
+**Why it matters.** Professional judgment starts where the exercise stops telling the student which card is best.
 
-**What the learner does.** Six paths are six rounds: Industry, Healthcare, Robotics, Ethics, Education, and Sandbox. Each round has a scenario, constraints, and a few decisions. Every option lists the rubric ids it covers and the ids it misses. The learner writes a reflection of at least the required length and fills a self-rating for each rubric row. Sandbox also requires a problem statement of at least the required number of characters, so the learner defines the user and the action before choosing components.
+**Example activity.** Cover grounding, a human escalation path, and a cost limit in one short design, then write the tradeoff the design accepts.
 
-**Example challenge.** Industry: a support desk with a cost cap. Route repeated calls to a cache and a smaller model, retrieve the return manual and cite the section, and open a ticket for a person before a high-value refund. Sending every call to the largest model misses the cost constraint. Letting the model issue the refund misses escalation. The reflection has to name a tradeoff in that design, for example quality on unusual tickets versus a predictable bill.
+**Implementation status.** Prototype. The score is constraint coverage, a reflection, and a completed self-rating. It is not a universal design grade.
 
-The other briefs are a clinic note that stays in an approved environment and does not write medications, a lab arm that localizes with a camera and stops when confidence is low, a hiring screener that does not emit a hire score and does not receive photos, a tutor that gives a hint rather than the final answer and cites course notes, and a sandbox brief the learner writes.
-
-**Feedback.** The breakdown lists covered criteria, missed criteria, whether the reflection is long enough, and whether every self-rating was filled in. Self-ratings do not secretly define a second correct architecture. They are part of the rubric because the learner has to judge their own design against the same rows.
-
-**Common misconception addressed.** A fluent diagram is not yet a design until each constraint is covered or explicitly declined.
-
-**Learning objectives.** Translate a written constraint into a choice that covers it. Reject a more capable choice that misses a constraint. Write a reflection that names a tradeoff. Complete a self-assessment against the printed rubric.
+**Estimated time.** 40 minutes.
 
 **Bloom level.** Analyze, evaluate, create.
 
-**Estimated time.** About 40 minutes for the six briefs.
+## Token Forge — reference implementation
 
-**Implementation note.** Constraint-coverage capstone. Coverage is computed from the covers and misses on the selected options, plus reflection length and completed self-ratings. No system is deployed. The rubric is not a claim that one architecture is universally correct. There is one challenge per path in this release, not a library of three to five, and there is no community sharing board.
+Token Forge is the game to assign when you want the full documented loop. Students work through five cases:
 
-## Complete learning session walkthrough
+1. Simple English.
+2. Python-like code, including a function signature.
+3. A morphologically complex German word.
+4. Mixed-script text, with Latin and Japanese characters in one string.
+5. A legal clause under a cost constraint.
 
-1. The learner opens the app. The home page lists the three tiers and the games the config has enabled.
-2. The pre-assessment is optional. Ten questions, scored as percent correct, stored only after submit. Explanations appear after submit.
-3. The learner starts Token Forge, reads the implementation note and the worked example, and starts the game.
-4. Rounds get more specific: a plain clause, then code, then cases where the segmentation family matters more.
-5. Selecting a family updates the pieces and the cost immediately. Locking the round shows the score.
-6. If the learner is stuck, they reveal hint 1, then 2, then 3. Each hint subtracts one point from that round, down to zero.
-7. At the end, the best round scores are summed. Mastery is 70 percent unless the config changed it. The record is written to IndexedDB, or to localStorage if IndexedDB is unavailable.
-8. The progress page recommends the next unlocked game that is not yet mastered.
-9. After four Cognitive Core games are mastered, Systems Forge opens. The learner can instead turn on Practice ahead.
-10. Systems games ask for a design under numeric or checklist constraints.
-11. After three Systems Forge games are mastered, Foundry opens. The learner completes a brief, a reflection, and the self-ratings.
-12. From the progress page the learner can export CSV and JSON, or delete the local record. The post-assessment is the same ten items, stored separately from the pre-assessment.
+On each case they compare:
 
-## Scoring and mastery
+- BPE
+- WordPiece
+- SentencePiece
+- Unigram
 
-Every round is worth 10 points before hints. On card-style rounds, the best fit scores 10, an acceptable fit scores 6, and a poor fit scores 0. Computed rounds score 10 when every target is met and 0 otherwise, except where the evaluator marks a partial success. Partial successes are labeled in the feedback. They are not a hidden curve.
+They see visual token segmentation, token counts, and a cost estimate computed from the pieces on the screen. Feedback explains why a segmentation was a better or worse fit for that text. Hints open one at a time: a concept cue, then a direction, then a stronger explanation. Each hint subtracts one point from that round, down to zero. The game keeps the best score, compares it with a 70% mastery line, asks for a short reflection, and recommends a next game. Progress is saved in the browser.
 
-Each revealed hint subtracts 1 point from that round after the raw score, with a floor of 0. At most three hints can be revealed. The penalty is printed on the hint box and again in the feedback: raw points, hint count, round score.
+The built-in segmentations are authored educational illustrations. Token counts and the displayed cost are arithmetic on those illustrations. Token Forge does not run a production tokenizer, and it does not claim that the pieces match a vendor’s current vocabulary.
 
-A retry replaces the action and clears the hint counter for the new attempt. If the new score is lower, the previous best is kept. The game percent is `round(earned / (rounds × 10) × 100)` using each round's best score. Letter grades, when shown, are A for 90 and above, B for 80–89, C for 70–79, D for 60–69, and F below 60.
+The same game is also available at [games/token-forge](https://piaattufts.github.io/llmodyssey/games/token-forge).
 
-Mastery is that percent at or above the threshold, and only after every round has a score. The default threshold is 70. `config/odyssey.config.ts` replaces each game's own threshold while `overrideGameThresholds` is true, which it is in the shipped file. Set the flag to false to honor the number inside the game file. The educator page shows the threshold that will actually be used.
+## Pedagogical design
 
-Foundry uses the same 10-point scale. Points are proportional to the rubric. A criterion counts as covered when a selected option lists it and no selected option misses it. Reflection length and a completed self-rating are their own criteria. There is not a second, hidden answer.
+### Immediate formative feedback
 
-## Hint system
+Students learn a decision better when the consequence arrives while the choice is still in view. Odyssey scores a round as soon as the student locks it, and the explanation says what was stronger or weaker about that choice. In Token Forge, the pieces, the count, and the cost are visible before the round is locked. After it is locked, the score and the reason appear immediately.
 
-Hints are graduated because an immediate answer ends the practice. The first hint names the idea. The second says where to look. The third gives away more of the reasoning and still leaves the selection to the learner.
+### Scaffolded hints
 
-The penalty is small on purpose. Three hints on a perfect raw score leave 7 out of 10. A learner can use hints and still master the game. The achievement list treats that as scaffolded success, and it treats a mastered game with no hints on the best attempts as independent mastery. Both are recorded. Neither is required.
+Hints are graduated. The first hint names the idea. The second points at what to inspect. The third explains more of the pattern without pasting the selected answer. Each revealed hint costs one point on that round. The penalty is printed. Students can retry, and the best score is the one that is kept.
 
-Hint use is stored on the round as `totalHints` and as `hintsOnBestAttempt`.
+### Progressive difficulty
 
-## Progress and achievements
+Rounds inside a game start with a smaller case and add a complication: code-like text, morphology, another script, or a budget. Across the course, the task itself opens up, from reading a mechanism to judging a system to proposing a design.
 
-The progress page shows overall status, per-tier mastery counts, a concept list, scores, attempts, hints, time on the game page, and the recommended next game. Concept "mastery" on that page means a game that lists the concept has been mastered. It is a summary of progress, not a psychometric scale.
+### Worked examples
 
-Achievements are derived from the record every time it is saved. They are not a separate score. The learning-oriented ones are mastery, independent mastery, scaffolded mastery, full marks, Cognitive Core, Systems Forge, Foundry, and both assessments. Completion of a game without meeting the threshold is recorded and is not called mastery. The "Odyssey complete" achievement requires mastery of all 13 games, not merely opening them.
+Each game opens with its objectives, a misconception worth watching, a worked example, and a concept guide with further reading. The worked example shows the kind of step the round expects. It does not reveal later answers.
 
-Tier unlocks follow the counts above. They are educational structure. The badges are labels for those states.
+### Authentic engineering scenarios
 
-## Educator use
+The cases use constraints that show up in practice: a price per million tokens, a context budget, a latency target, a tool permission, a passage that must be retrieved, an audit question. The numbers are teaching numbers. The constraint is the point.
 
-Educator mode is `/educator`. It does not ask for a password. It is generated from the game files, so the objectives on the page are the objectives in the content.
+### Mastery-oriented retries
 
-### Lecture companion
+The default mastery threshold is 70%. Letter bands are A at 90 and above, B from 80 to 89, C from 70 to 79, D from 60 to 69, and F below 60. A student can finish a game below 70%. That completion is stored. It is not labeled mastery. Retrying a round replaces a score only when the new score is higher.
 
-Teach the idea, then open the matching game and play one round where the class can see the readout change.
+### Reflection
 
-### Lab
+After the rounds, the student is asked to say what they would measure or decide in a real setting. The prompt is there so the choice is not only a click. Skipping the reflection is allowed. Saving it stores the text on that device.
 
-Assign one or two games. Ask students to export the progress CSV at the end of the period. The CSV has scores, attempts, time, hints, and the reflection.
+### Tiered progression
 
-### Independent module
+Cognitive Core makes the mechanisms inspectable. Systems Forge asks whether a design meets cost, latency, grounding, and failure constraints. Foundry Arena asks for a design and a named tradeoff. Later tiers can stay locked until earlier games are mastered. Students can turn on Practice ahead. The listed prerequisites remain visible either way.
 
-Assign a tier plus the optional pre-assessment and post-assessment. Students can practice ahead if you want them to sample later games, or you can leave the locks on.
+## How an educator can use LLM Odyssey
 
-### Capstone
+You can use one game, one tier, or the whole sequence. The public site needs no installation.
 
-Assign a Foundry path. Read the reflection and the self-ratings. The in-app score is the coverage rubric. Your grade can weigh the reflection more heavily than the app does. Say that in the syllabus if you do.
+### 1. Lecture companion
 
-### Six-week example
+Teach the idea in class, then assign the matching game. A tokenization lecture is followed by Token Forge. Students arrive at the next meeting having compared segmentations, not only having heard the vocabulary.
 
-| Week | Assignment |
+### 2. Lab exercise
+
+Students complete one or more games in a scheduled lab. Ask them to export the progress CSV from the Progress page before they leave. The file contains the record on that browser.
+
+### 3. Independent module
+
+Students complete a tier on their own, with the optional pre-check and post-check if you want a before-and-after snapshot. Those items are a classroom check. They are not a validated instrument.
+
+### 4. Capstone / design activity
+
+Students use Foundry Arena to bring several earlier ideas into one brief. Grade the constraints they covered and the tradeoff they named. Do not treat the score as the only professional judgment. The exercise says so on the page.
+
+## Example course plan
+
+This six-week sequence is an example. Reorder it, or assign a single week.
+
+| Week | Games |
 | --- | --- |
 | 1 | Token Forge and Attention Architect |
 | 2 | Context Compression and Promptsmith |
 | 3 | Gradient Playground, Reasoning Reactor, and Alignment Arena |
 | 4 | Retrieval Lab and Agent Architect |
-| 5 | System Composer and ProdOps Gauntlet |
+| 5 | Ship-It Simulator, System Composer, and ProdOps Gauntlet |
 | 6 | Foundry Arena |
 
-Week 4 is inside Systems Forge, so students need four mastered Cognitive Core games, or Practice ahead, or a config change, before those links open.
+## What students need
 
-For a live class demo that should not touch anyone's record, use `/demo`. Reset Classroom Demo on the educator page restores the sample demo record. It does not delete the learner record.
+For the hosted site:
 
-## Customization
+- a modern browser
+- no installation
+- no API key
+- no account
 
-Interface code reads content. It does not contain the challenge sentences. Edit `content/games/token-forge.ts` to change Token Forge. The same pattern holds for the other twelve files in `content/games/`.
+For a local run:
 
-A round looks like this, abbreviated from the real schema:
+- Node.js 22
+- npm
 
-```ts
-{
-  id: "english-clause",
-  title: "Round 1 · A plain English clause",
-  concept: "Word-like pieces versus subwords",
-  learnerTask: "Choose the segmentation with the best cost-quality fit.",
-  hints: ["Start by counting pieces, not characters.", "Look at the possessive.", "The Unigram row keeps it in one piece."],
-  scoringRule: "Best scores 10. Acceptable scores 6. Poor scores 0. Each hint subtracts 1.",
-  interaction: { type: "tokenizer", text: "The contractor's liability is limited.", strategies: [] }
-}
-```
+Supabase is not required. A paid model API is not required.
 
-The real objects are longer. Zod requires every field. A mistake names the file and the path when the app loads.
+## Run LLM Odyssey online
 
-To change challenge text, edit `scenario`, `learnerTask`, or the option labels. To add a round, append an object with a new `id` and three hints. To change hints, edit the `hints` tuple. To change the mastery threshold for the whole course, edit `masteryThreshold` in `config/odyssey.config.ts`. To disable a game, remove its id from `enabledGames`. To reorder, edit `gameOrder`. To add a citation, add an object to `content/references.ts` and put its id in `furtherReadingIds`. To set branding, set `title`, `institution`, and `logoSrc`. Put a logo file in `public/` and point `logoSrc` at it, for example `/institution.svg`.
+Open:
 
-`config/odyssey.config.ts` in the repository starts as:
+https://piaattufts.github.io/llmodyssey/
 
-```ts
-export default {
-  title: "LLM Odyssey",
-  institution: "",
-  researchMode: false,
-  masteryThreshold: 70,
-  showFoundry: true,
-  enabledGames: ["token-forge", "attention-architect", "..."],
-};
-```
+No installation is required.
 
-The shipped file also sets tagline, logo, unlock counts, `overrideGameThresholds`, and the full id lists. Research mode in the running app prefers `VITE_RESEARCH_MODE` when that variable is `true` or `false`.
+Demo:
 
-A new Foundry brief is a new round in `content/games/foundry-arena.ts` whose interaction type is `foundry`, with a `pathId` of industry, healthcare, robotics, ethics, education, or sandbox. `content/challenges/foundry.ts` lists those rounds for anything that wants the path ids without parsing React.
+https://piaattufts.github.io/llmodyssey/demo
 
-## Adding a new game
+Educator guide:
 
-1. Create `src/games/<id>/index.ts` that re-exports the definition.
-2. Write `content/games/<id>.ts` as a `GameDefinition`. `examples/custom-game/sample.ts` is a minimal valid file. It is not registered, and learners do not see it.
-3. Put rounds, hints, objectives, the misconception, the worked example, and the implementation note in that file.
-4. If you use an existing interaction type, you do not write a new component. A new interaction type needs a Zod variant, a branch in `src/game-engine/evaluate.ts`, and a branch in `src/components/game/InteractionHost.tsx`.
-5. Import the file from `src/content/load-games.ts` and `src/games/register.ts`. Add the id to `enabledGames` and `gameOrder`. The loader currently expects 13 games and throws otherwise, so change that check and the test together.
-6. The route `/play/:gameId` already exists. Add a route only if the game needs a page that is not the shared shell.
-7. `npm test` runs `gameIsSolvable` on every registered game.
-8. Add citations to `content/references.ts` and reference them from the game.
-9. `npm run build`.
+https://piaattufts.github.io/llmodyssey/educator
 
-## Architecture
+Token Forge:
 
-```
-Learner
-   |
-React UI
-   |
-Shared Game Engine
-   |
-Game Definitions
-   |
-Local Progress Store
-   |
-Optional Analytics Adapter
-   |
-Optional Backend
-```
+https://piaattufts.github.io/llmodyssey/play/token-forge
 
-The React UI is `src/app` for pages and `src/components/game` for the shell and the interaction boards. The shell runs the lifecycle: introduction, round, action, evaluation, feedback, hint or retry, next round, reflection, completion, and a link to the recommended next game.
+Direct links such as `/demo`, `/educator`, `/progress`, `/play/token-forge`, and `/games/token-forge` load the app. An unknown path shows a page-not-found message inside the app.
 
-The shared engine is `src/game-engine`. It owns the Zod schema, scoring, unlock rules, achievements, and `evaluateRound`. Models for attention, the educational loss curve, retrieval, and lever arithmetic live in `src/game-engine/models` so the readout and the grader call the same functions.
-
-Game definitions are `content/games/*.ts`. They are parsed by `src/content/load-games.ts` before the course renders.
-
-The local progress store is IndexedDB through `idb`, database `llmodyssey-learner` or `llmodyssey-demo`, with a localStorage fallback. Session ids live in localStorage.
-
-The optional analytics adapter is created in `src/analytics/create-adapter.ts`. With research mode off it is a no-op. With research mode on and local storage it keeps events only in the learner record. With Supabase configured it also inserts a row. A failed insert does not stop the game.
-
-The optional backend is documented in `supabase/`. The optional model proxy is `examples/llm-proxy/server.mjs`. Gameplay does not start either one.
-
-## Why local-first
-
-A classroom, a conference network, and a lab behind a firewall should be able to run the course without an account on someone else's platform. Local play has no per-student API bill, fewer services that can be down during a demo, and a clear privacy story: the record is on the machine that played. The same inputs produce the same scores, which is what you want if two students are comparing work or if you are writing a worksheet from a round.
-
-The optional backend does not add gameplay. It can store anonymous events if you configure it. The optional model proxy does not add gameplay either. It exists so a later lesson can call a vendor without putting a key in the frontend. The thirteen games do not call it.
-
-## Data and privacy
-
-Default local mode stores a random session id, game progress, scores, attempts, hints, reflections, assessment answers, and anonymous interaction events. Settings such as Practice ahead are in the same record. Research consent, only relevant if you enable research mode, is a separate localStorage flag, `llmodyssey.researchConsent`.
-
-That data remains in the browser. Export it from `/progress` or `/educator` as progress CSV, assessment CSV, events CSV, or events JSON. Delete it with "Reset progress" on the progress page. The button asks for confirmation before it clears the record. That control deletes the record for the mode you are in. Deleting the learner record does not delete the demo record, and the reverse is also true.
-
-Using this public repository does not make a player a research participant. The app does not ask for a name or an email.
-
-## Research mode
-
-Research mode is disabled by default with `VITE_RESEARCH_MODE=false`. When it is enabled, the app asks whether to keep anonymous events. A yes allows the adapter to run. A no leaves gameplay intact and skips the adapter. The session id is a random id created in the browser. Events use the schema above. They do not include an IP address collected by this app, a name, an email, or a device fingerprint.
-
-Consent in the dialog is not an ethics approval. This repository does not state that every deployment is IRB or REB approved. It does not state that players of the public project are enrolled in a study. An institution that enables research mode obtains its own approval where one is required, and it keeps any contact list apart from the event table. The SQL in `supabase/migrations` has no contact columns on purpose.
-
-## Simulation versus real execution
-
-| Game | Implementation type | What is real | What is simulated |
-| --- | --- | --- | --- |
-| Token Forge (implemented) | Precomputed segmentations | Counts, efficiency, and cost arithmetic on the pieces shown | The pieces themselves; not a live tokenizer |
-| Attention Architect | Simplified computation | Scaled dot-product and softmax on the given vectors | A transformer; the vectors are hand-written |
-| Context Compression | Deterministic simulation | Budget, relevance, and must-keep checks | Abstractive summary text, which is prewritten |
-| Promptsmith | Deterministic simulation | The comparison among authored strategies | Any model response; none is requested |
-| Gradient Playground | Educational simulation | The documented loss formula and the chart | Training; there are no parameters or data |
-| Reasoning Reactor | Deterministic simulation | Checklist scoring and the sample table lookup | Sampling; the strings were written ahead of time |
-| Alignment Arena | Educational simulation | The weighted sum of printed scores | Reward-model training and real raters |
-| Ship-It Simulator | Deterministic simulation | Baseline plus authored lever effects | A cluster, queue, or live API |
-| Agent Architect | Deterministic simulation | Needed and harmful flags | Tool execution; nothing is called |
-| Retrieval Lab | Simplified computation | Cosine, overlap, hybrid scores, precision, recall | Embeddings; vectors are 3-D examples; no neural reranker |
-| System Composer | Deterministic simulation | Sums and set coverage | Deployed services; units are teaching numbers |
-| ProdOps Gauntlet | Deterministic simulation | The labeled comparison among written responses | Monitoring; the metrics are part of the case |
-| Foundry Arena | Deterministic simulation | Coverage, reflection length, completed self-ratings | A deployment; the rubric is not a universal design |
-
-## Technical setup
-
-Prerequisites: Node.js 22, npm, and git. No API key. No database.
+## Run locally
 
 ```bash
 git clone https://github.com/piaattufts/llmodyssey.git
@@ -640,230 +437,175 @@ npm install
 npm run dev
 ```
 
-Vite prints a local URL. The development default is port 5173 unless you pass another port.
+This launches the same educational platform on your machine. Vite prints a local URL, usually http://localhost:5173/. Progress stays in that browser. The local site is served from `/`, not from `/llmodyssey/`.
 
-```bash
-npm run build
-npm run preview
-```
+## Student progress
 
-`npm run build` typechecks and writes `dist/`.
+The default record stores:
 
-Environment variables, all optional:
+- a random session ID
+- games started
+- games completed
+- score
+- attempts
+- rounds
+- hints
+- mastery
+- timestamps
 
-| Variable | Default | Role |
+In the default local mode, that record stays in the browser, using IndexedDB with localStorage as a fallback. Refresh does not erase it. The Progress page can export CSV and JSON. **Reset progress** asks for confirmation, then deletes the record for the mode you are in. Resetting the learner record does not reset the demo record.
+
+## Data and privacy
+
+The public educational site is local-first. It does not require a backend, an account, a paid model API, or a research upload. Playing the public site does not make someone a research participant.
+
+Research mode is optional and off unless a build sets `VITE_RESEARCH_MODE=true`. When it is on, the app asks whether to keep anonymous events. Declining leaves the games playable. Consent in that dialog is not an ethics approval. This repository does not claim that every deployment is covered by an existing institutional review, and an approval from another institution does not travel with the code. Original development and a Winter 2026 classroom deployment were conducted while the author was at Durham College. That is history. It is not an approval for your course.
+
+## Simulation versus real execution
+
+| Game | Current implementation | Educational abstraction |
 | --- | --- | --- |
-| `VITE_STORAGE_MODE` | `local` | `supabase` selects the optional analytics insert. Anything else stays local. |
-| `VITE_RESEARCH_MODE` | `false` | `true` shows the consent dialog and allows the adapter. |
-| `VITE_SUPABASE_URL` | empty | Used only with the Supabase adapter. |
-| `VITE_SUPABASE_ANON_KEY` | empty | Used only with the Supabase adapter. Never a service-role key. |
-| `VITE_LLM_PROVIDER` | `mock` | `mock` unless this is something else and the proxy URL is set. |
-| `VITE_LLM_PROXY_URL` | empty | Browser calls this URL. The proxy holds vendor keys. |
-| `VITE_BASE_PATH` | `/` | Set to `/llmodyssey/` for GitHub Pages. |
+| Token Forge | Implemented. Counts, efficiency, and cost are computed from the pieces on the screen. | The segmentations are precomputed illustrations. They are not a live production tokenizer. |
+| Attention Architect | Prototype. Scaled dot-product and softmax run on the given vectors. | The vectors are hand-written. This is not a transformer. |
+| Context Compression | Prototype. Budget, relevance, and must-keep checks are calculated. | Abstractive summary text is written ahead of time. |
+| Promptsmith | Prototype. The comparison among authored strategies is scored. | No model response is requested. |
+| Gradient Playground | Prototype. A documented loss formula draws the chart. | No training run, parameters, or data. |
+| Reasoning Reactor | Prototype. A checklist and a sample table are scored. | The strings were written ahead of time. Nothing is sampled live. |
+| Alignment Arena | Prototype. A weighted sum of printed scores is calculated. | No reward model and no live raters. |
+| Ship-It Simulator | Prototype. Lever effects are added to a baseline. | No cluster, queue, or live API. |
+| Agent Architect | Prototype. Needed and harmful flags are scored. | No tool is called. |
+| Retrieval Lab | Prototype. Cosine, overlap, hybrid score, precision, and recall are computed. | Vectors are small examples. There is no neural embedding model. |
+| System Composer | Prototype. Sums and set coverage are calculated. | Units are teaching numbers. Nothing is deployed. |
+| ProdOps Gauntlet | Prototype. Written responses are compared. | The metrics belong to the case. There is no live monitor. |
+| Foundry Arena | Prototype. Coverage, reflection length, and completed self-ratings are scored. | The rubric is not a universal design. Nothing is deployed. |
 
-Copy `.env.example` to `.env` only if you are changing one of these. A stock clone does not need the file. `VITE_` values are compiled into the static build. Do not put secrets in them.
+## Customizing for a course
 
-## Demo mode
+Instructors edit data, then rebuild.
 
-Open `/demo`.
+| What you want to change | Where it lives |
+| --- | --- |
+| Challenge text, hints, objectives, scenarios | `content/games/<game-id>.ts` |
+| Mastery threshold, enabled games, order, institution name, logo | `config/odyssey.config.ts` |
+| Optional pre/post items | `content/assessments/index.ts` |
+| Tier descriptions on the home page | `src/app/copy.ts` |
 
-It is for conferences, faculty demonstrations, classroom previews, and workshops. It does not ask for an API key. After the page has loaded, the games, the sample record, and the tour do not need the network. If Supabase, a model provider, or analytics is misconfigured, the course still runs and a short banner explains the fallback.
+`config/odyssey.config.ts` already sets the course-wide mastery line and the game list. A tokenizer-only section looks like this:
 
-Demo mode uses a separate browser record, so it does not overwrite a learner who later uses the same machine. It opens every tier. It loads a sample record the first time the demo store is empty: Token Forge and Attention Architect mastered, Context Compression started, a sample pre-assessment, and three sample events. Reset Classroom Demo on `/educator` or `/demo/educator` restores that sample.
+```ts
+masteryThreshold: 70,
+enabledGames: ["token-forge"],
+gameOrder: ["token-forge"],
+```
 
-The guided tour is nine steps, meant to take about six to nine minutes. Start it from the demo home. It walks through the three tiers, the thirteen-game list, Token Forge feedback and hints, local progress, an educator view, and the difference between the reference game and the prototypes. It does not ask for login, Supabase, Wi-Fi after the app has loaded, or an API key.
+Set `institution` and `logoSrc` in the same file when you want them in the sidebar. Leave research mode off unless you have a separate plan for event collection.
 
-1. Show the three tiers.
-2. Open Token Forge.
-3. Show immediate feedback on a tokenizer choice.
-4. Show the three hint levels and the printed penalty.
-5. Open the progress page.
-6. Open Ship-It Simulator for Systems Forge.
-7. Open Foundry Arena.
-8. Open the educator page.
+## Using only part of the Odyssey
 
-Each step is a link with a `tour` query parameter. The bar on the page says what to click.
+You do not have to use all 13 games.
 
-## Deployment
+- Tokenizer lesson: Token Forge only.
+- Retrieval lesson: Retrieval Lab.
+- Production module: Ship-It Simulator, System Composer, and ProdOps Gauntlet.
+- Agent module: Agent Architect, Retrieval Lab, and System Composer.
 
-Build with `npm run build`. Publish the `dist` directory.
+Remove the other ids from `enabledGames` in `config/odyssey.config.ts` if you do not want them on the course page.
 
-### GitHub Pages
-
-This repository's project site is served under `/llmodyssey/`.
+## For developers
 
 ```bash
-VITE_BASE_PATH=/llmodyssey/ npm run build
-```
-
-The build copies `dist/index.html` to `dist/404.html` so a refresh on a client route still loads the app. Point GitHub Pages at that `dist` output. Do not add secret environment variables.
-
-### Vercel
-
-Import the Git repository `https://github.com/piaattufts/llmodyssey`. Use the Vite preset if offered. Build command `npm run build`. Output directory `dist`. `vercel.json` rewrites all paths to `index.html`. Leave Supabase and LLM variables empty for a faithful demo.
-
-### Netlify
-
-Build command `npm run build`. Publish directory `dist`. `public/_redirects` is included in the build and rewrites `/*` to `/index.html` with status 200.
-
-### Docker
-
-From the repository root:
-
-```bash
-docker compose up --build
-```
-
-The site is at `http://127.0.0.1:8088`. The image runs `npm run build` and serves the result with nginx. Unknown paths fall back to `index.html`.
-
-### Institutional static server
-
-Copy `dist/` to the web root, or to a subdirectory if you also set `VITE_BASE_PATH` to that subdirectory. Configure the server so routes such as `/play/token-forge` return `index.html`. `nginx.conf` is a working configuration. No database has to be reachable from the browser.
-
-## Repository structure
-
-```
-llmodyssey/
-├── README.md
-├── LICENSE
-├── CITATION.cff
-├── CONTRIBUTING.md
-├── CODE_OF_CONDUCT.md
-├── CHANGELOG.md
-├── .env.example
-├── package.json
-├── vite.config.ts
-├── vitest.config.ts
-├── playwright.config.ts
-├── eslint.config.js
-├── tsconfig.json
-├── Dockerfile
-├── docker-compose.yml
-├── nginx.conf
-├── vercel.json
-├── config/odyssey.config.ts
-├── content/
-│   ├── games/                 # one definition per game
-│   ├── challenges/foundry.ts  # path ids taken from Foundry rounds
-│   ├── assessments/index.ts   # pre/post items
-│   ├── concept-guides/index.ts
-│   ├── references.ts
-│   └── achievements.ts
-├── docs/                      # educator, student, deployment, customization, research, design, pedagogy, architecture, adding a game, migration audit
-├── examples/
-│   ├── custom-game/sample.ts  # valid, unregistered example
-│   └── llm-proxy/server.mjs   # sample server-side proxy, not started by the app
-├── public/
-├── src/
-│   ├── app/                   # routes, pages, demo seed, tour
-│   ├── components/            # game shell, interaction boards, UI primitives
-│   ├── games/                 # one folder per game, re-exporting its definition
-│   ├── game-engine/           # schema, scoring, evaluation, models
-│   ├── content/load-games.ts
-│   ├── storage/               # IndexedDB repository and CSV export
-│   ├── analytics/             # noop, local, and optional Supabase adapters
-│   ├── research/mode.ts
-│   ├── llm/providers.ts
-│   ├── hooks/use-learner.tsx
-│   └── site.ts                # canonical repository URL and citation fields
-├── supabase/migrations/       # optional anonymous event table
-├── tests/engine.test.ts
-└── e2e/smoke.spec.ts
-```
-
-`src/instructor` is not a separate package. Instructor screens are `src/app/pages/EducatorPage.tsx`. `src/pedagogy` is not a separate package. Unlock and mastery rules are in `src/game-engine`, and the narrative is in `docs/pedagogy.md`.
-
-## Testing
-
-```bash
-npm test
+git clone https://github.com/piaattufts/llmodyssey.git
+cd llmodyssey
+npm install
+npm run dev
 npm run typecheck
 npm run lint
+npm run test
+npm run test:e2e
 npm run build
 ```
 
-`npm test` runs Vitest. It checks that both registries contain the same 13 games, that every round has a successful solver action, that the Token Forge volume round really has 19 and 23 pieces, that attention winners are unique and match the clicked index, that hint penalties and letter grades match the published bands, that 35 out of 50 is 70 percent and is mastery, that Systems Forge and Foundry honor the unlock counts and Practice ahead, that a memory repository saves, exports, and deletes, that research mode defaults off, that the model provider defaults to the mock, and that the README, citation file, and package metadata point at `https://github.com/piaattufts/llmodyssey`. It also checks that `src/` does not mention Base44.
+`npm run dev` serves the app at the site root. The GitHub Pages build sets `VITE_BASE_PATH=/llmodyssey/` so assets and the router resolve under https://piaattufts.github.io/llmodyssey/. `.github/workflows/deploy-pages.yml` runs typecheck, lint, unit tests, the production build, and the Pages deploy on every push to `main`. The Playwright smoke test needs a Chromium install the first time: `npx playwright install chromium`.
 
-`npm run test:e2e` runs a Playwright smoke test: open the home page, enter Token Forge, complete round 1, read the feedback, open progress. Install browsers with `npx playwright install chromium` before the first e2e run. Continuous integration runs typecheck, lint, unit tests, and the production build. It does not need secrets.
+Project layout:
 
-## Accessibility
+```text
+content/games/          game definitions, one file per game
+config/odyssey.config.ts  branding, order, mastery, enabled games
+src/app/                routes, home, educator, progress, demo
+src/components/game/    shared game loop components
+src/game-engine/        scoring, evaluation, schema
+src/storage/            browser progress repository
+tests/                  unit tests
+e2e/                    Playwright smoke test
+```
 
-The interface uses semantic regions: navigation, main, headings, and buttons. The course menu is a persistent sidebar from the `md` breakpoint up. On smaller screens it is a button that opens a drawer. Interactive controls in the course are at least 44 pixels on the short side. Focus uses a visible ring, and `:focus-visible` adds an outline.
+## Architecture
 
-Correctness is not communicated by color alone. Selected cards say "selected." Metrics say "met" or "not met." Feedback says "Met the round target," "Partly met," or "Not met." Progress is text as well as a bar, and the bar has an accessible name. A `prefers-reduced-motion` stylesheet collapses animation and transition duration. The feedback panel also skips its entrance animation when reduced motion is requested.
+```text
+Learner
+   ↓
+React Interface
+   ↓
+Shared Game Components
+   ↓
+Game Definitions
+   ↓
+Local Progress Storage
+   ↓
+Optional Analytics / Backend
+```
 
-Contrast uses light text on a dark laboratory background, with muted text kept light enough for body copy. This is an intentional effort toward WCAG 2.2 AA, not a formal audit certificate.
+The teaching path stops at local progress storage. Optional analytics and a model adapter exist in the repository and stay off in the default build. The games do not need them.
 
-## References
+## Current release status
 
-Technical background used by the games is listed in `content/references.ts` and linked from each concept guide. The main works are:
+Current stable public release: [v0.1.0](https://github.com/piaattufts/llmodyssey/releases/tag/v0.1.0).
 
-- Vaswani et al., "Attention Is All You Need," 2017. <https://arxiv.org/abs/1706.03762>
-- Sennrich, Haddow, and Birch, "Neural Machine Translation of Rare Words with Subword Units," 2016. <https://aclanthology.org/P16-1162/>
-- Schuster and Nakajima, "Japanese and Korean Voice Search," 2012, for WordPiece. <https://doi.org/10.1109/ICASSP.2012.6289079>
-- Kudo and Richardson, "SentencePiece," 2018. The ACL Anthology entry is linked from `content/references.ts`.
-- Kudo, "Subword Regularization: Improving Neural Network Translation Models with Multiple Subword Candidates," 2018, for the Unigram language model.
-- Hu et al., "LoRA: Low-Rank Adaptation of Large Language Models," 2021. <https://arxiv.org/abs/2106.09685>
-- Lewis et al., "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks," 2020. <https://arxiv.org/abs/2005.11401>
-- Karpukhin et al., "Dense Passage Retrieval for Open-Domain Question Answering," 2020.
-- Ouyang et al., "Training language models to follow instructions with human feedback," 2022. <https://arxiv.org/abs/2203.02155>
-- Christiano et al., "Deep Reinforcement Learning from Human Preferences," 2017.
-- Brown et al., "Language Models are Few-Shot Learners," 2020.
-- Wei et al., "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models," 2022.
-- Wang et al., "Self-Consistency Improves Chain of Thought Reasoning in Language Models," 2022.
-- Yao et al., "Tree of Thoughts," 2023.
-- Bommasani et al., "On the Opportunities and Risks of Foundation Models," 2021.
-- Huyen, *Designing Machine Learning Systems*, 2022, for production constraints.
-- Zamfirescu-Pereira et al., "Why Johnny Can't Prompt," 2023.
+Token Forge is the reference implementation. The other twelve games are playable prototypes. They do not have the same maturity, and the interface says so.
 
-Pedagogical background, also in `content/references.ts`: Black and Wiliam on formative assessment; Vygotsky on the zone the hints are meant to occupy; Sweller on cognitive load; Bloom, "Learning for Mastery," 1968; Anderson and Krathwohl's revision of Bloom's taxonomy; Deci and Ryan on self-determination; Brown, Collins, and Duguid on situated cognition; Hamari, Koivisto, and Sarsa on gamification evidence; Csikszentmihalyi, *Flow*, 1990; Piaget, *The Construction of Reality in the Child*. Book entries that do not have a verified DOI point at a WorldCat search rather than at an invented identifier.
+## Roadmap
 
-The Odyssey paper itself is Tripathi, arXiv:2608.16924.
+The items below are **future work**. They are not in v0.1.0.
+
+- Mature prototype games into full reference implementations.
+- Adaptive difficulty.
+- LMS integration.
+- Additional Foundry challenges.
+- Additional instructor analytics.
+- Optional live model integrations.
+- Accessibility refinement.
+- Multi-institution evaluation of learning outcomes.
 
 ## Research and citation
 
-LLM Odyssey is the software described in "WIP: LLM Odyssey: A Game-Based Platform for Teaching LLM Engineering Concepts" by Priyamvada Tripathi. The current affiliation is the Tufts Institute for Artificial Intelligence at Tufts University. Original development and the Winter 2026 deployment were conducted while the author was at Durham College.
+Priyamvada Tripathi  
+Tufts Institute for Artificial Intelligence  
+Tufts University
 
-The verified paper record used here is arXiv:2608.16924, <https://arxiv.org/abs/2608.16924>, DOI 10.48550/arXiv.2608.16924. No other DOI is stated because none has been verified for this software release.
+Project: LLM Odyssey: A Game-Based Platform for Teaching LLM Engineering Concepts.
 
-`CITATION.cff` is the machine-readable citation. GitHub and many reference managers read it from the repository root. Please cite both the software and the paper when the distinction matters: the paper is the design report, and this repository is the implementation you can run.
+Please cite the software and, where relevant, the preprint recorded in [CITATION.cff](CITATION.cff):
 
-Contact for the author of the software: pia.tripathi@tufts.edu. Please use the scholarly name Priyamvada Tripathi in citations.
+Priyamvada Tripathi. *LLM Odyssey: A Game-Based Platform for Teaching LLM Engineering Concepts.* Software, version 0.1.0. https://github.com/piaattufts/llmodyssey
+
+Priyamvada Tripathi. *WIP: LLM Odyssey: A Game-Based Platform for Teaching LLM Engineering Concepts.* arXiv:2608.16924, 2026. https://arxiv.org/abs/2608.16924. DOI: 10.48550/arXiv.2608.16924.
+
+Original development and the Winter 2026 classroom deployment were conducted while the author was at Durham College. The present project is maintained at Tufts University.
 
 ## Limitations
 
-The simulations simplify production systems. A 3-dimensional vector is not an embedding model. An authored segmentation is not the tokenizer you will call next year. The loss formula is not a training run. Deterministic exercises do not show the variance of a real model at a non-zero temperature.
-
-Some ideas are abstracted on purpose: positional encodings are discussed rather than trained, reranking is top-k on a score rather than a second model, and agent tools are flags rather than APIs. Those abstractions can teach the decision and still leave out failure modes you will meet in a codebase.
-
-LLM engineering practice changes quickly. Content will go stale and should be revised in `content/` rather than defended as complete.
-
-Learning effectiveness is not established by shipping the software. The pre/post check is available for a class or a study. This repository does not report a treatment effect.
-
-Foundry scoring is a rubric, not a unique correct design. Two learners can cover the same constraints with different reflections, and a human reader may value those reflections differently. The app will give them the same coverage score.
-
-Listed per-game prerequisites are visible and are not a second lock. If you need "finish Token Forge before Attention Architect" as a hard gate, that is a change to `unlockStatus`, not a setting that already exists.
-
-Each Foundry path has one brief. A community board for sharing solutions is not part of this release.
+- Many current games are prototypes.
+- The simulations simplify production systems.
+- Precomputed examples do not reproduce every behavior of production LLM systems.
+- Tokenizer, model, and API behavior changes quickly. The illustrations are pinned to this release.
+- Learning effectiveness requires empirical evaluation. This repository does not claim that evaluation has already been done.
+- Open-ended Foundry tasks do not have a single correct answer.
 
 ## Contributing
 
-Educators and developers can contribute new rounds, new games, translations, accessibility improvements, corrections to the technical content, bug fixes, and written reports of classroom use. Issues are at <https://github.com/piaattufts/llmodyssey/issues>. Please read `CONTRIBUTING.md` and `CODE_OF_CONDUCT.md`.
-
-Do not file learner exports or participant data. If a study needs a data deposit, that deposit belongs in the institution's approved archive, not in this gameplay repository.
-
-## Future work
-
-The following are not implemented. They are listed so they are not confused with the current app.
-
-- More than one challenge per Foundry path.
-- Optional sharing of Foundry write-ups through a backend.
-- Live tokenizer libraries behind Token Forge, still labeled as such.
-- A training run behind Gradient Playground.
-- Adaptive difficulty that changes rounds from performance.
-- SCORM or LTI packaging.
-- A graded instructor view of many students at once. The current educator page reads one browser.
+Issues and pedagogical corrections are welcome at https://github.com/piaattufts/llmodyssey/issues. See [CONTRIBUTING.md](CONTRIBUTING.md) and [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
 
 ## License
 
-MIT. See `LICENSE`.
+[MIT](LICENSE). Copyright Priyamvada Tripathi.

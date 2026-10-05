@@ -2,7 +2,7 @@ import type { OdysseyConfig } from "../src/game-engine/config.ts";
 
 const config: OdysseyConfig = {
   title: "LLM Odyssey",
-  tagline: "13 games · 3 learning tiers · No API key required · Open source · Instructor customizable",
+  tagline: "13 games · 3 learning tiers · Browser-based · No paid API required · Open source · Educator reusable",
   institution: "",
   logoSrc: "",
   researchMode: false,

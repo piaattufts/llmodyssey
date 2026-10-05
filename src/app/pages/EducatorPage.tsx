@@ -1,21 +1,25 @@
 import { useState } from "react";
+import { Link } from "react-router";
 import { assessmentItems } from "@content/assessments/index.ts";
 import { games } from "../../content/load-games.ts";
 import { odysseyConfig } from "../../game-engine/config.ts";
 import { courseGames, thresholdFor } from "../../game-engine/prerequisites.ts";
+import { releaseStatusLabel } from "../../game-engine/schema.ts";
 import { useLearner } from "../../hooks/use-learner.tsx";
 import { researchModeEnabled } from "../../research/mode.ts";
+import { citation, repository } from "../../site.ts";
 import { createRepository } from "../../storage/repository.ts";
 import { assessmentCsv, downloadText, eventsCsv, eventsJson, progressCsv } from "../../storage/export.ts";
 import { sampleLearnerState } from "../demo-seed.ts";
 import { tierCopy } from "../copy.ts";
 
-export function EducatorPage() {
+export function EducatorPage({ basePath = "" }: { basePath?: string }) {
   const learner = useLearner();
   const [notice, setNotice] = useState<string | null>(null);
   if (learner.loading || !learner.state) return <p>Loading the local record…</p>;
   const state = learner.state;
   const visible = courseGames(games);
+  const threshold = odysseyConfig.masteryThreshold;
 
   async function resetDemo() {
     const repository = createRepository("demo");
@@ -25,75 +29,166 @@ export function EducatorPage() {
   }
 
   return (
-    <div className="space-y-8">
-      <header className="space-y-2">
-        <h1 className="text-3xl font-semibold">Educator mode</h1>
-        <p>No account is required. This page reads the game definitions. It does not show a private research database.</p>
-        <p className="text-sm text-muted-foreground">
-          Research mode is {researchModeEnabled() ? "on" : "off"}. Branding, unlock counts, and the default mastery threshold are build-time settings in config/odyssey.config.ts.
+    <div className="space-y-10">
+      <header className="space-y-3">
+        <p className="text-sm text-muted-foreground">For instructors</p>
+        <h1 className="text-3xl font-semibold">Educator guide</h1>
+        <p className="max-w-3xl text-lg">
+          LLM Odyssey is a browser course for LLM engineering. Students make a decision, see the result, and can retry. No account and no paid model API are required for the hosted site or a local run.
+        </p>
+        <p>
+          In v0.1.0, Token Forge is the reference implementation. The other twelve games are playable prototypes. Prototype scores are calculated from the student’s answers. They are not finished reference designs.
+        </p>
+        <p className="text-sm">
+          <a className="underline" href={repository.url}>GitHub repository</a>
+          {" · "}
+          <a className="underline" href={`${repository.url}/blob/main/README.md`}>README</a>
+          {" · "}
+          <a className="underline" href={`${repository.url}/blob/main/CITATION.cff`}>CITATION.cff</a>
+          {" · "}
+          <a className="underline" href={`${repository.url}/releases/tag/v0.1.0`}>Release v0.1.0</a>
         </p>
       </header>
-      <section className="space-y-2">
-        <h2 className="text-xl font-semibold">Classroom patterns</h2>
-        <ul className="list-disc space-y-1 pl-5">
-          <li>Lecture companion: teach the mechanism, then open the matching game for one or two rounds.</li>
-          <li>Lab: assign a game and ask students to export the progress CSV before they leave.</li>
-          <li>Independent module: assign a tier and the pre/post assessment.</li>
-          <li>Capstone: use one Foundry path and grade the reflection against the rubric printed in the round.</li>
-        </ul>
-        <p>A six-week map is in the README. Week 1 is Token Forge and Attention Architect. Week 6 is Foundry Arena.</p>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold">What the platform is for</h2>
+        <p>
+          Use it when a lecture has named a mechanism and you want students to practice the decision: which segmentation is cheaper, which passage must stay inside a context budget, which tool an agent should be allowed to call. The platform is designed to support that practice. It is not, by itself, evidence that the practice improves learning. A formal estimate of learning outcomes is still an empirical question for a particular course.
+        </p>
+        <p>
+          Research collection is {researchModeEnabled() ? "on in this build" : "off in this build"}. Visitors of the public site are not enrolled in a study. An institution that later turns research mode on obtains its own ethics approval where one is required. An approval from another campus does not transfer.
+        </p>
       </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold">Three tiers</h2>
+        <ul className="space-y-2">
+          {([1, 2, 3] as const).map((tier) => (
+            <li key={tier}>
+              <strong>Tier {tier} · {tierCopy[tier].name}. </strong>
+              {tierCopy[tier].goal} Bloom emphasis: {tierCopy[tier].bloom}.
+            </li>
+          ))}
+        </ul>
+        <p className="text-sm text-muted-foreground">
+          Early games ask students to inspect a mechanism. Later games ask them to judge a system. Foundry Arena asks for a design under a brief. There is not one hidden correct architecture.
+        </p>
+      </section>
+
       <section className="overflow-x-auto">
-        <h2 className="mb-3 text-xl font-semibold">Curriculum</h2>
+        <h2 className="mb-3 text-xl font-semibold">Games, status, and time</h2>
         <table className="w-full text-left text-sm">
           <thead>
             <tr>
+              <th className="p-2">#</th>
               <th className="p-2">Game</th>
               <th className="p-2">Tier</th>
+              <th className="p-2">Students learn</th>
+              <th className="p-2">Status</th>
               <th className="p-2">Minutes</th>
               <th className="p-2">Bloom</th>
               <th className="p-2">Mastery</th>
-              <th className="p-2">Prerequisites listed</th>
             </tr>
           </thead>
           <tbody>
             {visible.map((game) => (
               <tr key={game.id} className="border-t border-border align-top">
-                <td className="p-2">{game.title}</td>
+                <td className="p-2">{game.order}</td>
+                <td className="p-2">
+                  <Link className="underline" to={`${basePath}/play/${game.id}`}>{game.title}</Link>
+                </td>
                 <td className="p-2">{tierCopy[game.tier].name}</td>
+                <td className="p-2">{game.summary}</td>
+                <td className="p-2">
+                  {releaseStatusLabel(game.status)}
+                  {game.status === "implemented" ? " · Reference" : ""}
+                </td>
                 <td className="p-2">{game.estimatedMinutes}</td>
                 <td className="p-2">{game.bloomLevels.join(", ")}</td>
                 <td className="p-2">{thresholdFor(game)}%</td>
-                <td className="p-2">{game.prerequisites.length ? game.prerequisites.join(", ") : "None listed"}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </section>
+
       <section className="space-y-4">
-        <h2 className="text-xl font-semibold">Objectives and misconceptions</h2>
+        <h2 className="text-xl font-semibold">Learning objectives</h2>
         {visible.map((game) => (
           <article key={game.id} className="rounded-xl border border-border p-4">
-            <h3 className="text-lg font-medium">{game.title}</h3>
-            <p className="text-sm text-muted-foreground">{game.implementation.label}</p>
-            <ul className="mt-2 list-disc pl-5">{game.learningObjectives.map((objective) => <li key={objective}>{objective}</li>)}</ul>
-            <p className="mt-2 text-sm"><strong>Misconception. </strong>{game.misconception}</p>
-            <p className="text-sm"><strong>Concepts. </strong>{game.concepts.join(", ")}</p>
+            <h3 className="text-lg font-medium">
+              {game.order}. {game.title}
+              <span className="ml-2 text-sm font-normal text-muted-foreground">
+                {releaseStatusLabel(game.status)}
+                {game.status === "implemented" ? " · Reference" : ""}
+              </span>
+            </h3>
+            <p className="mt-1 text-sm">{game.purpose}</p>
+            <ul className="mt-2 list-disc pl-5">
+              {game.learningObjectives.map((objective) => (
+                <li key={objective}>{objective}</li>
+              ))}
+            </ul>
+            <p className="mt-2 text-sm"><strong>Concepts. </strong>{game.concepts.join(", ")}</p>
+            <p className="text-sm"><strong>Misconception in view. </strong>{game.misconception}</p>
+            <p className="text-sm"><strong>What the screen is doing. </strong>{game.implementation.whatIsReal} {game.implementation.whatIsSimulated}</p>
           </article>
         ))}
       </section>
+
       <section className="space-y-2">
-        <h2 className="text-xl font-semibold">Assessments</h2>
-        <p>{assessmentItems.length} items, scored as the percent correct. Explanations are shown after submission. Items are in content/assessments/index.ts.</p>
-        <ul className="list-disc pl-5 text-sm">
-          {assessmentItems.map((item) => (
-            <li key={item.id}>{item.domain}: {item.prompt}</li>
-          ))}
+        <h2 className="text-xl font-semibold">Ways to assign it</h2>
+        <ul className="list-disc space-y-2 pl-5">
+          <li><strong>Lecture companion.</strong> Teach tokenization, then assign <Link className="underline" to={`${basePath}/play/token-forge`}>Token Forge</Link> before the next meeting.</li>
+          <li><strong>Lab.</strong> Students complete one game in the lab period and export the progress CSV from Progress before they leave.</li>
+          <li><strong>Independent module.</strong> Assign one tier and the optional pre/post check. Students do not need all 13 games.</li>
+          <li><strong>Capstone.</strong> Use <Link className="underline" to={`${basePath}/play/foundry-arena`}>Foundry Arena</Link>. Grade the reflection and the constraints the student covered. The rubric is not a single official architecture.</li>
         </ul>
+        <p>A six-week example, which you can reorder: week 1 Token Forge and Attention Architect; week 2 Context Compression and Promptsmith; week 3 Gradient Playground, Reasoning Reactor, and Alignment Arena; week 4 Retrieval Lab and Agent Architect; week 5 Ship-It Simulator, System Composer, and ProdOps Gauntlet; week 6 Foundry Arena.</p>
+        <p>Shorter slices: Token Forge alone for a tokenizer lesson; Retrieval Lab for retrieval; Ship-It Simulator with System Composer and ProdOps Gauntlet for production; Agent Architect with Retrieval Lab and System Composer for agents.</p>
       </section>
+
       <section className="space-y-2">
-        <h2 className="text-xl font-semibold">Exports for this browser</h2>
-        <p className="text-sm">These files contain only the record loaded in the current mode. In demo mode that is the demo record. On the course site it is the learner record.</p>
+        <h2 className="text-xl font-semibold">Scoring and mastery</h2>
+        <p>
+          Each round is scored out of 10. A strong answer scores 10, an acceptable answer scores 6, and a poor fit scores 0. Each revealed hint then subtracts 1 point, to a floor of 0. The game percent is the sum of the best round scores. The default mastery line is {threshold}%. Letter bands are A 90+, B 80–89, C 70–79, D 60–69, and F below 60. Students may retry. The best score on each round is kept. Finishing a game below {threshold}% is recorded and is not called mastery.
+        </p>
+        <p className="text-sm text-muted-foreground">
+          Later tiers can stay locked until earlier games are mastered. Students can turn on Practice ahead on the home page. Listed prerequisites stay visible either way. Unlock counts live in config/odyssey.config.ts.
+        </p>
+      </section>
+
+      <section className="space-y-2">
+        <h2 className="text-xl font-semibold">Progress on the student’s computer</h2>
+        <p>
+          The default record stays in the browser. It holds a random session id, games started, games completed, scores, attempts, rounds, hints, mastery, and timestamps. Refresh does not erase it. Students can export CSV or JSON from Progress, and Reset progress asks for confirmation before it deletes that browser’s record for the current mode. The public site does not require an account, a backend, or a research upload.
+        </p>
+      </section>
+
+      <section className="space-y-2">
+        <h2 className="text-xl font-semibold">Change it for your course</h2>
+        <p>Game text, hints, and objectives are in <code>content/games/</code>. Branding, which games are enabled, order, and the mastery threshold are in <code>config/odyssey.config.ts</code>.</p>
+        <pre className="overflow-x-auto rounded-lg border border-border p-3 text-sm">{`masteryThreshold: 70,
+enabledGames: ["token-forge"],
+gameOrder: ["token-forge"],`}</pre>
+        <p className="text-sm">
+          That example keeps a tokenizer lesson and leaves the other games out of the course list. Rebuild after editing the config. The file in this repository is{" "}
+          <a className="underline" href={`${repository.url}/blob/main/config/odyssey.config.ts`}>config/odyssey.config.ts</a>.
+        </p>
+        <p className="text-sm text-muted-foreground">Institution line in this build: {odysseyConfig.institution || "not set"}. Set <code>institution</code> and <code>logoSrc</code> in the same config file if you want them in the sidebar.</p>
+      </section>
+
+      <section className="space-y-2">
+        <h2 className="text-xl font-semibold">Optional check and exports</h2>
+        <p>
+          {assessmentItems.length} optional pre/post items live in <code>content/assessments/index.ts</code>. Explanations appear after submission. They are a classroom check, not a validated instrument.
+        </p>
+        <p>
+          <Link className="underline" to={`${basePath}/assess/pre`}>Open the pre-check</Link>
+          {" · "}
+          <Link className="underline" to={`${basePath}/assess/post`}>Open the post-check</Link>
+        </p>
+        <p className="text-sm">These downloads contain only the record in the current mode on this browser.</p>
         <div className="flex flex-wrap gap-2">
           <button type="button" className="min-h-11 rounded-lg border border-border px-4" onClick={() => downloadText("odyssey-progress.csv", progressCsv(state), "text/csv")}>Progress CSV</button>
           <button type="button" className="min-h-11 rounded-lg border border-border px-4" onClick={() => downloadText("odyssey-assessments.csv", assessmentCsv(state), "text/csv")}>Assessment CSV</button>
@@ -102,7 +197,19 @@ export function EducatorPage() {
           <button type="button" className="min-h-11 rounded-lg border border-border px-4" onClick={() => void resetDemo()}>Reset Classroom Demo</button>
         </div>
         {notice ? <p role="status">{notice}</p> : null}
-        <p className="text-sm text-muted-foreground">Institution: {odysseyConfig.institution || "Not set"}. Enabled games: {odysseyConfig.enabledGames.join(", ")}.</p>
+      </section>
+
+      <section className="space-y-2 text-sm">
+        <h2 className="text-xl font-semibold">Citation</h2>
+        <p>
+          {citation.author}, {citation.affiliation}. {citation.platformTitle}. Software, version 0.1.0.{" "}
+          <a className="underline" href={repository.url}>{repository.url}</a>
+        </p>
+        <p>
+          Associated preprint: {citation.paperTitle}. arXiv:{citation.arxivId}, {citation.year}.{" "}
+          <a className="underline" href={citation.arxivUrl}>{citation.arxivUrl}</a>. DOI: {citation.arxivDoi}.
+        </p>
+        <p className="text-muted-foreground">{citation.historicalAffiliation}</p>
       </section>
     </div>
   );
