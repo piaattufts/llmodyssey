@@ -1,3 +1,4 @@
+import { shipItOrientation } from "../orientation/games.ts";
 import type { GameDefinition } from "../../src/game-engine/schema.ts";
 
 const scoreRule =
@@ -42,6 +43,7 @@ const shipIt: GameDefinition = {
     whatIsReal: "The arithmetic from baseline and lever effects to projected metrics.",
     whatIsSimulated: "There is no cluster, queue, or live API. The effect sizes are authored for the scenario.",
   },
+  orientation: shipItOrientation,
   rounds: [
     {
       id: "support-api",

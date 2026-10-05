@@ -1,3 +1,4 @@
+import { reasoningReactorOrientation } from "../orientation/games.ts";
 import type { GameDefinition } from "../../src/game-engine/schema.ts";
 
 const scoreRule =
@@ -42,6 +43,7 @@ const reasoningReactor: GameDefinition = {
     whatIsReal: "The checklist scoring and the lookup of the sample table for the selected temperature.",
     whatIsSimulated: "The sample strings were written for the exercise. No model was sampled at runtime.",
   },
+  orientation: reasoningReactorOrientation,
   rounds: [
     {
       id: "arithmetic",

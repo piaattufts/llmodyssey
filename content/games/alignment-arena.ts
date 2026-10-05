@@ -1,3 +1,4 @@
+import { alignmentArenaOrientation } from "../orientation/games.ts";
 import type { GameDefinition } from "../../src/game-engine/schema.ts";
 
 const scoreRule =
@@ -42,6 +43,7 @@ const alignmentArena: GameDefinition = {
     whatIsReal: "The weighted sum is computed from the printed scores and weights.",
     whatIsSimulated: "No preference model is trained, no human raters were collected, and the scores are authored for the lesson.",
   },
+  orientation: alignmentArenaOrientation,
   rounds: [
     {
       id: "weights",

@@ -8,20 +8,21 @@ import { completionAllowed, type GameDefinition } from "../../game-engine/schema
 import { applyHintPenalty, ROUND_MAX_POINTS } from "../../game-engine/scoring.ts";
 import { useLearner } from "../../hooks/use-learner.tsx";
 import type { RoundRecord } from "../../storage/types.ts";
-import { ConceptGuide, WorkedExample } from "./ConceptGuide.tsx";
 import { FeedbackPanel } from "./FeedbackPanel.tsx";
 import { GameCompletion } from "./GameCompletion.tsx";
+import { GameGuide } from "./GameGuide.tsx";
 import { GameHeader } from "./GameHeader.tsx";
+import { GameOrientation } from "./GameOrientation.tsx";
 import { HintPanel } from "./HintPanel.tsx";
 import { InteractionHost } from "./InteractionHost.tsx";
-import { LearningObjectives } from "./LearningObjectives.tsx";
+import { RoundBrief } from "./RoundBrief.tsx";
 import { RoundProgress } from "./RoundProgress.tsx";
 import { ScorePanel } from "./ScorePanel.tsx";
 
 export function GameShell({ game, basePath }: { game: GameDefinition; basePath: string }) {
   const learner = useLearner();
   const threshold = thresholdFor(game);
-  const [phase, setPhase] = useState<"intro" | "round" | "feedback" | "reflection" | "complete">("intro");
+  const [phase, setPhase] = useState<"orientation" | "round" | "feedback" | "complete">("orientation");
   const [roundIndex, setRoundIndex] = useState(0);
   const [action, setAction] = useState<GameAction | null>(null);
   const [hints, setHints] = useState(0);
@@ -114,7 +115,24 @@ export function GameShell({ game, basePath }: { game: GameDefinition; basePath: 
       setPhase("round");
       return;
     }
-    setPhase("reflection");
+    void finish(reflection.trim().length === 0);
+  }
+
+  function replay() {
+    setRoundIndex(0);
+    setHints(0);
+    setEvaluation(null);
+    setLockedScore(null);
+    setAction(null);
+    setPhase("orientation");
+  }
+
+  async function saveReflection() {
+    await learner.update((state) => {
+      const current = state.games[game.id] ?? blankGameRecord(game.id);
+      const updated = projectRecord(game, { ...current, reflection }, threshold);
+      return { ...state, games: { ...state.games, [game.id]: updated } };
+    });
   }
 
   async function finish(skip: boolean) {
@@ -135,39 +153,36 @@ export function GameShell({ game, basePath }: { game: GameDefinition; basePath: 
   const nextGame = learner.state ? recommendedNext(courseGames(games), learner.state, learner.bypassLocks) : null;
 
   const following = nextGame && nextGame.id !== game.id ? nextGame : null;
+  const ordered = courseGames(games);
+  const orderIndex = ordered.findIndex((item) => item.id === game.id);
+  const nextInOrder = orderIndex >= 0 ? (ordered[orderIndex + 1] ?? null) : null;
+  const guide = game.orientation.roundGuides[roundIndex];
 
   return (
     <div className="space-y-6">
-      <GameHeader game={game} threshold={threshold} />
+      {phase === "orientation" ? null : <GameHeader game={game} threshold={threshold} />}
       <RoundProgress
-        value={((roundIndex + (phase === "intro" ? 0 : 1)) / game.rounds.length) * 100}
+        value={((roundIndex + (phase === "orientation" ? 0 : 1)) / game.rounds.length) * 100}
         label="Round progress"
       />
 
-      {phase === "intro" ? (
-        <LearningObjectives
-          game={game}
-          actions={
-            <>
-              <WorkedExample game={game} />
-              <ConceptGuide game={game} />
-              <Button className="min-h-11" data-testid="start-game" onClick={() => void start()}>
-                Start game
-              </Button>
-            </>
-          }
-        />
-      ) : null}
+      {phase === "orientation" ? <GameOrientation game={game} onStart={() => void start()} /> : null}
 
       {phase === "round" || phase === "feedback" ? (
         <section className="space-y-4">
           <div className="flex flex-wrap items-end justify-between gap-3">
             <div>
               <h2 className="text-xl font-semibold">{round.title}</h2>
-              <p className="text-sm text-muted-foreground">Concept: {round.concept}</p>
+              <p className="text-sm text-muted-foreground">
+                Round {roundIndex + 1} of {game.rounds.length}
+              </p>
             </div>
-            <ScorePanel earned={earned} possible={possible} percent={percent} />
+            <div className="flex flex-wrap items-center gap-3">
+              <ScorePanel earned={earned} possible={possible} percent={percent} />
+              <GameGuide game={game} />
+            </div>
           </div>
+          {guide ? <RoundBrief roundNumber={roundIndex + 1} roundCount={game.rounds.length} concept={round.concept} guide={guide} /> : null}
           <p>{round.scenario}</p>
           <p>
             <strong>Task. </strong>
@@ -200,8 +215,11 @@ export function GameShell({ game, basePath }: { game: GameDefinition; basePath: 
               Lock in this round
             </Button>
           ) : null}
-          {phase === "feedback" && evaluation && lockedScore !== null ? (
+          {phase === "feedback" && evaluation && lockedScore !== null && guide ? (
             <FeedbackPanel
+              round={round}
+              action={action}
+              guide={guide}
               evaluation={evaluation}
               hints={hints}
               score={lockedScore}
@@ -213,28 +231,20 @@ export function GameShell({ game, basePath }: { game: GameDefinition; basePath: 
         </section>
       ) : null}
 
-      {phase === "reflection" ? (
-        <section className="space-y-3">
-          <h2 className="text-xl font-semibold">Reflection</h2>
-          <p>{game.reflectionPrompt}</p>
-          <textarea
-            className="min-h-32 w-full rounded-lg border border-border bg-background p-3"
-            value={reflection}
-            onChange={(event) => setReflectionDraft(event.target.value)}
-          />
-          <div className="flex flex-wrap gap-2">
-            <Button className="min-h-11" onClick={() => void finish(false)}>
-              Save reflection
-            </Button>
-            <Button variant="outline" className="min-h-11" onClick={() => void finish(true)}>
-              Skip for now
-            </Button>
-          </div>
-        </section>
-      ) : null}
-
       {phase === "complete" ? (
-        <GameCompletion game={game} record={record} percent={percent} threshold={threshold} nextGame={following} basePath={basePath} />
+        <GameCompletion
+          game={game}
+          record={record}
+          percent={percent}
+          threshold={threshold}
+          nextGame={following}
+          nextInOrder={nextInOrder}
+          basePath={basePath}
+          reflection={reflection}
+          onReflectionChange={setReflectionDraft}
+          onSaveReflection={() => void saveReflection()}
+          onReplay={replay}
+        />
       ) : null}
     </div>
   );

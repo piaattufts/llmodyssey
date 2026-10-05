@@ -1,3 +1,4 @@
+import { foundryArenaOrientation } from "../orientation/games.ts";
 import type { GameDefinition } from "../../src/game-engine/schema.ts";
 
 const scoreRule =
@@ -45,6 +46,7 @@ const foundryArena: GameDefinition = {
     whatIsReal: "Coverage is computed from the covers and misses on the options you select, plus reflection length and whether every self-rating is filled in.",
     whatIsSimulated: "No system is deployed, and the rubric is not a claim that one architecture is universally correct.",
   },
+  orientation: foundryArenaOrientation,
   rounds: [
     {
       id: "industry",

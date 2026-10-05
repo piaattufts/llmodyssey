@@ -1,3 +1,4 @@
+import { contextCompressionOrientation } from "../orientation/games.ts";
 import type { GameDefinition } from "../../src/game-engine/schema.ts";
 
 const scoreRule =
@@ -42,6 +43,7 @@ const contextCompression: GameDefinition = {
     whatIsReal: "Token sums, budget checks, and relevance totals are computed from the numbers in the round.",
     whatIsSimulated: "Abstractive summaries are prewritten. The game does not call a model to summarize.",
   },
+  orientation: contextCompressionOrientation,
   rounds: [
     {
       id: "extract-faq",

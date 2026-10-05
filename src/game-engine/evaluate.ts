@@ -256,6 +256,70 @@ export function liveReadout(round: RoundDefinition, action: GameAction | null): 
   return { lines: [], detail: "" };
 }
 
+export function describeDecision(round: RoundDefinition, action: GameAction | null): string {
+  if (!action || action.type !== round.interaction.type) return "No decision was submitted.";
+  const interaction = round.interaction;
+  if (interaction.type === "choice" && action.type === "choice") {
+    return interaction.options.find((item) => item.id === action.optionId)?.label ?? "An unrecognized option.";
+  }
+  if (interaction.type === "tokenizer" && action.type === "tokenizer") {
+    const strategy = interaction.strategies.find((item) => item.id === action.strategyId);
+    return strategy ? `${strategy.name} (${strategy.tokens.length} authored tokens)` : "An unrecognized strategy.";
+  }
+  if (interaction.type === "attention" && action.type === "attention") {
+    return interaction.tokens[action.tokenIndex] ?? "An unrecognized token.";
+  }
+  if (interaction.type === "budget" && action.type === "budget") {
+    const strategy = interaction.strategies.find((item) => item.id === action.strategyId);
+    const spans = interaction.spans.filter((span) => action.spanIds.includes(span.id)).map((span) => span.text);
+    const kept = strategy?.mode === "fixed-summary" ? "prewritten summary" : spans.join("; ") || "no spans";
+    return `${strategy?.label ?? "Unknown strategy"} — ${kept}`;
+  }
+  if (interaction.type === "curve" && action.type === "curve") {
+    const method = action.method === "lora" ? "LoRA" : "Full fine-tuning";
+    return `${method}, learning rate ${action.learningRate}, ${action.epochs} epochs, batch ${action.batchSize}`;
+  }
+  if (interaction.type === "workflow" && action.type === "workflow") {
+    const steps = interaction.steps.filter((step) => action.stepIds.includes(step.id)).map((step) => step.label);
+    const temperature = interaction.temperatures.find((item) => item.value === action.temperature);
+    return `Steps: ${steps.join(", ") || "none"}. Temperature: ${temperature?.label ?? String(action.temperature)}.`;
+  }
+  if (interaction.type === "rank" && action.type === "rank") {
+    return interaction.responses.find((item) => item.id === action.responseId)?.text ?? "An unrecognized response.";
+  }
+  if (interaction.type === "levers" && action.type === "levers") {
+    const labels = interaction.levers.filter((lever) => action.leverIds.includes(lever.id)).map((lever) => lever.label);
+    return labels.length ? labels.join(", ") : "No levers selected.";
+  }
+  if (interaction.type === "agent" && action.type === "agent") {
+    const tools = interaction.tools.filter((tool) => action.toolIds.includes(tool.id)).map((tool) => tool.label);
+    const controls = interaction.controls.filter((control) => action.controlIds.includes(control.id)).map((control) => control.label);
+    return `Tools: ${tools.join(", ") || "none"}. Controls: ${controls.join(", ") || "none"}.`;
+  }
+  if (interaction.type === "retrieval" && action.type === "retrieval") {
+    return `${action.method} retrieval${action.useFilter ? " with the metadata filter" : " without the metadata filter"}`;
+  }
+  if (interaction.type === "composer" && action.type === "composer") {
+    const blocks = interaction.blocks.filter((block) => action.blockIds.includes(block.id)).map((block) => block.label);
+    return blocks.length ? blocks.join(", ") : "No components selected.";
+  }
+  if (interaction.type === "foundry" && action.type === "foundry") {
+    return interaction.decisions
+      .map((decision) => {
+        const option = decision.options.find((item) => item.id === action.choices[decision.id]);
+        return `${option?.label ?? "not chosen"}`;
+      })
+      .join(" · ");
+  }
+  return "Decision recorded.";
+}
+
+export function resultLabel(success: boolean, partial: boolean): "Correct" | "Partially appropriate" | "Incorrect" {
+  if (success) return "Correct";
+  if (partial) return "Partially appropriate";
+  return "Incorrect";
+}
+
 export function evaluateRound(round: RoundDefinition, action: GameAction | null): Evaluation {
   const empty = baseEvaluation(round, 0, false, round.feedbackIncorrect, ["No answer was submitted."]);
   if (!action || action.type !== round.interaction.type) return empty;

@@ -2,7 +2,7 @@
 
 1. Create `src/games/<id>/index.ts` that re-exports the definition.
 2. Add `content/games/<id>.ts` as a `GameDefinition`. Copy `examples/custom-game/sample.ts` and change the ids.
-3. Put rounds, hints, objectives, and the implementation note in that file. Zod checks it when the app loads.
+3. Put rounds, hints, objectives, the implementation note, and an `orientation` object in that file. Zod checks it when the app loads. The orientation is what learners read before round 1. `content/orientation/copy.ts` has `buildOrientation` for the shared scoring language.
 4. If the round uses `choice`, `tokenizer`, `attention`, `budget`, `curve`, `workflow`, `rank`, `levers`, `agent`, `retrieval`, `composer`, or `foundry`, you do not add a React component. A new interaction type needs a schema variant in `src/game-engine/schema.ts`, a case in `src/game-engine/evaluate.ts`, and a branch in `src/components/game/InteractionHost.tsx`.
 5. Register the import in `src/content/load-games.ts` and `src/games/register.ts`. Add the id to `enabledGames` and `gameOrder` in `config/odyssey.config.ts`. The loader throws if the count is not 13, so update that expectation and `tests/engine.test.ts` together.
 6. The route is already `/play/:gameId`. Do not add a route unless the game needs a page that is not the shared shell.

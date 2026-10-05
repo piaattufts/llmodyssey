@@ -1,3 +1,4 @@
+import { agentArchitectOrientation } from "../orientation/games.ts";
 import type { GameDefinition } from "../../src/game-engine/schema.ts";
 
 const scoreRule =
@@ -42,6 +43,7 @@ const agentArchitect: GameDefinition = {
     whatIsReal: "The scoring of needed and harmful tools and controls.",
     whatIsSimulated: "No agent runs and no tools are called.",
   },
+  orientation: agentArchitectOrientation,
   rounds: [
     {
       id: "refund-status",

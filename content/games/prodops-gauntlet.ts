@@ -1,3 +1,4 @@
+import { prodopsOrientation } from "../orientation/games.ts";
 import type { GameDefinition } from "../../src/game-engine/schema.ts";
 
 const scoreRule =
@@ -42,6 +43,7 @@ const prodops: GameDefinition = {
     whatIsReal: "The comparison among the written responses and their labeled outcomes.",
     whatIsSimulated: "No production system is being monitored. The metrics on each card are part of the case.",
   },
+  orientation: prodopsOrientation,
   rounds: [
     {
       id: "cost-spike",

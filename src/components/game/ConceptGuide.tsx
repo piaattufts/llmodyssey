@@ -10,11 +10,11 @@ function GuideButton({ children }: { children: string }) {
   );
 }
 
-export function ConceptGuide({ game }: { game: GameDefinition }) {
+export function ConceptGuide({ game, label = "Concept guide" }: { game: GameDefinition; label?: string }) {
   const refs = game.furtherReadingIds.map((id) => referenceById(id)).filter((item) => item !== undefined);
   return (
     <Dialog>
-      <GuideButton>Concept guide</GuideButton>
+      <GuideButton>{label}</GuideButton>
       <DialogContent className="max-h-[80vh] overflow-y-auto sm:max-w-2xl">
         <DialogHeader>
           <DialogTitle>{game.title} concept guide</DialogTitle>

@@ -1,9 +1,13 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { Button } from "@/components/ui/button.tsx";
-import type { Evaluation } from "../../game-engine/evaluate.ts";
+import { describeDecision, resultLabel, type Evaluation, type GameAction } from "../../game-engine/evaluate.ts";
 import { ROUND_MAX_POINTS } from "../../game-engine/scoring.ts";
+import type { GameOrientation, RoundDefinition } from "../../game-engine/schema.ts";
 
 export function FeedbackPanel({
+  round,
+  action,
+  guide,
   evaluation,
   hints,
   score,
@@ -11,6 +15,9 @@ export function FeedbackPanel({
   onRetry,
   onNext,
 }: {
+  round: RoundDefinition;
+  action: GameAction | null;
+  guide: GameOrientation["roundGuides"][number];
   evaluation: Evaluation;
   hints: number;
   score: number;
@@ -19,6 +26,7 @@ export function FeedbackPanel({
   onNext: () => void;
 }) {
   const reduceMotion = useReducedMotion();
+  const result = resultLabel(evaluation.success, evaluation.partial);
   return (
     <motion.div
       className="space-y-3 rounded-xl border border-border p-4"
@@ -27,9 +35,32 @@ export function FeedbackPanel({
       initial={reduceMotion ? false : { opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
     >
-      <p className="text-lg font-semibold">{evaluation.success ? "Met the round target" : evaluation.partial ? "Partly met" : "Not met"}</p>
-      <p>{evaluation.feedback}</p>
-      <p>{evaluation.explanation}</p>
+      <h3 className="text-lg font-semibold">Feedback</h3>
+      <p>
+        <strong>Your decision. </strong>
+        {describeDecision(round, action)}
+      </p>
+      <p>
+        <strong>Result. </strong>
+        {result}
+        {evaluation.success ? "" : evaluation.partial ? " — part of the target was met." : " — the round target was not met."}
+      </p>
+      <p>
+        <strong>Why. </strong>
+        {evaluation.feedback} {evaluation.explanation}
+      </p>
+      <p>
+        <strong>Trade-off. </strong>
+        {guide.tradeoff}
+      </p>
+      <p>
+        <strong>Takeaway. </strong>
+        {guide.takeaway}
+      </p>
+      <p>
+        <strong>What would happen in a real system? </strong>
+        {guide.realSystem}
+      </p>
       <ul className="list-disc pl-5 text-sm">
         {evaluation.breakdown.map((line) => (
           <li key={line.detail}>{line.detail}</li>
@@ -43,7 +74,7 @@ export function FeedbackPanel({
           Retry this round
         </Button>
         <Button className="min-h-11" onClick={onNext}>
-          {isLastRound ? "Continue to reflection" : "Next round"}
+          {isLastRound ? "See your result" : "Next round"}
         </Button>
       </div>
     </motion.div>

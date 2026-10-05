@@ -1,3 +1,4 @@
+import { tokenForgeOrientation } from "../orientation/games.ts";
 import type { GameDefinition } from "../../src/game-engine/schema.ts";
 
 const scoreRule =
@@ -44,6 +45,7 @@ const tokenForge: GameDefinition = {
     whatIsSimulated:
       "The segments are authored illustrations of how these families often behave. They are not the output of a production tokenizer library.",
   },
+  orientation: tokenForgeOrientation,
   rounds: [
     {
       id: "english-clause",
