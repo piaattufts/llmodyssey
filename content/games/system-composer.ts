@@ -1,3 +1,4 @@
+import { systemComposerOrientation } from "../orientation/games.ts";
 import type { GameDefinition } from "../../src/game-engine/schema.ts";
 
 const scoreRule =
@@ -42,6 +43,7 @@ const systemComposer: GameDefinition = {
     whatIsReal: "Sums of authored cost and latency, plus set coverage of the named concerns.",
     whatIsSimulated: "No services are deployed. Cost and latency units are teaching numbers, not a cloud quote.",
   },
+  orientation: systemComposerOrientation,
   rounds: [
     {
       id: "faq",

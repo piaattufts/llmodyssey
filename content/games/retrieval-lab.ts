@@ -1,3 +1,4 @@
+import { retrievalLabOrientation } from "../orientation/games.ts";
 import type { GameDefinition } from "../../src/game-engine/schema.ts";
 
 const scoreRule =
@@ -42,6 +43,7 @@ const retrievalLab: GameDefinition = {
     whatIsReal: "Cosine similarity, keyword overlap, hybrid scores, precision, and recall are computed in the browser.",
     whatIsSimulated: "The vectors are 3-dimensional teaching examples, not the output of an embedding model. There is no reranker model; top-k on the score is the only ranker.",
   },
+  orientation: retrievalLabOrientation,
   rounds: [
     {
       id: "lexical",

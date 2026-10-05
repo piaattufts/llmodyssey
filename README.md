@@ -90,6 +90,29 @@ Individual games also record their own Bloom labels. Those labels are the author
 
 Prototype games are playable. Their scores are calculated. They are not reference implementations of equal maturity to Token Forge.
 
+## Before Every Game
+
+Every game now begins with a pre-game orientation. A learner is not dropped into round 1.
+
+The orientation is a shared screen, filled from each game’s definition. It is a pedagogical part of the course, not a README substitute and not a one-time UI tour. In about one to three minutes it shows:
+
+- what the learner will learn
+- why the concept matters
+- what the learner will actually do
+- how the simulation or visualization works
+- how to play
+- how scoring works, including hints, retries, and the mastery threshold
+- how to self-evaluate, including the difference between completion, performance, and mastery
+- how rounds progress, and what happens if mastery is not reached
+
+Token Forge is labeled **Reference Implementation**. The other twelve games are labeled **Playable Prototype**: the activity and scoring flow work, and the instructional design is still being refined. Prototype does not mean broken, and it does not mean those games have the same validation as Token Forge.
+
+After Start game, a **Game Guide** stays available during play. Opening it shows the goal, how to play, scoring, concepts, and the simulation note. It does not reset the round, the score, or the hints already used.
+
+Each round opens with a short brief: round number, difficulty, concept, and goal. The brief does not give the answer. Feedback after a decision names the choice, the result, why, the trade-off, a takeaway, and what the idea looks like in a real system.
+
+At the end, the result screen shows the score, grade, hints, attempts, and mastery status. Learners can mark each objective as understood or still needing practice. That self-check stays on the device and does not change the score. They can replay, review the concept guide, or continue to the next game. A score under 70% is recorded as completed without mastery. It does not, by itself, hide the next game. Later tiers still follow the course’s mastery gates when those gates are turned on.
+
 ## Detailed game explanations
 
 ### Game 1 — Token Forge
@@ -339,7 +362,7 @@ Rounds inside a game start with a smaller case and add a complication: code-like
 
 ### Worked examples
 
-Each game opens with its objectives, a misconception worth watching, a worked example, and a concept guide with further reading. The worked example shows the kind of step the round expects. It does not reveal later answers.
+Each game opens with an orientation: objectives, why the idea matters, what the learner will do, how the page computes or simulates the result, how to play, and how the score works. A misconception worth watching and a worked example sit on that page. The concept guide, with further reading, can be reopened during play and again at the end. The worked example shows the kind of step the round expects. It does not reveal later answers.
 
 ### Authentic engineering scenarios
 

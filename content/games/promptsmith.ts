@@ -1,3 +1,4 @@
+import { promptsmithOrientation } from "../orientation/games.ts";
 import type { GameDefinition } from "../../src/game-engine/schema.ts";
 
 const scoreRule =
@@ -43,6 +44,7 @@ const promptsmith: GameDefinition = {
     whatIsReal: "The comparison among authored strategies, including their token and quality labels.",
     whatIsSimulated: "No live language model is called. Outcome cards are written for the exercise.",
   },
+  orientation: promptsmithOrientation,
   rounds: [
     {
       id: "invoice-fields",

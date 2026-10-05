@@ -1,3 +1,4 @@
+import { buildOrientation } from "../../content/orientation/copy.ts";
 import { parseGame } from "../../src/game-engine/schema.ts";
 
 const sample = {
@@ -26,6 +27,40 @@ const sample = {
     whatIsReal: "The score for the selected card.",
     whatIsSimulated: "Nothing is executed beyond the card label.",
   },
+  orientation: buildOrientation({
+    tagline: "A minimal example of the orientation every game must include.",
+    overview: "This example shows the smallest orientation the schema accepts. It is not part of the course.",
+    whyItMatters: "Educators can see the required sections before they copy the file.",
+    learningObjectives: [
+      "Identify the option marked best in a two-choice round.",
+      "Name the hint penalty before playing.",
+      "Distinguish completion from mastery on the result screen.",
+    ],
+    whatYouWillDo: "You compare two cards and lock the round.",
+    howToPlay: ["Read the task.", "Compare the cards.", "Select one.", "Lock the round.", "Read the feedback."],
+    howItWorks: "The score is the label on the card. Nothing else is executed. This is an example, not a simulation of a model.",
+    earns: "The card marked best scores 10. The other scores 0.",
+    roundCount: 1,
+    efficiencyMatters: "Efficiency is not part of this example.",
+    multipleAcceptableAnswers: "No. One card is marked best.",
+    mastery: "You can explain which card matched the task.",
+    rounds: [{ label: "Round 1", difficulty: "Introductory", focus: "Read the card" }],
+    recommendedNext: "Return to the course list.",
+    implementationNote: "Simulation disclosure: this example only scores the selected card. It is not a live system.",
+    estimatedTime: "About 5 minutes",
+    beforeYouStart: ["Read both cards.", "The schema validates this file when tests run."],
+    selfCheck: ["Can I say which card fit?", "Can I say this example is not a course game?"],
+    reflectionPrompts: ["What would you change in the hint text?", "What would you add before a learner starts?"],
+    roundGuides: [
+      {
+        difficulty: "Introductory",
+        goal: "Select the card whose description matches the task.",
+        tradeoff: "Skipping validation ships a file the schema will reject.",
+        takeaway: "Validate the definition before shipping it.",
+        realSystem: "A content error should fail at load time, not in front of a learner.",
+      },
+    ],
+  }),
   rounds: [
     {
       id: "only-round",

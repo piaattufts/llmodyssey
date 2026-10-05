@@ -136,6 +136,64 @@ export function EducatorPage({ basePath = "" }: { basePath?: string }) {
         ))}
       </section>
 
+      <section className="space-y-4">
+        <h2 className="text-xl font-semibold">Orientation preview</h2>
+        <p>
+          Every game now begins with a pre-game orientation before round 1. The notes below are the same learner-facing content: objectives, instructions, evaluation, mastery, simulation disclosure, duration, and status. Open the game if you want the page students see.
+        </p>
+        {visible.map((game) => (
+          <details key={game.id} className="rounded-xl border border-border p-4" data-testid={`educator-orientation-${game.id}`}>
+            <summary className="cursor-pointer font-medium">
+              {game.order}. {game.title} · {releaseStatusLabel(game.status)}
+              {game.status === "implemented" ? " · Reference Implementation" : ""}
+              {game.status === "prototype" ? " · Playable Prototype" : ""} · {game.orientation.estimatedTime} · mastery {thresholdFor(game)}%
+            </summary>
+            <div className="mt-3 space-y-2 text-sm">
+              <p>{game.orientation.tagline}</p>
+              <p>
+                <strong>Learning objectives. </strong>
+              </p>
+              <ul className="list-disc pl-5">
+                {game.orientation.learningObjectives.map((objective) => (
+                  <li key={objective}>{objective}</li>
+                ))}
+              </ul>
+              <p>
+                <strong>Learner instructions. </strong>
+                {game.orientation.whatYouWillDo}
+              </p>
+              <ol className="list-decimal pl-5">
+                {game.orientation.howToPlay.map((step) => (
+                  <li key={step}>{step}</li>
+                ))}
+              </ol>
+              <p>
+                <strong>Evaluation method. </strong>
+                {game.orientation.evaluation.whatEarnsPoints} {game.orientation.evaluation.hintEffect}
+              </p>
+              <p>
+                <strong>Mastery threshold. </strong>
+                {thresholdFor(game)}%. {game.orientation.mastery}
+              </p>
+              <p>
+                <strong>Simulation disclosure. </strong>
+                {game.orientation.implementationNote}
+              </p>
+              <p>
+                <strong>Expected duration. </strong>
+                {game.orientation.estimatedTime}
+              </p>
+              <p>
+                <strong>Game status. </strong>
+                {releaseStatusLabel(game.status)}
+                {game.status === "implemented" ? " · Reference Implementation" : ""}
+                {game.status === "prototype" ? " · Playable Prototype" : ""}
+              </p>
+            </div>
+          </details>
+        ))}
+      </section>
+
       <section className="space-y-2">
         <h2 className="text-xl font-semibold">Ways to assign it</h2>
         <ul className="list-disc space-y-2 pl-5">

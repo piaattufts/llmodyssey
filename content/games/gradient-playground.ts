@@ -1,3 +1,4 @@
+import { gradientPlaygroundOrientation } from "../orientation/games.ts";
 import type { GameDefinition } from "../../src/game-engine/schema.ts";
 
 const scoreRule =
@@ -51,6 +52,7 @@ const gradientPlayground: GameDefinition = {
     whatIsReal: "The plotted numbers are computed from the formula documented in the concept guide and in src/game-engine/models/loss-curve.ts.",
     whatIsSimulated: "Nothing is trained. There are no gradients, parameters, or datasets behind the curves.",
   },
+  orientation: gradientPlaygroundOrientation,
   rounds: [
     {
       id: "stabilize",

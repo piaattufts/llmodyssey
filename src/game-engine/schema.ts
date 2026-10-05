@@ -336,6 +336,59 @@ const interactionSchema = z.discriminatedUnion("type", [
   }),
 ]);
 
+const nonEmpty = z.string().trim().min(1);
+
+export const orientationRoundGuideSchema = z.object({
+  difficulty: nonEmpty,
+  goal: nonEmpty,
+  tradeoff: nonEmpty,
+  takeaway: nonEmpty,
+  realSystem: nonEmpty,
+});
+
+export const orientationSchema = z.object({
+  tagline: nonEmpty,
+  overview: nonEmpty,
+  whyItMatters: nonEmpty,
+  learningObjectives: z.array(nonEmpty).min(3).max(5),
+  whatYouWillDo: nonEmpty,
+  howToPlay: z.array(nonEmpty).min(5).max(12),
+  howItWorks: nonEmpty,
+  evaluation: z.object({
+    whatEarnsPoints: nonEmpty,
+    maximumScore: nonEmpty,
+    penalties: nonEmpty,
+    hintEffect: nonEmpty,
+    retryEffect: nonEmpty,
+    masteryThreshold: nonEmpty,
+    efficiencyMatters: nonEmpty,
+    multipleAcceptableAnswers: nonEmpty,
+  }),
+  mastery: nonEmpty,
+  progress: z.object({
+    rounds: z
+      .array(
+        z.object({
+          label: nonEmpty,
+          difficulty: nonEmpty,
+          focus: nonEmpty,
+        }),
+      )
+      .min(1),
+    afterIncorrect: nonEmpty,
+    retry: nonEmpty,
+    completedWhen: nonEmpty,
+    belowMastery: nonEmpty,
+    recommendedNext: nonEmpty,
+  }),
+  implementationNote: nonEmpty,
+  estimatedTime: nonEmpty,
+  beforeYouStart: z.array(nonEmpty).min(2).max(6),
+  selfCheck: z.array(nonEmpty).min(2).max(4),
+  reflectionPrompts: z.tuple([nonEmpty, nonEmpty]),
+  roundGuides: z.array(orientationRoundGuideSchema).min(1),
+});
+
 export const roundSchema = z.object({
   id: z.string().min(1),
   title: z.string().min(1),
@@ -375,10 +428,12 @@ export const gameDefinitionSchema = z.object({
   }),
   furtherReadingIds: z.array(z.string().min(1)).min(1),
   implementation: implementationSchema,
+  orientation: orientationSchema,
   rounds: z.array(roundSchema).min(1),
 });
 
 export type GameDefinition = z.infer<typeof gameDefinitionSchema>;
+export type GameOrientation = z.infer<typeof orientationSchema>;
 export type RoundDefinition = z.infer<typeof roundSchema>;
 export type Interaction = RoundDefinition["interaction"];
 export type BloomLevel = z.infer<typeof bloomLevelSchema>;
@@ -412,6 +467,12 @@ export function parseGame(input: unknown, source: string): GameDefinition {
 }
 
 function validateGame(game: GameDefinition, source: string): void {
+  if (game.orientation.progress.rounds.length !== game.rounds.length) {
+    throw new Error(`${source}: orientation progress must describe every round`);
+  }
+  if (game.orientation.roundGuides.length !== game.rounds.length) {
+    throw new Error(`${source}: orientation round guides must match the rounds`);
+  }
   const ids = new Set<string>();
   for (const round of game.rounds) {
     if (ids.has(round.id)) {

@@ -6,7 +6,7 @@ import { foundryChallenges } from "../content/challenges/foundry.ts";
 import { games } from "../src/content/load-games.ts";
 import { registeredGames } from "../src/games/register.ts";
 import { attend } from "../src/game-engine/models/attention.ts";
-import { evaluateRound, gameIsSolvable, representativeSuccessAction } from "../src/game-engine/evaluate.ts";
+import { describeDecision, evaluateRound, gameIsSolvable, representativeSuccessAction } from "../src/game-engine/evaluate.ts";
 import { odysseyConfig } from "../src/game-engine/config.ts";
 import { unlockStatus } from "../src/game-engine/prerequisites.ts";
 import { blankGameRecord, projectRecord } from "../src/game-engine/records.ts";
@@ -129,6 +129,44 @@ describe("course content", () => {
     expect(projected.completedAt).toBeNull();
     expect(projected.rounds).toEqual({});
     expect(projected.bestPercent).toBe(0);
+  });
+
+  it("requires a complete orientation on every game", () => {
+    const sections = ["overview", "whyItMatters", "whatYouWillDo", "howItWorks", "implementationNote", "mastery"] as const;
+    for (const game of games) {
+      const orientation = game.orientation;
+      for (const section of sections) {
+        expect(orientation[section].trim().length, `${game.id}.${section}`).toBeGreaterThan(40);
+      }
+      expect(orientation.learningObjectives.length, game.id).toBeGreaterThanOrEqual(3);
+      expect(orientation.learningObjectives.length, game.id).toBeLessThanOrEqual(5);
+      expect(orientation.howToPlay.length, game.id).toBeGreaterThanOrEqual(5);
+      expect(orientation.howToPlay.every((step) => step.trim().length > 0), game.id).toBe(true);
+      expect(orientation.evaluation.whatEarnsPoints.trim().length, game.id).toBeGreaterThan(20);
+      expect(orientation.evaluation.hintEffect.toLowerCase(), game.id).toContain("hint");
+      expect(orientation.evaluation.masteryThreshold, game.id).toContain("70");
+      expect(orientation.implementationNote.toLowerCase(), game.id).toContain("simulation disclosure");
+      expect(orientation.progress.rounds, game.id).toHaveLength(game.rounds.length);
+      expect(orientation.roundGuides, game.id).toHaveLength(game.rounds.length);
+      for (const guide of orientation.roundGuides) {
+        expect(guide.goal.trim().length, game.id).toBeGreaterThan(10);
+        expect(guide.tradeoff.trim().length, game.id).toBeGreaterThan(10);
+        expect(guide.takeaway.trim().length, game.id).toBeGreaterThan(10);
+        expect(guide.realSystem.trim().length, game.id).toBeGreaterThan(10);
+      }
+      expect(orientation.estimatedTime.trim().length, game.id).toBeGreaterThan(4);
+      expect(orientation.beforeYouStart.length, game.id).toBeGreaterThanOrEqual(2);
+      expect(orientation.selfCheck.length, game.id).toBeGreaterThanOrEqual(2);
+      expect(orientation.reflectionPrompts).toHaveLength(2);
+    }
+    const forge = games.find((game) => game.id === "token-forge");
+    if (!forge) throw new Error("forge");
+    expect(forge.orientation.overview.toLowerCase()).toContain("token");
+    expect(forge.status).toBe("implemented");
+    const prototypes = games.filter((game) => game.status === "prototype");
+    expect(prototypes).toHaveLength(12);
+    const decision = describeDecision(forge.rounds[0]!, { type: "tokenizer", strategyId: "bpe" });
+    expect(decision).toContain("BPE");
   });
 
   it("rejects a broken educator file with a path", () => {
