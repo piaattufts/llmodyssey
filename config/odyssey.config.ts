@@ -1,0 +1,47 @@
+import type { OdysseyConfig } from "../src/game-engine/config.ts";
+
+const config: OdysseyConfig = {
+  title: "LLM Odyssey",
+  tagline: "13 games · 3 learning tiers · No API key required · Open source · Instructor customizable",
+  institution: "",
+  logoSrc: "",
+  researchMode: false,
+  enforcePrerequisites: true,
+  tier2UnlockMastered: 4,
+  tier3UnlockMastered: 3,
+  masteryThreshold: 70,
+  overrideGameThresholds: true,
+  showFoundry: true,
+  enabledGames: [
+    "token-forge",
+    "attention-architect",
+    "context-compression",
+    "promptsmith",
+    "gradient-playground",
+    "reasoning-reactor",
+    "alignment-arena",
+    "ship-it-simulator",
+    "agent-architect",
+    "retrieval-lab",
+    "system-composer",
+    "prodops-gauntlet",
+    "foundry-arena",
+  ],
+  gameOrder: [
+    "token-forge",
+    "attention-architect",
+    "context-compression",
+    "promptsmith",
+    "gradient-playground",
+    "reasoning-reactor",
+    "alignment-arena",
+    "ship-it-simulator",
+    "agent-architect",
+    "retrieval-lab",
+    "system-composer",
+    "prodops-gauntlet",
+    "foundry-arena",
+  ],
+};
+
+export default config;

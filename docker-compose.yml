@@ -1,0 +1,5 @@
+services:
+  llmodyssey:
+    build: .
+    ports:
+      - "8088:80"

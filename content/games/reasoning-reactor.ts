@@ -1,0 +1,203 @@
+import type { GameDefinition } from "../../src/game-engine/schema.ts";
+
+const scoreRule =
+  "10 points if every required step is selected, no harmful step is selected, and the temperature is marked best. An acceptable temperature with the right steps scores 6. Otherwise 0. Samples are precomputed. Each hint subtracts 1 point, to a floor of 0.";
+
+const reasoningReactor: GameDefinition = {
+  id: "reasoning-reactor",
+  title: "Reasoning Reactor",
+  tier: 1,
+  order: 6,
+  summary: "Assemble a visible reasoning workflow: decomposition, checks, samples, and temperature.",
+  purpose: "Teach structured workflows around a model without treating displayed steps as the model's hidden internal reasoning.",
+  whyItMatters: "Reliability often comes from the procedure around a sample: a check, a second sample, or a vote. Temperature changes the diversity of those samples.",
+  learningObjectives: [
+    "Separate a public workflow from hidden model reasoning.",
+    "Include a verification step when a wrong answer is costly.",
+    "Choose a low temperature when samples must agree, and a higher one only when diversity is useful.",
+    "Use self-consistency as a vote over samples, not as a claim about internal thoughts.",
+  ],
+  concepts: ["Decomposition", "Verification", "Sampling", "Self-consistency", "Temperature", "Search"],
+  bloomLevels: ["apply", "analyze"],
+  prerequisites: ["promptsmith"],
+  estimatedMinutes: 25,
+  difficulty: "intermediate",
+  masteryThreshold: 70,
+  misconception: "A written reasoning workflow is not a window into hidden model cognition, and a higher temperature is not more intelligent.",
+  reflectionPrompt: "Where would you rather add a verifier than raise the temperature?",
+  workedExample: {
+    title: "A checked arithmetic workflow",
+    steps: [
+      "Decompose the question into the quantities the checker can recompute.",
+      "Sample at low temperature if you need agreement.",
+      "Verify the arithmetic with a calculator or a second deterministic check.",
+      "Do not add a step that asks the model to reveal private chain-of-thought.",
+    ],
+  },
+  furtherReadingIds: ["wei2022cot", "wang2023selfconsistency", "yao2023tot"],
+  implementation: {
+    type: "deterministic-simulation",
+    label: "Precomputed samples and a workflow checklist",
+    whatIsReal: "The checklist scoring and the lookup of the sample table for the selected temperature.",
+    whatIsSimulated: "The sample strings were written for the exercise. No model was sampled at runtime.",
+  },
+  rounds: [
+    {
+      id: "arithmetic",
+      title: "Round 1 · A bill that must match",
+      concept: "Verification",
+      learnerTask: "Include decomposition and verification, and keep the temperature low.",
+      expectedReasoning: "The samples at temperature 0 agree. A high temperature introduces a conflicting total. The harmful step asks for hidden reasoning.",
+      scenario: "Payroll will pay whatever total you submit. A second sample that disagrees is a defect, not creativity.",
+      hints: [
+        "Agreement matters more than a vivid explanation.",
+        "Turn on the steps marked required, and leave the harmful step off.",
+        "Temperature 0 is the best row because every authored sample says $480.",
+      ],
+      scoringRule: scoreRule,
+      explanation: "Verification here is an external check. The sample list shows what this exercise pretends a sampler returned. It is not a log from a model.",
+      feedbackCorrect: "Low temperature plus a check is the workflow this payroll case needs.",
+      feedbackIncorrect: "Include both required steps, skip the hidden-reasoning step, and choose the temperature whose samples agree.",
+      interaction: {
+        type: "workflow",
+        prompt: "Build the workflow and choose a temperature.",
+        steps: [
+          { id: "decompose", label: "Decompose into hours and rate", description: "Write the public quantities.", required: true, harmful: false },
+          { id: "verify", label: "Verify with a calculator", description: "Recompute the product outside the model.", required: true, harmful: false },
+          { id: "hidden", label: "Demand a private reasoning trace", description: "Ask the model to reveal hidden cognition.", required: false, harmful: true },
+          { id: "vote", label: "Majority vote", description: "Optional when you already have a calculator.", required: false, harmful: false },
+        ],
+        temperatures: [
+          { value: 0, label: "0", samples: ["$480", "$480", "$480"], agreement: 1, quality: "best", note: "All authored samples match." },
+          { value: 0.7, label: "0.7", samples: ["$480", "$408", "$480"], agreement: 0.67, quality: "acceptable", note: "A dissenting sample appears." },
+          { value: 1.2, label: "1.2", samples: ["$480", "$840", "$48"], agreement: 0.33, quality: "poor", note: "The samples do not support a payment." },
+        ],
+      },
+    },
+    {
+      id: "brainstorm",
+      title: "Round 2 · Diverse titles",
+      concept: "Sampling",
+      learnerTask: "Raise temperature for a brainstorm. Include the diversity step, and leave out the step marked harmful.",
+      expectedReasoning: "Title brainstorming wants different samples. Temperature 0.8 is marked best. Temperature 0 repeats one title.",
+      scenario: "A student newspaper needs five different headlines. Agreement is not the goal.",
+      hints: [
+        "This task wants difference, not a single repeated string.",
+        "Leave the hidden-reasoning step off.",
+        "Temperature 0.8 is the row whose samples are distinct and still on topic.",
+      ],
+      scoringRule: scoreRule,
+      explanation: "Temperature is a sampling control. In this table, higher temperature is pre-authored as more diverse, up to the point where headlines leave the topic.",
+      feedbackCorrect: "The mid temperature gives distinct, on-topic headlines in the authored table.",
+      feedbackIncorrect: "Temperature 0 repeats itself. Temperature 1.3 leaves the topic. Use the diverse on-topic row.",
+      interaction: {
+        type: "workflow",
+        prompt: "Which workflow fits a headline brainstorm?",
+        steps: [
+          { id: "diverse", label: "Ask for distinct options", description: "Require five headlines that are not paraphrases.", required: true, harmful: false },
+          { id: "hidden", label: "Request private chain-of-thought", description: "Not part of the assignment.", required: false, harmful: true },
+          { id: "vote", label: "Force a single winner immediately", description: "Collapses the brainstorm too early.", required: false, harmful: true },
+        ],
+        temperatures: [
+          { value: 0, label: "0", samples: ["Campus shuttle returns", "Campus shuttle returns", "Campus shuttle returns"], agreement: 1, quality: "poor", note: "No diversity." },
+          { value: 0.8, label: "0.8", samples: ["Shuttle returns Friday", "Night bus pilot", "New stop at the library"], agreement: 0, quality: "best", note: "Distinct and on topic." },
+          { value: 1.3, label: "1.3", samples: ["Shuttle returns", "Orbit the quad", "Banana council"], agreement: 0, quality: "poor", note: "Diversity without staying on task." },
+        ],
+      },
+    },
+    {
+      id: "consistency",
+      title: "Round 3 · A vote when you cannot check",
+      concept: "Self-consistency",
+      learnerTask: "Add a self-consistency vote and a moderate temperature, because there is no external checker.",
+      expectedReasoning: "Three of four authored samples agree. The workflow should take that vote rather than the first sample.",
+      scenario: "A reading quiz has no calculator and no answer key in the app. You may draw several short answers and keep the majority.",
+      hints: [
+        "Self-consistency is a vote over complete answers.",
+        "Select the vote step and the decomposition step.",
+        "Temperature 0.7 is the best row: three samples say B and one says C.",
+      ],
+      scoringRule: scoreRule,
+      explanation: "Wang et al. sample multiple reasoning paths and take a majority answer. This exercise shows only the final answers, not hidden paths, and the samples are prewritten.",
+      feedbackCorrect: "The majority answer is visible in the sample list, which is what the vote uses.",
+      feedbackIncorrect: "Turn on the vote. Then pick the temperature whose authored samples have a clear majority.",
+      interaction: {
+        type: "workflow",
+        prompt: "Build a vote when no external checker exists.",
+        steps: [
+          { id: "decompose", label: "Restate the question in one sentence", description: "A public restatement, not a hidden trace.", required: true, harmful: false },
+          { id: "vote", label: "Self-consistency vote", description: "Keep the majority final answer.", required: true, harmful: false },
+          { id: "first", label: "Trust the first sample only", description: "Ignores the other samples.", required: false, harmful: true },
+        ],
+        temperatures: [
+          { value: 0, label: "0", samples: ["B", "B", "B", "B"], agreement: 1, quality: "acceptable", note: "Agreement without any diversity to vote over." },
+          { value: 0.7, label: "0.7", samples: ["B", "B", "C", "B"], agreement: 0.75, quality: "best", note: "A real majority is visible." },
+          { value: 1.2, label: "1.2", samples: ["A", "B", "C", "D"], agreement: 0.25, quality: "poor", note: "No majority." },
+        ],
+      },
+    },
+    {
+      id: "search",
+      title: "Round 4 · Search with a checker",
+      concept: "Search",
+      learnerTask: "Keep a beam of candidates and a checker. Do not raise temperature so high that every candidate fails the check.",
+      expectedReasoning: "A small search is useful when a checker can reject illegal moves. Temperature 0.3 keeps candidates near the rules.",
+      scenario: "A puzzle tutor may propose three next moves. A rule checker discards illegal ones. You need at least one legal survivor.",
+      hints: [
+        "The checker is required. The search step is required.",
+        "Temperature 1.1's authored candidates all fail the checker.",
+        "Temperature 0.3 keeps two legal moves in the authored list.",
+      ],
+      scoringRule: scoreRule,
+      explanation: "Tree-of-thoughts-style search keeps intermediate candidates and evaluates them. This round uses a written candidate list, not a live search over a model.",
+      feedbackCorrect: "The checker has something legal left to accept.",
+      feedbackIncorrect: "High temperature emptied the legal set in the authored table. Lower it and keep the checker.",
+      interaction: {
+        type: "workflow",
+        prompt: "Choose a search workflow that still yields a legal move.",
+        steps: [
+          { id: "search", label: "Keep three candidate moves", description: "A small beam, written out.", required: true, harmful: false },
+          { id: "check", label: "Reject illegal moves", description: "Apply the puzzle rules.", required: true, harmful: false },
+          { id: "hidden", label: "Ask for hidden search traces", description: "Not required and not appropriate.", required: false, harmful: true },
+        ],
+        temperatures: [
+          { value: 0, label: "0", samples: ["Move the red disk", "Move the red disk", "Move the red disk"], agreement: 1, quality: "acceptable", note: "Legal, but there is no alternative if the checker surprises you." },
+          { value: 0.3, label: "0.3", samples: ["Move the red disk", "Move the blue disk", "Teleport"], agreement: 0.33, quality: "best", note: "Two legal moves survive a checker that bans teleport." },
+          { value: 1.1, label: "1.1", samples: ["Teleport", "Skip a turn", "Add a disk"], agreement: 0, quality: "poor", note: "Every authored candidate is illegal." },
+        ],
+      },
+    },
+    {
+      id: "no-hidden",
+      title: "Round 5 · Refuse the hidden trace",
+      concept: "Structured workflow versus hidden reasoning",
+      learnerTask: "Solve with public checks only. The step that demands a hidden trace is harmful in this assignment.",
+      expectedReasoning: "The course can grade a formula and a cited source. It cannot grade a claim about hidden cognition.",
+      scenario: "An instructor forbids prompts that tell students to paste a model's private reasoning. The numerical answer still needs a check.",
+      hints: [
+        "A harmful step fails the round even if the temperature is right.",
+        "Select the formula step and the source step.",
+        "Temperature 0 is best: the authored samples agree on 12.",
+      ],
+      scoringRule: scoreRule,
+      explanation: "Odyssey teaches workflows a person can inspect. It does not treat displayed educational steps as a readout of model-internal reasoning.",
+      feedbackCorrect: "The public checks are on, and the hidden-trace step is off.",
+      feedbackIncorrect: "Remove the hidden-trace step. It fails this assignment even when the number is right.",
+      interaction: {
+        type: "workflow",
+        prompt: "Build a workflow the instructor can grade.",
+        steps: [
+          { id: "formula", label: "Write the formula", description: "A public equation.", required: true, harmful: false },
+          { id: "source", label: "Cite the value's source", description: "Name the table the number came from.", required: true, harmful: false },
+          { id: "hidden", label: "Paste hidden chain-of-thought", description: "Disallowed by the assignment.", required: false, harmful: true },
+        ],
+        temperatures: [
+          { value: 0, label: "0", samples: ["12", "12", "12"], agreement: 1, quality: "best", note: "The authored samples agree." },
+          { value: 0.9, label: "0.9", samples: ["12", "21", "12"], agreement: 0.67, quality: "acceptable", note: "A swapped-digits sample appears." },
+        ],
+      },
+    },
+  ],
+};
+
+export default reasoningReactor;

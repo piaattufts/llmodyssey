@@ -1,0 +1,25 @@
+cff-version: 1.2.0
+title: "LLM Odyssey: A Game-Based Platform for Teaching LLM Engineering Concepts"
+message: "If you use LLM Odyssey in teaching or research, please cite this software and the associated paper."
+type: software
+authors:
+  - family-names: Tripathi
+    given-names: Priyamvada
+    email: pia.tripathi@tufts.edu
+    affiliation: "Tufts Institute for Artificial Intelligence, Tufts University"
+repository-code: "https://github.com/piaattufts/llmodyssey"
+url: "https://github.com/piaattufts/llmodyssey"
+license: MIT
+version: 0.1.0
+date-released: 2026-10-05
+preferred-citation:
+  type: article
+  title: "WIP: LLM Odyssey: A Game-Based Platform for Teaching LLM Engineering Concepts"
+  authors:
+    - family-names: Tripathi
+      given-names: Priyamvada
+      affiliation: "Tufts Institute for Artificial Intelligence, Tufts University"
+  year: 2026
+  journal: "arXiv preprint"
+  url: "https://arxiv.org/abs/2608.16924"
+  doi: "10.48550/arXiv.2608.16924"
