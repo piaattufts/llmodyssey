@@ -1,4 +1,5 @@
 import { agentArchitectOrientation } from "../orientation/games.ts";
+import { agentTeaching } from "../teaching/systems.ts";
 import type { GameDefinition } from "../../src/game-engine/schema.ts";
 
 const scoreRule =
@@ -36,7 +37,7 @@ const agentArchitect: GameDefinition = {
       "If the tool errors twice, stop and escalate instead of looping.",
     ],
   },
-  furtherReadingIds: ["yao2023tot", "huyen2022dmls"],
+  furtherReadingIds: ["yao2022react", "yao2023tot", "huyen2022dmls"],
   implementation: {
     type: "deterministic-simulation",
     label: "Agent-loop checklist",
@@ -44,6 +45,7 @@ const agentArchitect: GameDefinition = {
     whatIsSimulated: "No agent runs and no tools are called.",
   },
   orientation: agentArchitectOrientation,
+  teaching: agentTeaching,
   rounds: [
     {
       id: "refund-status",

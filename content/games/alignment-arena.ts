@@ -1,4 +1,5 @@
 import { alignmentArenaOrientation } from "../orientation/games.ts";
+import { alignmentTeaching } from "../teaching/adapt.ts";
 import type { GameDefinition } from "../../src/game-engine/schema.ts";
 
 const scoreRule =
@@ -36,7 +37,7 @@ const alignmentArena: GameDefinition = {
       "Say the tradeoff in words: which dimension the rejected reply was better at.",
     ],
   },
-  furtherReadingIds: ["christiano2017preferences", "ouyang2022instructgpt"],
+  furtherReadingIds: ["christiano2017preferences", "ouyang2022instructgpt", "rafailov2023dpo", "bai2022constitutional"],
   implementation: {
     type: "educational-simulation",
     label: "Educational preference simulation",
@@ -44,6 +45,7 @@ const alignmentArena: GameDefinition = {
     whatIsSimulated: "No preference model is trained, no human raters were collected, and the scores are authored for the lesson.",
   },
   orientation: alignmentArenaOrientation,
+  teaching: alignmentTeaching,
   rounds: [
     {
       id: "weights",

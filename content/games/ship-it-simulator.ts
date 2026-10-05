@@ -1,4 +1,5 @@
 import { shipItOrientation } from "../orientation/games.ts";
+import { shipItTeaching } from "../teaching/systems.ts";
 import type { GameDefinition } from "../../src/game-engine/schema.ts";
 
 const scoreRule =
@@ -44,6 +45,7 @@ const shipIt: GameDefinition = {
     whatIsSimulated: "There is no cluster, queue, or live API. The effect sizes are authored for the scenario.",
   },
   orientation: shipItOrientation,
+  teaching: shipItTeaching,
   rounds: [
     {
       id: "support-api",

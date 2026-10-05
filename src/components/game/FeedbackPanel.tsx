@@ -2,12 +2,13 @@ import { motion, useReducedMotion } from "framer-motion";
 import { Button } from "@/components/ui/button.tsx";
 import { describeDecision, resultLabel, type Evaluation, type GameAction } from "../../game-engine/evaluate.ts";
 import { ROUND_MAX_POINTS } from "../../game-engine/scoring.ts";
-import type { GameOrientation, RoundDefinition } from "../../game-engine/schema.ts";
+import type { GameOrientation, GameTeaching, RoundDefinition } from "../../game-engine/schema.ts";
 
 export function FeedbackPanel({
   round,
   action,
   guide,
+  note,
   evaluation,
   hints,
   score,
@@ -18,6 +19,7 @@ export function FeedbackPanel({
   round: RoundDefinition;
   action: GameAction | null;
   guide: GameOrientation["roundGuides"][number];
+  note: GameTeaching["roundNotes"][number];
   evaluation: Evaluation;
   hints: number;
   score: number;
@@ -50,11 +52,19 @@ export function FeedbackPanel({
         {evaluation.feedback} {evaluation.explanation}
       </p>
       <p>
+        <strong>What mattered in this scenario? </strong>
+        {note.whatMattered}
+      </p>
+      <p>
+        <strong>Why the alternatives were weaker. </strong>
+        {note.alternatives}
+      </p>
+      <p>
         <strong>Trade-off. </strong>
         {guide.tradeoff}
       </p>
       <p>
-        <strong>Takeaway. </strong>
+        <strong>Engineering takeaway. </strong>
         {guide.takeaway}
       </p>
       <p>

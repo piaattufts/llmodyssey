@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { Button } from "@/components/ui/button.tsx";
 import { initialAction, evaluateRound, type Evaluation, type GameAction } from "../../game-engine/evaluate.ts";
 import { courseGames, recommendedNext, thresholdFor } from "../../game-engine/prerequisites.ts";
@@ -14,10 +14,11 @@ import { GameGuide } from "./GameGuide.tsx";
 import { GameHeader } from "./GameHeader.tsx";
 import { GameOrientation } from "./GameOrientation.tsx";
 import { HintPanel } from "./HintPanel.tsx";
-import { InteractionHost } from "./InteractionHost.tsx";
 import { RoundBrief } from "./RoundBrief.tsx";
 import { RoundProgress } from "./RoundProgress.tsx";
 import { ScorePanel } from "./ScorePanel.tsx";
+
+const InteractionHost = lazy(() => import("./InteractionHost.tsx").then((module) => ({ default: module.InteractionHost })));
 
 export function GameShell({ game, basePath }: { game: GameDefinition; basePath: string }) {
   const learner = useLearner();
@@ -182,8 +183,16 @@ export function GameShell({ game, basePath }: { game: GameDefinition; basePath: 
               <GameGuide game={game} />
             </div>
           </div>
-          {guide ? <RoundBrief roundNumber={roundIndex + 1} roundCount={game.rounds.length} concept={round.concept} guide={guide} /> : null}
-          <p>{round.scenario}</p>
+          {guide && game.teaching.roundNotes[roundIndex] ? (
+            <RoundBrief
+              roundNumber={roundIndex + 1}
+              roundCount={game.rounds.length}
+              concept={round.concept}
+              scenario={round.scenario}
+              guide={guide}
+              note={game.teaching.roundNotes[roundIndex]}
+            />
+          ) : null}
           <p>
             <strong>Task. </strong>
             {round.learnerTask}
@@ -191,9 +200,11 @@ export function GameShell({ game, basePath }: { game: GameDefinition; basePath: 
           <details className="rounded-lg border border-border p-3 text-sm">
             <summary className="cursor-pointer font-medium">How this round is scored</summary>
             <p className="mt-2">{round.scoringRule}</p>
-            <p className="mt-2">Expected reasoning, visible to you before you answer: {round.expectedReasoning}</p>
+            <p className="mt-2">The expected reasoning stays hidden until you lock the round, so the choice is still yours.</p>
           </details>
-          <InteractionHost round={round} action={action} disabled={phase === "feedback"} onChange={setAction} />
+          <Suspense fallback={<p>Loading the activity…</p>}>
+            <InteractionHost round={round} action={action} disabled={phase === "feedback"} onChange={setAction} />
+          </Suspense>
           <HintPanel
             hints={[...round.hints]}
             revealed={hints}
@@ -220,6 +231,7 @@ export function GameShell({ game, basePath }: { game: GameDefinition; basePath: 
               round={round}
               action={action}
               guide={guide}
+              note={game.teaching.roundNotes[roundIndex]!}
               evaluation={evaluation}
               hints={hints}
               score={lockedScore}

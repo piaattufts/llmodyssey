@@ -240,6 +240,46 @@ export const references: ReferenceEntry[] = [
     venue: "Basic Books",
     url: "https://doi.org/10.1037/11168-000",
   },
+  {
+    id: "bai2022constitutional",
+    authors: "Yuntao Bai, Saurav Kadavath, Sandipan Kundu, Amanda Askell, Jackson Kernion, Andy Jones, Anna Chen, Anna Goldie, Azalia Mirhoseini, Cameron McKinnon, and others",
+    year: 2022,
+    title: "Constitutional AI: Harmlessness from AI Feedback",
+    venue: "arXiv:2212.08073",
+    url: "https://arxiv.org/abs/2212.08073",
+  },
+  {
+    id: "holtzman2020nucleus",
+    authors: "Ari Holtzman, Jan Buys, Li Du, Maxwell Forbes, and Yejin Choi",
+    year: 2020,
+    title: "The Curious Case of Neural Text Degeneration",
+    venue: "International Conference on Learning Representations",
+    url: "https://arxiv.org/abs/1904.09751",
+  },
+  {
+    id: "rafailov2023dpo",
+    authors: "Rafael Rafailov, Archit Sharma, Eric Mitchell, Stefano Ermon, Christopher D. Manning, and Chelsea Finn",
+    year: 2023,
+    title: "Direct Preference Optimization: Your Language Model is Secretly a Reward Model",
+    venue: "arXiv:2305.18290",
+    url: "https://arxiv.org/abs/2305.18290",
+  },
+  {
+    id: "yao2022react",
+    authors: "Shunyu Yao, Jeffrey Zhao, Dian Yu, Nan Du, Izhak Shafran, Karthik Narasimhan, and Yuan Cao",
+    year: 2023,
+    title: "ReAct: Synergizing Reasoning and Acting in Language Models",
+    venue: "International Conference on Learning Representations",
+    url: "https://arxiv.org/abs/2210.03629",
+  },
+  {
+    id: "robertson2009bm25",
+    authors: "Stephen Robertson and Hugo Zaragoza",
+    year: 2009,
+    title: "The Probabilistic Relevance Framework: BM25 and Beyond",
+    venue: "Foundations and Trends in Information Retrieval",
+    url: "https://doi.org/10.1561/1500000019",
+  },
 ];
 
 export function referenceById(id: string): ReferenceEntry | undefined {

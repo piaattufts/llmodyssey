@@ -59,24 +59,34 @@ export function GameCompletion({
           <li>Mastery status: {mastered ? `Reached (threshold ${threshold}%)` : `Not yet reached (threshold ${threshold}%)`}</li>
         </ul>
         <p className="text-sm text-muted-foreground">
-          Completion means you finished the activity. Performance is this score. Mastery is whether you can explain and apply the concept. The self-check below does not change the score.
+          {universalSelfEvaluation.completion} {universalSelfEvaluation.performance} {universalSelfEvaluation.mastery}{" "}
+          {universalSelfEvaluation.transfer} The self-check below does not change the score.
         </p>
       </div>
 
       <div className="space-y-3" data-testid="self-evaluation">
-        <h2 className="text-xl font-semibold">What you should now be able to explain</h2>
+        <h2 className="text-xl font-semibold">How Well Do I Understand This?</h2>
+        <p>What you should now be able to explain:</p>
         <ul className="space-y-3">
-          {game.orientation.learningObjectives.map((objective) => (
+          {game.teaching.selfEvaluationQuestions.map((objective) => (
             <li key={objective} className="rounded-xl border border-border p-3">
               <p>{objective}</p>
               <div className="mt-2 flex flex-wrap gap-2">
                 <Button
                   type="button"
-                  variant={marks[objective] === "understand" ? "default" : "outline"}
+                  variant={marks[objective] === "confident" ? "default" : "outline"}
                   className="min-h-11"
-                  onClick={() => mark(objective, "understand")}
+                  onClick={() => mark(objective, "confident")}
                 >
-                  I understand this
+                  I can explain this confidently
+                </Button>
+                <Button
+                  type="button"
+                  variant={marks[objective] === "partial" ? "default" : "outline"}
+                  className="min-h-11"
+                  onClick={() => mark(objective, "partial")}
+                >
+                  I partly understand this
                 </Button>
                 <Button
                   type="button"
@@ -88,6 +98,12 @@ export function GameCompletion({
                 </Button>
               </div>
             </li>
+          ))}
+        </ul>
+        <h3 className="text-lg font-medium">Learning objectives</h3>
+        <ul className="list-disc space-y-1 pl-5">
+          {game.orientation.learningObjectives.map((objective) => (
+            <li key={objective}>{objective}</li>
           ))}
         </ul>
       </div>

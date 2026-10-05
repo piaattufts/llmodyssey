@@ -1,4 +1,5 @@
 import { systemComposerOrientation } from "../orientation/games.ts";
+import { composerTeaching } from "../teaching/systems.ts";
 import type { GameDefinition } from "../../src/game-engine/schema.ts";
 
 const scoreRule =
@@ -44,6 +45,7 @@ const systemComposer: GameDefinition = {
     whatIsSimulated: "No services are deployed. Cost and latency units are teaching numbers, not a cloud quote.",
   },
   orientation: systemComposerOrientation,
+  teaching: composerTeaching,
   rounds: [
     {
       id: "faq",

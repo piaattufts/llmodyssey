@@ -1,4 +1,5 @@
 import { reasoningReactorOrientation } from "../orientation/games.ts";
+import { reasoningTeaching } from "../teaching/adapt.ts";
 import type { GameDefinition } from "../../src/game-engine/schema.ts";
 
 const scoreRule =
@@ -36,7 +37,7 @@ const reasoningReactor: GameDefinition = {
       "Do not add a step that asks the model to reveal private chain-of-thought.",
     ],
   },
-  furtherReadingIds: ["wei2022cot", "wang2023selfconsistency", "yao2023tot"],
+  furtherReadingIds: ["wei2022cot", "wang2023selfconsistency", "yao2023tot", "holtzman2020nucleus"],
   implementation: {
     type: "deterministic-simulation",
     label: "Precomputed samples and a workflow checklist",
@@ -44,6 +45,7 @@ const reasoningReactor: GameDefinition = {
     whatIsSimulated: "The sample strings were written for the exercise. No model was sampled at runtime.",
   },
   orientation: reasoningReactorOrientation,
+  teaching: reasoningTeaching,
   rounds: [
     {
       id: "arithmetic",

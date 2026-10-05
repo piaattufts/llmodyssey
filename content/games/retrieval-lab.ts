@@ -1,4 +1,5 @@
 import { retrievalLabOrientation } from "../orientation/games.ts";
+import { retrievalTeaching } from "../teaching/systems.ts";
 import type { GameDefinition } from "../../src/game-engine/schema.ts";
 
 const scoreRule =
@@ -36,7 +37,7 @@ const retrievalLab: GameDefinition = {
       "If a filter removes the only relevant chunk, recall falls even when the remaining list looks clean.",
     ],
   },
-  furtherReadingIds: ["lewis2020rag", "karpukhin2020dpr", "reimers2019sbert"],
+  furtherReadingIds: ["lewis2020rag", "karpukhin2020dpr", "reimers2019sbert", "robertson2009bm25"],
   implementation: {
     type: "simplified-computation",
     label: "Local retrieval over toy vectors",
@@ -44,6 +45,7 @@ const retrievalLab: GameDefinition = {
     whatIsSimulated: "The vectors are 3-dimensional teaching examples, not the output of an embedding model. There is no reranker model; top-k on the score is the only ranker.",
   },
   orientation: retrievalLabOrientation,
+  teaching: retrievalTeaching,
   rounds: [
     {
       id: "lexical",

@@ -1,4 +1,5 @@
 import { tokenForgeOrientation } from "../orientation/games.ts";
+import { tokenForgeTeaching } from "../teaching/forge.ts";
 import type { GameDefinition } from "../../src/game-engine/schema.ts";
 
 const scoreRule =
@@ -10,7 +11,8 @@ const tokenForge: GameDefinition = {
   title: "Token Forge",
   tier: 1,
   order: 1,
-  summary: "Compare how subword tokenizers segment the same text, and what that does to count and cost.",
+  summary:
+    "See how text becomes the discrete units processed by a language model. Compare subword segmentation strategies and reason about vocabulary, sequence length, multilingual text, code, context use, and token-related cost.",
   purpose: "Make tokenization visible so learners can connect segmentation choices to sequence length and API cost.",
   whyItMatters:
     "Model APIs bill and attend over tokens, not characters. A segmentation that looks similar on the page can change cost, context fit, and how rare words are represented.",
@@ -46,6 +48,7 @@ const tokenForge: GameDefinition = {
       "The segments are authored illustrations of how these families often behave. They are not the output of a production tokenizer library.",
   },
   orientation: tokenForgeOrientation,
+  teaching: tokenForgeTeaching,
   rounds: [
     {
       id: "english-clause",

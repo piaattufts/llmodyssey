@@ -1,4 +1,5 @@
 import { foundryArenaOrientation } from "../orientation/games.ts";
+import { foundryTeaching } from "../teaching/systems.ts";
 import type { GameDefinition } from "../../src/game-engine/schema.ts";
 
 const scoreRule =
@@ -47,6 +48,7 @@ const foundryArena: GameDefinition = {
     whatIsSimulated: "No system is deployed, and the rubric is not a claim that one architecture is universally correct.",
   },
   orientation: foundryArenaOrientation,
+  teaching: foundryTeaching,
   rounds: [
     {
       id: "industry",

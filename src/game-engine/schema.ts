@@ -389,6 +389,81 @@ export const orientationSchema = z.object({
   roundGuides: z.array(orientationRoundGuideSchema).min(1),
 });
 
+export const teachingSchema = z.object({
+  atAGlance: z.object({
+    tierExplanation: nonEmpty,
+    recommendedLevel: nonEmpty,
+    timeExplanation: nonEmpty,
+    activityType: nonEmpty,
+    masteryExplanation: nonEmpty,
+    statusExplanation: nonEmpty,
+  }),
+  whyThisGameExists: z.array(nonEmpty).min(2).max(4),
+  bloomExplanation: nonEmpty,
+  misconceptions: z
+    .array(
+      z.object({
+        statement: nonEmpty,
+        howTheGameAddressesIt: nonEmpty,
+      }),
+    )
+    .min(1)
+    .max(3),
+  assigning: z.object({
+    required: nonEmpty,
+    helpful: nonEmpty,
+    notRequired: nonEmpty,
+  }),
+  difficultyExplanation: nonEmpty,
+  roundNotes: z
+    .array(
+      z.object({
+        practicing: nonEmpty,
+        whyChosen: nonEmpty,
+        watchFor: nonEmpty,
+        whatMattered: nonEmpty,
+        alternatives: nonEmpty,
+      }),
+    )
+    .min(1),
+  scoringNarrative: nonEmpty,
+  transferExplanation: nonEmpty,
+  selfEvaluationQuestions: z.array(nonEmpty).min(4).max(8),
+  guide: z.object({
+    title: nonEmpty,
+    overview: nonEmpty,
+    keyConcepts: z.array(z.object({ term: nonEmpty, explanation: nonEmpty })).min(4),
+    howItWorks: nonEmpty,
+    workedExamples: z.array(z.object({ title: nonEmpty, body: nonEmpty, label: nonEmpty })).min(1),
+    visualNote: nonEmpty,
+    applications: nonEmpty,
+    tradeoffs: nonEmpty,
+    bestPractices: z.array(nonEmpty).min(3),
+    pitfalls: z.array(nonEmpty).min(3),
+    checkYourUnderstanding: z.array(nonEmpty).min(3),
+    whenToUse: nonEmpty,
+    whenNotToUse: nonEmpty,
+    productionConsiderations: nonEmpty,
+  }),
+  educator: z.object({
+    whyTeach: nonEmpty,
+    whatStudentsDo: nonEmpty,
+    evidencePrompts: z.array(nonEmpty).min(3),
+    beforeClass: nonEmpty,
+    duringClass: nonEmpty,
+    afterClass: nonEmpty,
+    assignment: nonEmpty,
+    extension: nonEmpty,
+    relatedGames: nonEmpty,
+  }),
+  discussionQuestions: z.array(nonEmpty).min(3).max(5),
+  nextConnection: z.object({
+    headline: nonEmpty,
+    body: nonEmpty,
+    path: nonEmpty,
+  }),
+});
+
 export const roundSchema = z.object({
   id: z.string().min(1),
   title: z.string().min(1),
@@ -429,11 +504,13 @@ export const gameDefinitionSchema = z.object({
   furtherReadingIds: z.array(z.string().min(1)).min(1),
   implementation: implementationSchema,
   orientation: orientationSchema,
+  teaching: teachingSchema,
   rounds: z.array(roundSchema).min(1),
 });
 
 export type GameDefinition = z.infer<typeof gameDefinitionSchema>;
 export type GameOrientation = z.infer<typeof orientationSchema>;
+export type GameTeaching = z.infer<typeof teachingSchema>;
 export type RoundDefinition = z.infer<typeof roundSchema>;
 export type Interaction = RoundDefinition["interaction"];
 export type BloomLevel = z.infer<typeof bloomLevelSchema>;
@@ -441,9 +518,16 @@ export type Quality = z.infer<typeof qualitySchema>;
 export type ReleaseStatus = z.infer<typeof releaseStatusSchema>;
 
 export function releaseStatusLabel(status: ReleaseStatus): string {
-  if (status === "implemented") return "Implemented";
+  if (status === "implemented") return "Reference";
   if (status === "prototype") return "Prototype";
   return "Planned";
+}
+
+export function learnerDifficultyLabel(difficulty: GameDefinition["difficulty"]): string {
+  if (difficulty === "foundational") return "Introductory";
+  if (difficulty === "intermediate") return "Intermediate";
+  if (difficulty === "capstone") return "Advanced synthesis";
+  return "Advanced";
 }
 
 /** Planned games stay descriptive. They do not record completion or mastery. */
@@ -472,6 +556,9 @@ function validateGame(game: GameDefinition, source: string): void {
   }
   if (game.orientation.roundGuides.length !== game.rounds.length) {
     throw new Error(`${source}: orientation round guides must match the rounds`);
+  }
+  if (game.teaching.roundNotes.length !== game.rounds.length) {
+    throw new Error(`${source}: teaching round notes must match the rounds`);
   }
   const ids = new Set<string>();
   for (const round of game.rounds) {

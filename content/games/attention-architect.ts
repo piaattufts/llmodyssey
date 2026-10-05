@@ -1,4 +1,5 @@
 import { attentionArchitectOrientation } from "../orientation/games.ts";
+import { attentionTeaching } from "../teaching/core.ts";
 import type { GameDefinition } from "../../src/game-engine/schema.ts";
 
 const scoreRule =
@@ -46,6 +47,7 @@ const attentionArchitect: GameDefinition = {
       "The vectors are tiny and hand-authored. There is no trained transformer, no full residual stream, and no claim that these weights match any production model.",
   },
   orientation: attentionArchitectOrientation,
+  teaching: attentionTeaching,
   rounds: [
     {
       id: "self-bias",

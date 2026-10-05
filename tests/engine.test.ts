@@ -169,6 +169,40 @@ describe("course content", () => {
     expect(decision).toContain("BPE");
   });
 
+  it("requires teaching, a guide, and reference status only on Token Forge", () => {
+    expect(games).toHaveLength(13);
+    for (const game of games) {
+      const teaching = game.teaching;
+      expect(teaching.whyThisGameExists.length, game.id).toBeGreaterThanOrEqual(2);
+      expect(teaching.bloomExplanation.length, game.id).toBeGreaterThan(40);
+      expect(teaching.misconceptions.length, game.id).toBeGreaterThanOrEqual(1);
+      expect(teaching.assigning.required.length, game.id).toBeGreaterThan(10);
+      expect(teaching.scoringNarrative.toLowerCase(), game.id).toContain("hint");
+      expect(teaching.transferExplanation.length, game.id).toBeGreaterThan(20);
+      expect(teaching.selfEvaluationQuestions.length, game.id).toBeGreaterThanOrEqual(4);
+      expect(teaching.roundNotes, game.id).toHaveLength(game.rounds.length);
+      expect(teaching.educator.evidencePrompts.length, game.id).toBeGreaterThanOrEqual(3);
+      expect(teaching.discussionQuestions.length, game.id).toBeGreaterThanOrEqual(3);
+      expect(teaching.nextConnection.path.length, game.id).toBeGreaterThan(5);
+      expect(teaching.guide.overview.length, game.id).toBeGreaterThan(40);
+      expect(teaching.guide.keyConcepts.length, game.id).toBeGreaterThanOrEqual(4);
+      expect(teaching.guide.workedExamples.length, game.id).toBeGreaterThanOrEqual(1);
+      expect(teaching.guide.applications.length, game.id).toBeGreaterThan(20);
+      expect(teaching.guide.bestPractices.length, game.id).toBeGreaterThanOrEqual(3);
+      expect(teaching.guide.pitfalls.length, game.id).toBeGreaterThanOrEqual(3);
+      expect(game.furtherReadingIds.length, game.id).toBeGreaterThanOrEqual(1);
+      expect(game.orientation.implementationNote.toLowerCase(), game.id).toContain("simulation");
+      if (game.id === "token-forge") {
+        expect(game.status).toBe("implemented");
+        expect(teaching.atAGlance.statusExplanation).toContain("Reference Implementation");
+      } else {
+        expect(game.status).toBe("prototype");
+        expect(teaching.atAGlance.statusExplanation).toContain("Playable Prototype");
+        expect(teaching.atAGlance.statusExplanation).not.toContain("Reference Implementation");
+      }
+    }
+  });
+
   it("rejects a broken educator file with a path", () => {
     expect(() => parseGame({ id: "nope" }, "content/games/nope.ts")).toThrow(/content\/games\/nope.ts/);
     expect(customGame.id).toBe("example-custom-game");

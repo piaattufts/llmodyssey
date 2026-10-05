@@ -1,4 +1,5 @@
 import { prodopsOrientation } from "../orientation/games.ts";
+import { prodopsTeaching } from "../teaching/systems.ts";
 import type { GameDefinition } from "../../src/game-engine/schema.ts";
 
 const scoreRule =
@@ -44,6 +45,7 @@ const prodops: GameDefinition = {
     whatIsSimulated: "No production system is being monitored. The metrics on each card are part of the case.",
   },
   orientation: prodopsOrientation,
+  teaching: prodopsTeaching,
   rounds: [
     {
       id: "cost-spike",

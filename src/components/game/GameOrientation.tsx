@@ -1,13 +1,27 @@
 import { Button } from "@/components/ui/button.tsx";
 import { learnerStatusCopy, universalSelfEvaluation } from "@content/orientation/copy.ts";
 import { tierCopy } from "../../app/copy.ts";
-import type { GameDefinition, GameOrientation as OrientationContent } from "../../game-engine/schema.ts";
+import { learnerDifficultyLabel, type GameDefinition, type GameOrientation as OrientationContent } from "../../game-engine/schema.ts";
+import { GameGuide } from "./GameGuide.tsx";
+import {
+  AssigningPanel,
+  AtAGlance,
+  BloomExplanation,
+  EducatorNotes,
+  IllustratedGuide,
+  MisconceptionPanel,
+  NextConnection,
+  ScoringNarrative,
+  WhyThisGame,
+} from "./TeachingSections.tsx";
 
 export function GameOrientation({ game, onStart }: { game: GameDefinition; onStart: () => void }) {
   const orientation = game.orientation;
   return (
     <div className="space-y-4" data-testid="game-orientation">
       <GameOverview game={game} />
+      <AtAGlance game={game} />
+      <WhyThisGame game={game} />
       <div className="grid gap-4 lg:grid-cols-2">
         <LearningObjectives gameTitle={game.title} objectives={orientation.learningObjectives} misconception={game.misconception} />
         <WhyItMatters text={orientation.whyItMatters} />
@@ -23,11 +37,18 @@ export function GameOrientation({ game, onStart }: { game: GameDefinition; onSta
           ))}
         </ol>
       </details>
+      <BloomExplanation game={game} />
+      <MisconceptionPanel game={game} />
+      <AssigningPanel game={game} />
       <HowYouAreEvaluated orientation={orientation} threshold={game.masteryThreshold} />
+      <ScoringNarrative game={game} />
       <ProgressAndMastery orientation={orientation} roundCount={game.rounds.length} />
       <SimulationDisclosure game={game} />
       <EstimatedTime time={orientation.estimatedTime} notes={orientation.beforeYouStart} />
-      <StartGameButton onStart={onStart} />
+      <StartGameButton game={game} onStart={onStart} />
+      <IllustratedGuide game={game} />
+      <EducatorNotes game={game} />
+      <NextConnection game={game} />
     </div>
   );
 }
@@ -44,7 +65,7 @@ export function GameOverview({ game }: { game: GameDefinition }) {
       <p className="text-lg">{orientation.tagline}</p>
       <ul className="flex flex-wrap gap-2 text-sm">
         <li className="rounded-full border border-border px-3 py-1">Tier {game.tier} · {tierCopy[game.tier].name}</li>
-        <li className="rounded-full border border-border px-3 py-1 capitalize">{game.difficulty}</li>
+        <li className="rounded-full border border-border px-3 py-1">{learnerDifficultyLabel(game.difficulty)}</li>
         <li className="rounded-full border border-border px-3 py-1">{orientation.estimatedTime}</li>
         {game.concepts.map((concept) => (
           <li key={concept} className="rounded-full border border-border px-3 py-1">
@@ -192,8 +213,12 @@ export function SelfEvaluationPrimer({ orientation }: { orientation: Orientation
           {universalSelfEvaluation.performance}
         </li>
         <li>
-          <strong>Mastery. </strong>
+          <strong>Mastery threshold. </strong>
           {universalSelfEvaluation.mastery}
+        </li>
+        <li>
+          <strong>Transfer. </strong>
+          {universalSelfEvaluation.transfer}
         </li>
       </ul>
       <p>{orientation.mastery}</p>
@@ -264,13 +289,16 @@ export function EstimatedTime({ time, notes }: { time: string; notes: string[] }
   );
 }
 
-export function StartGameButton({ onStart }: { onStart: () => void }) {
+export function StartGameButton({ game, onStart }: { game: GameDefinition; onStart: () => void }) {
   return (
     <div className="rounded-xl border border-border bg-background p-4">
       <p className="mb-3 text-sm text-muted-foreground">When the sections above make sense, start round 1.</p>
-      <Button className="min-h-11 w-full sm:w-auto" data-testid="start-game" onClick={onStart}>
-        Start game
-      </Button>
+      <div className="flex flex-wrap gap-2">
+        <Button className="min-h-11 w-full sm:w-auto" data-testid="start-game" onClick={onStart}>
+          Start game
+        </Button>
+        <GameGuide game={game} />
+      </div>
     </div>
   );
 }

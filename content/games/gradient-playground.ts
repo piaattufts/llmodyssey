@@ -1,4 +1,5 @@
 import { gradientPlaygroundOrientation } from "../orientation/games.ts";
+import { gradientTeaching } from "../teaching/adapt.ts";
 import type { GameDefinition } from "../../src/game-engine/schema.ts";
 
 const scoreRule =
@@ -53,6 +54,7 @@ const gradientPlayground: GameDefinition = {
     whatIsSimulated: "Nothing is trained. There are no gradients, parameters, or datasets behind the curves.",
   },
   orientation: gradientPlaygroundOrientation,
+  teaching: gradientTeaching,
   rounds: [
     {
       id: "stabilize",

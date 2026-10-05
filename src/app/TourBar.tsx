@@ -7,15 +7,17 @@ export function TourBar() {
   const step = tourSteps.find((item) => item.id === current);
   if (!step) {
     return (
-      <p className="rounded-xl border border-border p-3 text-sm">
-        <Link className="underline" to="/demo?tour=1">
-          Start the guided tour
+      <section className="space-y-2 rounded-xl border border-border p-4" aria-label="Guided tour">
+        <h2 className="text-lg font-semibold">Guided tour</h2>
+        <p className="text-sm">Eleven short stops, about five to eight minutes. You can leave at any step. The tour does not call a model API.</p>
+        <Link className="inline-flex min-h-11 items-center underline" to="/demo?tour=1">
+          Start Guided Tour
         </Link>
-        . It is eight short stops and is meant to run in about five to eight minutes.
-      </p>
+      </section>
     );
   }
   const next = tourSteps.find((item) => item.id === step.id + 1);
+  const previous = tourSteps.find((item) => item.id === step.id - 1);
   return (
     <section className="rounded-xl border border-primary/40 bg-primary/10 p-4" aria-label="Guided tour">
       <p className="text-sm text-muted-foreground">
@@ -23,17 +25,25 @@ export function TourBar() {
       </p>
       <h2 className="text-lg font-semibold">{step.title}</h2>
       <p className="mt-1 text-sm">{step.body}</p>
-      <p className="mt-3">
+      <div className="mt-3 flex flex-wrap gap-3">
+        {previous ? (
+          <Link className="inline-flex min-h-11 items-center underline" to={`${previous.path}?tour=${previous.id}`}>
+            Back
+          </Link>
+        ) : null}
         {next ? (
           <Link className="inline-flex min-h-11 items-center underline" to={`${next.path}?tour=${next.id}`}>
-            Next: {next.title}
+            Next
           </Link>
         ) : (
           <Link className="inline-flex min-h-11 items-center underline" to="/demo">
-            End tour
+            Finish tour
           </Link>
         )}
-      </p>
+        <Link className="inline-flex min-h-11 items-center underline" to="/demo">
+          Exit Tour
+        </Link>
+      </div>
     </section>
   );
 }

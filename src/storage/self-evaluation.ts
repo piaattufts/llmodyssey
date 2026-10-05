@@ -1,4 +1,4 @@
-export type SelfMark = "understand" | "practice";
+export type SelfMark = "confident" | "partial" | "practice";
 
 const KEY = "llmodyssey-self-evaluation";
 

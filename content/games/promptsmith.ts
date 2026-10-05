@@ -1,4 +1,5 @@
 import { promptsmithOrientation } from "../orientation/games.ts";
+import { promptsmithTeaching } from "../teaching/core.ts";
 import type { GameDefinition } from "../../src/game-engine/schema.ts";
 
 const scoreRule =
@@ -45,6 +46,7 @@ const promptsmith: GameDefinition = {
     whatIsSimulated: "No live language model is called. Outcome cards are written for the exercise.",
   },
   orientation: promptsmithOrientation,
+  teaching: promptsmithTeaching,
   rounds: [
     {
       id: "invoice-fields",

@@ -1,4 +1,5 @@
 import { contextCompressionOrientation } from "../orientation/games.ts";
+import { contextTeaching } from "../teaching/core.ts";
 import type { GameDefinition } from "../../src/game-engine/schema.ts";
 
 const scoreRule =
@@ -44,6 +45,7 @@ const contextCompression: GameDefinition = {
     whatIsSimulated: "Abstractive summaries are prewritten. The game does not call a model to summarize.",
   },
   orientation: contextCompressionOrientation,
+  teaching: contextTeaching,
   rounds: [
     {
       id: "extract-faq",

@@ -32,7 +32,7 @@ export function EducatorPage({ basePath = "" }: { basePath?: string }) {
     <div className="space-y-10">
       <header className="space-y-3">
         <p className="text-sm text-muted-foreground">For instructors</p>
-        <h1 className="text-3xl font-semibold">Educator guide</h1>
+        <h1 className="text-3xl font-semibold">LLM Odyssey Educator Guide</h1>
         <p className="max-w-3xl text-lg">
           LLM Odyssey is a browser course for LLM engineering. Students make a decision, see the result, and can retry. No account and no paid model API are required for the hosted site or a local run.
         </p>
@@ -202,8 +202,20 @@ export function EducatorPage({ basePath = "" }: { basePath?: string }) {
           <li><strong>Independent module.</strong> Assign one tier and the optional pre/post check. Students do not need all 13 games.</li>
           <li><strong>Capstone.</strong> Use <Link className="underline" to={`${basePath}/play/foundry-arena`}>Foundry Arena</Link>. Grade the reflection and the constraints the student covered. The rubric is not a single official architecture.</li>
         </ul>
-        <p>A six-week example, which you can reorder: week 1 Token Forge and Attention Architect; week 2 Context Compression and Promptsmith; week 3 Gradient Playground, Reasoning Reactor, and Alignment Arena; week 4 Retrieval Lab and Agent Architect; week 5 Ship-It Simulator, System Composer, and ProdOps Gauntlet; week 6 Foundry Arena.</p>
-        <p>Shorter slices: Token Forge alone for a tokenizer lesson; Retrieval Lab for retrieval; Ship-It Simulator with System Composer and ProdOps Gauntlet for production; Agent Architect with Retrieval Lab and System Composer for agents.</p>
+        <h3 className="text-lg font-medium">One-week module</h3>
+        <p>Token Forge, Attention Architect, and Promptsmith. Enough to move from units of text, to how representations interact, to how a task is specified.</p>
+        <h3 className="text-lg font-medium">Two-week module</h3>
+        <p>The foundational games plus Retrieval Lab. Students finish with a concrete picture of context construction, not only of a single model call.</p>
+        <h3 className="text-lg font-medium">Six-week sequence</h3>
+        <ol className="list-decimal space-y-1 pl-5">
+          <li>Week 1: Token Forge and Attention Architect.</li>
+          <li>Week 2: Context Compression and Promptsmith.</li>
+          <li>Week 3: Gradient Playground, Reasoning Reactor, and Alignment Arena.</li>
+          <li>Week 4: Retrieval Lab and Agent Architect.</li>
+          <li>Week 5: Ship-It Simulator, System Composer, and ProdOps Gauntlet.</li>
+          <li>Week 6: Foundry Arena.</li>
+        </ol>
+        <p>A single game is a valid assignment. The sequence is a teaching order, not a claim that production systems are built in this order. Correct selections are not sufficient evidence of learning. Ask students to justify the decision and apply it to a new case.</p>
       </section>
 
       <section className="space-y-2">

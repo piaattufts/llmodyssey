@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased
+
+- Educator-facing orientation, concept guides, and teaching notes on all 13 games.
+- Clearer distinction among completion, performance, the mastery threshold, and transfer.
+- Demo tour with back and exit. Separate demo copy for workshops and review.
+- Concept index grouped by foundations, systems, and production.
+- Local-only feedback page. Assessment pages explain what they do and do not affect.
+
 ## 0.1.0
 
 First standalone open-source release.

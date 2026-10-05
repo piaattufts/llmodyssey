@@ -1,4 +1,5 @@
 import { buildOrientation } from "../../content/orientation/copy.ts";
+import { exampleTeaching } from "../../content/teaching/example.ts";
 import { parseGame } from "../../src/game-engine/schema.ts";
 
 const sample = {
@@ -61,6 +62,7 @@ const sample = {
       },
     ],
   }),
+  teaching: exampleTeaching,
   rounds: [
     {
       id: "only-round",

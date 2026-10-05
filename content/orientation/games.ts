@@ -11,7 +11,7 @@ const play = [
 ];
 
 export const tokenForgeOrientation = buildOrientation({
-  tagline: "See how text becomes the units an LLM actually processes.",
+  tagline: "Build words from pieces",
   overview:
     "Token Forge is a comparison of tokenization strategies. You will see the same text split in more than one way, then decide which split fits the engineering goal.",
   whyItMatters:
@@ -100,7 +100,7 @@ export const tokenForgeOrientation = buildOrientation({
 });
 
 export const attentionArchitectOrientation = buildOrientation({
-  tagline: "See which token a simplified attention calculation actually emphasizes.",
+  tagline: "Wire the brain",
   overview:
     "Attention Architect shows how attention changes the importance assigned to different positions when a representation is built. You read a tiny, fully visible calculation and choose the token it weights most.",
   whyItMatters:
@@ -196,7 +196,7 @@ export const attentionArchitectOrientation = buildOrientation({
 });
 
 export const contextCompressionOrientation = buildOrientation({
-  tagline: "Keep what the task needs inside a hard token budget.",
+  tagline: "Fit more in less",
   overview:
     "Context Compression is about fitting source text into a context window. The objective is not simply to make the text shorter. You have to preserve task-relevant information under a constraint.",
   whyItMatters:
@@ -292,7 +292,7 @@ export const contextCompressionOrientation = buildOrientation({
 });
 
 export const promptsmithOrientation = buildOrientation({
-  tagline: "Design a prompt as a specification, not as a magic phrase.",
+  tagline: "Craft better task specifications",
   overview:
     "Promptsmith is practice in systematic prompt design. You match the shape of the instruction to the failure mode of the task.",
   whyItMatters:
@@ -388,7 +388,7 @@ export const promptsmithOrientation = buildOrientation({
 });
 
 export const gradientPlaygroundOrientation = buildOrientation({
-  tagline: "Read an educational loss curve before anyone rents a GPU.",
+  tagline: "Fine-tune and optimize",
   overview:
     "Gradient Playground lets you change learning rate, batch size, epochs, and full fine-tuning versus LoRA, then read what an educational model does to training loss and validation loss.",
   whyItMatters:
@@ -580,7 +580,7 @@ export const reasoningReactorOrientation = buildOrientation({
 });
 
 export const alignmentArenaOrientation = buildOrientation({
-  tagline: "Rank replies with an explicit policy, not a single notion of good.",
+  tagline: "Shape AI behavior",
   overview:
     "Alignment Arena is an educational simulation of preference ranking. You apply weights for helpfulness, safety, and factuality, and you see which reply the policy prefers.",
   whyItMatters:

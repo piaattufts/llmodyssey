@@ -36,6 +36,12 @@ export function AssessmentPage({ basePath }: { basePath: string }) {
     <div className="space-y-6">
       <header className="space-y-2">
         <h1 className="text-3xl font-semibold">{kind === "pre" ? "Pre-assessment" : "Post-assessment"}</h1>
+        <p>
+          This check exists so you can see what you already know before the games, or what you can answer after them. Plan on about 10 to 15 minutes. It measures recognition of ideas the course names. It does not unlock, lock, or grade the games. Your game progression is independent of this score.
+        </p>
+        <p>
+          Answers stay in this browser’s local record until you reset that record. The public site does not enroll you in a study. Research upload is a separate, optional mode and is off unless a build explicitly enables it.
+        </p>
         <p>Ten questions. The score is the percent correct. This is a knowledge check, not a certified exam. {existing ? `A previous ${kind} score of ${existing.scorePercent}% is already stored. Submitting replaces it.` : "Nothing is stored until you submit."}</p>
       </header>
       <ol className="space-y-6">

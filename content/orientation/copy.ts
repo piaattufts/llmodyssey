@@ -13,9 +13,12 @@ export const universalSelfEvaluation = {
     "Could I apply the concept to a new example?",
     "Can I describe the trade-off rather than merely remember the answer?",
   ],
-  completion: "I finished the activity.",
-  performance: "I earned a particular score.",
-  mastery: "I can explain and apply the underlying concept.",
+  completion: "Completion means the learner finished the activity.",
+  performance: "Performance is the numerical result on this activity's scenarios.",
+  mastery:
+    "The mastery threshold is an instructional benchmark for this activity. Meeting it is not a claim of professional expertise.",
+  transfer:
+    "Transfer is stronger evidence of learning: the learner can explain the decision and apply the concept to a new case.",
 };
 
 export function learnerStatusCopy(status: ReleaseStatus): { title: string; detail: string } {
@@ -23,14 +26,14 @@ export function learnerStatusCopy(status: ReleaseStatus): { title: string; detai
     return {
       title: "Reference Implementation",
       detail:
-        "This is the reference game in this release. Its activity, scoring, and explanations are the model the other games are moving toward.",
+        "Token Forge currently serves as the most complete implementation of the intended LLM Odyssey pedagogical pattern.",
     };
   }
   if (status === "prototype") {
     return {
       title: "Playable Prototype",
       detail:
-        "This game contains a functioning educational activity and scoring flow, but its instructional mechanics and content are still being refined. Playable means the rounds, feedback, and score work. It does not mean this game has the same validation as the reference implementation.",
+        "This activity contains working gameplay, feedback, scoring, and educational content, but its instructional mechanics and content remain under refinement. Prototype status refers to the maturity of the software activity, not to the importance or validity of the underlying technical topic.",
     };
   }
   return {
