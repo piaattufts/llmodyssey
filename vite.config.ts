@@ -13,16 +13,16 @@ export default defineConfig({
       name: "github-pages-spa-fallback",
       apply: "build",
       closeBundle() {
-        const dist = path.resolve(__dirname, "dist");
+        const dist = path.resolve(import.meta.dirname, "dist");
         copyFileSync(path.join(dist, "index.html"), path.join(dist, "404.html"));
       },
     },
   ],
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./src"),
-      "@content": path.resolve(__dirname, "./content"),
-      "@config": path.resolve(__dirname, "./config"),
+      "@": path.resolve(import.meta.dirname, "./src"),
+      "@content": path.resolve(import.meta.dirname, "./content"),
+      "@config": path.resolve(import.meta.dirname, "./config"),
     },
   },
 });
