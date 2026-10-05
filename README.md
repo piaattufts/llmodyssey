@@ -6,7 +6,7 @@ LLM Odyssey is an open-source, browser-based game-based learning platform for te
 
 The course is three tiers. Cognitive Core covers mechanisms. Systems Forge covers production structure. Foundry Arena is a constrained design brief. The default install is local. Scoring, hints, progress, assessments, and the demo run in the browser with no database and no paid model API. Educational simulations are labeled in the interface. Educator content is data, validated at startup. Research collection is optional and off unless you turn it on.
 
-This repository does not use Base44, and it does not require an account.
+This repository does not use Base44, and it does not require an account. The earlier classroom app was exported from Base44 (`llm-odyssey-0544b844`). Its teaching aims were reviewed for this release. Its SDK, accounts, and character-slice tokenizer were not carried over. The review is in `docs/migration-audit.md`.
 
 ## If you use LLM Odyssey in teaching or research, please cite
 

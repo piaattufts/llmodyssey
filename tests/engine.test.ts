@@ -115,7 +115,7 @@ describe("scoring and gates", () => {
     expect(isMastered(69, 70)).toBe(false);
     const forge = games[0];
     if (!forge) throw new Error("forge");
-    const weak = evaluateRound(forge.rounds[0]!, { type: "tokenizer", strategyId: "bpe" });
+    const weak = evaluateRound(forge.rounds[0]!, { type: "tokenizer", strategyId: "unigram" });
     expect(weak.rawPoints).toBeLessThan(10);
   });
 

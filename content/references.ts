@@ -145,6 +145,14 @@ export const references: ReferenceEntry[] = [
     url: "https://www.oreilly.com/library/view/designing-machine-learning/9781098107956/",
   },
   {
+    id: "liu2023lost",
+    authors: "Nelson F. Liu, Kevin Lin, John Hewitt, Ashwin Paranjape, Michele Bevilacqua, Fabio Petroni, and Percy Liang",
+    year: 2024,
+    title: "Lost in the Middle: How Language Models Use Long Contexts",
+    venue: "Transactions of the Association for Computational Linguistics",
+    url: "https://arxiv.org/abs/2307.03172",
+  },
+  {
     id: "zamfirescu2023prompt",
     authors: "J.D. Zamfirescu-Pereira, Richmond Y. Wong, Bjoern Hartmann, and Qian Yang",
     year: 2023,

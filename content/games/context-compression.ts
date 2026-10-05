@@ -34,7 +34,7 @@ const contextCompression: GameDefinition = {
       "If they do not fit, an abstractive summary is only acceptable when its authored text still carries those facts.",
     ],
   },
-  furtherReadingIds: ["vaswani2017", "huyen2022dmls"],
+  furtherReadingIds: ["vaswani2017", "huyen2022dmls", "liu2023lost"],
   implementation: {
     type: "deterministic-simulation",
     label: "Deterministic budget arithmetic",
@@ -48,7 +48,8 @@ const contextCompression: GameDefinition = {
       concept: "Extractive compression",
       learnerTask: "Select an extractive strategy and the spans that fit the budget while keeping the refund rule.",
       expectedReasoning: "The refund span is must-keep and small. Marketing spans spend the budget without relevance.",
-      scenario: "A help widget has 40 tokens left. The user asked how long a refund takes.",
+      scenario:
+        "A help widget has 40 tokens left. The user asked how long a refund takes. The classroom prototype used the same kind of budget on a support ticket and on a contract that had to keep dates and dollar amounts.",
       hints: [
         "Must-keep spans are marked. Start there.",
         "You do not need the slogan.",
