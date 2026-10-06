@@ -253,7 +253,18 @@ def slide_gap(deck: Presentation):
 def slide_curriculum(deck: Presentation):
     slide = blank(deck)
     fill_slide(slide, PAPER)
-    full_bleed(slide, DIAG / "01_curriculum_tiers.png")
+    place_image(slide, DIAG / "01_curriculum_tiers.png", Inches(0.35), Inches(0.15), Inches(12.63), Inches(6.55))
+    add_text(
+        slide,
+        "Later tiers open at a 70% instructional mastery benchmark.",
+        Inches(0.4),
+        Inches(6.85),
+        Inches(12.5),
+        Inches(0.45),
+        20,
+        bold=True,
+        align=PP_ALIGN.CENTER,
+    )
     notes(
         slide,
         "Token Forge is the reference implementation. Games 2–13 are playable prototypes. "
