@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0,0 L12,6 L0,12 Z" fill="#142033"/>
+    </marker>
+  </defs>
+  <rect width="1920" height="1080" fill="#F4F7FB"/>
+  <text x="72" y="68" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="48" font-weight="800" fill="#142033" text-anchor="start">How one game teaches</text>
+<rect x="64" y="120" width="1000" height="120" rx="16" fill="#E7F1FB" stroke="#1B4F8A" stroke-width="5"/>
+<text x="96" y="170" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="32" font-weight="800" fill="#1B4F8A" text-anchor="start">1  ORIENTATION</text>
+<text x="96" y="212" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="26" font-weight="650" fill="#142033" text-anchor="start">What, why, and how to play.</text>
+<line x1="564" y1="240" x2="564" y2="268" stroke="#142033" stroke-width="5" marker-end="url(#arrow)"/>
+<rect x="64" y="270" width="1000" height="120" rx="16" fill="#FFFFFF" stroke="#142033" stroke-width="5"/>
+<text x="96" y="320" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="32" font-weight="800" fill="#142033" text-anchor="start">2  CHALLENGE</text>
+<text x="96" y="362" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="26" font-weight="650" fill="#142033" text-anchor="start">An engineering decision.</text>
+<line x1="564" y1="390" x2="564" y2="418" stroke="#142033" stroke-width="5" marker-end="url(#arrow)"/>
+<rect x="64" y="420" width="1000" height="120" rx="16" fill="#E5F6F6" stroke="#0F6E78" stroke-width="5"/>
+<text x="96" y="470" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="32" font-weight="800" fill="#0F6E78" text-anchor="start">3  FEEDBACK</text>
+<text x="96" y="512" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="26" font-weight="650" fill="#142033" text-anchor="start">Result, why, and the trade-off.</text>
+<line x1="564" y1="540" x2="564" y2="568" stroke="#142033" stroke-width="5" marker-end="url(#arrow)"/>
+<rect x="64" y="570" width="1000" height="120" rx="16" fill="#FDE8F0" stroke="#8E1E4A" stroke-width="5"/>
+<text x="96" y="620" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="32" font-weight="800" fill="#8E1E4A" text-anchor="start">HINT OR CONTINUE</text>
+<text x="96" y="662" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="26" font-weight="650" fill="#142033" text-anchor="start">Hint: minus 1. Retry keeps the best.</text>
+<line x1="564" y1="690" x2="564" y2="718" stroke="#142033" stroke-width="5" marker-end="url(#arrow)"/>
+<rect x="64" y="720" width="1000" height="120" rx="16" fill="#FFFFFF" stroke="#142033" stroke-width="5"/>
+<text x="96" y="770" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="32" font-weight="800" fill="#142033" text-anchor="start">4  NEXT ROUND</text>
+<text x="96" y="812" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="26" font-weight="650" fill="#142033" text-anchor="start">Same pattern until the last round.</text>
+<rect x="1140" y="120" width="716" height="250" rx="16" fill="#FFF4D8" stroke="#8A5A12" stroke-width="5"/>
+<text x="1172" y="180" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="34" font-weight="800" fill="#8A5A12" text-anchor="start">CONCEPT GUIDE</text>
+<text x="1172" y="240" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="30" font-weight="700" fill="#142033" text-anchor="start">Reopen any time.</text>
+<text x="1172" y="290" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="30" font-weight="700" fill="#142033" text-anchor="start">Round and score stay.</text>
+<line x1="1064" y1="330" x2="1136" y2="245" stroke="#142033" stroke-width="5" stroke-dasharray="10 8" marker-end="url(#arrow)"/>
+<rect x="1140" y="640" width="716" height="130" rx="16" fill="#E7F1FB" stroke="#1B4F8A" stroke-width="5"/>
+<text x="1172" y="694" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="32" font-weight="800" fill="#1B4F8A" text-anchor="start">5  MASTERY CHECK</text>
+<text x="1172" y="738" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="26" font-weight="650" fill="#142033" text-anchor="start">70% benchmark. Not expertise.</text>
+<line x1="1498" y1="770" x2="1498" y2="798" stroke="#142033" stroke-width="5" marker-end="url(#arrow)"/>
+<rect x="1140" y="800" width="716" height="130" rx="16" fill="#F4E9FB" stroke="#5C2D91" stroke-width="5"/>
+<text x="1172" y="854" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="32" font-weight="800" fill="#5C2D91" text-anchor="start">6  REFLECT, THEN NEXT</text>
+<text x="1172" y="898" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="26" font-weight="650" fill="#142033" text-anchor="start">Self-eval does not change the score.</text>
+<line x1="1064" y1="780" x2="1136" y2="705" stroke="#142033" stroke-width="5" marker-end="url(#arrow)"/>
+<rect x="64" y="980" width="1792" height="68" rx="16" fill="#FFFFFF" stroke="#142033" stroke-width="4"/>
+<text x="960" y="1024" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="30" font-weight="700" fill="#142033" text-anchor="middle">Completion is finishing.  Mastery is the benchmark.  Transfer is a new case.</text>
+</svg>

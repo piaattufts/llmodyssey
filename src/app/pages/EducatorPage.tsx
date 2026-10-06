@@ -101,7 +101,6 @@ export function EducatorPage({ basePath = "" }: { basePath?: string }) {
                 <td className="p-2">{game.summary}</td>
                 <td className="p-2">
                   {releaseStatusLabel(game.status)}
-                  {game.status === "implemented" ? " · Reference" : ""}
                 </td>
                 <td className="p-2">{game.estimatedMinutes}</td>
                 <td className="p-2">{game.bloomLevels.join(", ")}</td>
@@ -120,7 +119,6 @@ export function EducatorPage({ basePath = "" }: { basePath?: string }) {
               {game.order}. {game.title}
               <span className="ml-2 text-sm font-normal text-muted-foreground">
                 {releaseStatusLabel(game.status)}
-                {game.status === "implemented" ? " · Reference" : ""}
               </span>
             </h3>
             <p className="mt-1 text-sm">{game.purpose}</p>
@@ -144,9 +142,7 @@ export function EducatorPage({ basePath = "" }: { basePath?: string }) {
         {visible.map((game) => (
           <details key={game.id} className="rounded-xl border border-border p-4" data-testid={`educator-orientation-${game.id}`}>
             <summary className="cursor-pointer font-medium">
-              {game.order}. {game.title} · {releaseStatusLabel(game.status)}
-              {game.status === "implemented" ? " · Reference Implementation" : ""}
-              {game.status === "prototype" ? " · Playable Prototype" : ""} · {game.orientation.estimatedTime} · mastery {thresholdFor(game)}%
+              {game.order}. {game.title} · {game.status === "implemented" ? "Reference Implementation" : game.status === "prototype" ? "Playable Prototype" : releaseStatusLabel(game.status)} · {game.orientation.estimatedTime} · mastery {thresholdFor(game)}%
             </summary>
             <div className="mt-3 space-y-2 text-sm">
               <p>{game.orientation.tagline}</p>
@@ -185,9 +181,7 @@ export function EducatorPage({ basePath = "" }: { basePath?: string }) {
               </p>
               <p>
                 <strong>Game status. </strong>
-                {releaseStatusLabel(game.status)}
-                {game.status === "implemented" ? " · Reference Implementation" : ""}
-                {game.status === "prototype" ? " · Playable Prototype" : ""}
+                {game.status === "implemented" ? "Reference Implementation" : game.status === "prototype" ? "Playable Prototype" : releaseStatusLabel(game.status)}
               </p>
             </div>
           </details>

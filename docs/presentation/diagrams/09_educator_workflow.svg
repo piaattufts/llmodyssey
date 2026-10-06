@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0,0 L12,6 L0,12 Z" fill="#142033"/>
+    </marker>
+  </defs>
+  <rect width="1920" height="1080" fill="#F4F7FB"/>
+  <text x="72" y="68" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="48" font-weight="800" fill="#142033" text-anchor="start">Educator workflow</text>
+<rect x="64" y="150" width="440" height="280" rx="18" fill="#FFFFFF" stroke="#1B4F8A" stroke-width="5"/>
+<text x="92" y="220" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="42" font-weight="800" fill="#1B4F8A" text-anchor="start">1</text>
+<text x="92" y="290" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="32" font-weight="800" fill="#142033" text-anchor="start">CHOOSE</text>
+<text x="92" y="350" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="28" font-weight="650" fill="#142033" text-anchor="start">One game or a path</text>
+<rect x="528" y="150" width="440" height="280" rx="18" fill="#FFFFFF" stroke="#1B4F8A" stroke-width="5"/>
+<text x="556" y="220" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="42" font-weight="800" fill="#1B4F8A" text-anchor="start">2</text>
+<text x="556" y="290" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="32" font-weight="800" fill="#142033" text-anchor="start">INSPECT</text>
+<text x="556" y="350" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="28" font-weight="650" fill="#142033" text-anchor="start">Objectives, time, Bloom</text>
+<rect x="992" y="150" width="440" height="280" rx="18" fill="#FFFFFF" stroke="#1B4F8A" stroke-width="5"/>
+<text x="1020" y="220" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="42" font-weight="800" fill="#1B4F8A" text-anchor="start">3</text>
+<text x="1020" y="290" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="32" font-weight="800" fill="#142033" text-anchor="start">INSPECT</text>
+<text x="1020" y="350" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="28" font-weight="650" fill="#142033" text-anchor="start">Scoring and simulation</text>
+<rect x="1456" y="150" width="440" height="280" rx="18" fill="#FFFFFF" stroke="#1B4F8A" stroke-width="5"/>
+<text x="1484" y="220" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="42" font-weight="800" fill="#1B4F8A" text-anchor="start">4</text>
+<text x="1484" y="290" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="32" font-weight="800" fill="#142033" text-anchor="start">PREVIEW</text>
+<text x="1484" y="350" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="28" font-weight="650" fill="#142033" text-anchor="start">Open the student view</text>
+<rect x="64" y="490" width="440" height="280" rx="18" fill="#FFF4D8" stroke="#8A5A12" stroke-width="5"/>
+<text x="92" y="560" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="42" font-weight="800" fill="#8A5A12" text-anchor="start">5</text>
+<text x="92" y="630" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="32" font-weight="800" fill="#142033" text-anchor="start">ASSIGN</text>
+<text x="92" y="690" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="28" font-weight="650" fill="#142033" text-anchor="start">Game, lab, module, or all</text>
+<rect x="528" y="490" width="440" height="280" rx="18" fill="#FFF4D8" stroke="#8A5A12" stroke-width="5"/>
+<text x="556" y="560" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="42" font-weight="800" fill="#8A5A12" text-anchor="start">6</text>
+<text x="556" y="630" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="32" font-weight="800" fill="#142033" text-anchor="start">STUDENTS PLAY</text>
+<text x="556" y="690" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="28" font-weight="650" fill="#142033" text-anchor="start">Local progress only</text>
+<rect x="992" y="490" width="440" height="280" rx="18" fill="#FFF4D8" stroke="#8A5A12" stroke-width="5"/>
+<text x="1020" y="560" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="42" font-weight="800" fill="#8A5A12" text-anchor="start">7</text>
+<text x="1020" y="630" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="32" font-weight="800" fill="#142033" text-anchor="start">LOOK FOR</text>
+<text x="1020" y="690" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="28" font-weight="650" fill="#142033" text-anchor="start">Score is not enough</text>
+<rect x="1456" y="490" width="440" height="280" rx="18" fill="#FFF4D8" stroke="#8A5A12" stroke-width="5"/>
+<text x="1484" y="560" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="42" font-weight="800" fill="#8A5A12" text-anchor="start">8</text>
+<text x="1484" y="630" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="32" font-weight="800" fill="#142033" text-anchor="start">DISCUSS</text>
+<text x="1484" y="690" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="28" font-weight="650" fill="#142033" text-anchor="start">Transfer and extension</text>
+<rect x="64" y="980" width="1792" height="68" rx="16" fill="#FFFFFF" stroke="#142033" stroke-width="4"/>
+<text x="960" y="1024" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="30" font-weight="700" fill="#142033" text-anchor="middle">An educator can read the lesson without reading the source code.</text>
+</svg>

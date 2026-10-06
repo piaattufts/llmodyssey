@@ -5,8 +5,7 @@ export function GameHeader({ game, threshold }: { game: GameDefinition; threshol
   return (
     <header className="space-y-3">
       <p className="text-sm text-muted-foreground">
-        Tier {game.tier} · {game.estimatedMinutes} min · mastery {threshold}% · {status}
-        {game.status === "implemented" ? " · Reference implementation" : ""}
+        Tier {game.tier} · {game.estimatedMinutes} min · mastery {threshold}% · {game.status === "implemented" ? "Reference implementation" : status}
       </p>
       <h1 className="text-3xl font-semibold tracking-tight" data-testid="game-title">
         {game.title}

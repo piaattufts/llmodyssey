@@ -148,7 +148,6 @@ export function HomePage({ basePath, demo = false }: { basePath: string; demo?: 
                       <span className="mt-1 block text-sm text-muted-foreground">{game.summary}</span>
                       <span className="mt-2 block text-sm">
                         {releaseStatusLabel(game.status)}
-                        {game.status === "implemented" ? " · Reference" : ""}
                         {game.status === "planned"
                           ? " · Not playable"
                           : record?.mastered

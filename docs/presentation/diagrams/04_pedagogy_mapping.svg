@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0,0 L12,6 L0,12 Z" fill="#142033"/>
+    </marker>
+  </defs>
+  <rect width="1920" height="1080" fill="#F4F7FB"/>
+  <text x="72" y="68" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="48" font-weight="800" fill="#142033" text-anchor="start">Learning science  →  game mechanic</text>
+<rect x="64" y="120" width="760" height="130" rx="16" fill="#E7F1FB" stroke="#1B4F8A" stroke-width="4"/>
+<text x="96" y="198" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="34" font-weight="800" fill="#1B4F8A" text-anchor="start">Immediate feedback</text>
+<line x1="840" y1="185" x2="980" y2="185" stroke="#142033" stroke-width="5" marker-end="url(#arrow)"/>
+<rect x="996" y="120" width="860" height="130" rx="16" fill="#FFFFFF" stroke="#142033" stroke-width="4"/>
+<text x="1028" y="198" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="32" font-weight="750" fill="#142033" text-anchor="start">Feedback after every decision</text>
+<rect x="64" y="270" width="760" height="130" rx="16" fill="#E7F1FB" stroke="#1B4F8A" stroke-width="4"/>
+<text x="96" y="348" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="34" font-weight="800" fill="#1B4F8A" text-anchor="start">Scaffolded hints</text>
+<line x1="840" y1="335" x2="980" y2="335" stroke="#142033" stroke-width="5" marker-end="url(#arrow)"/>
+<rect x="996" y="270" width="860" height="130" rx="16" fill="#FFFFFF" stroke="#142033" stroke-width="4"/>
+<text x="1028" y="348" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="32" font-weight="750" fill="#142033" text-anchor="start">Three hints, minus 1 point each</text>
+<rect x="64" y="420" width="760" height="130" rx="16" fill="#E7F1FB" stroke="#1B4F8A" stroke-width="4"/>
+<text x="96" y="498" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="34" font-weight="800" fill="#1B4F8A" text-anchor="start">Progressive difficulty</text>
+<line x1="840" y1="485" x2="980" y2="485" stroke="#142033" stroke-width="5" marker-end="url(#arrow)"/>
+<rect x="996" y="420" width="860" height="130" rx="16" fill="#FFFFFF" stroke="#142033" stroke-width="4"/>
+<text x="1028" y="498" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="32" font-weight="750" fill="#142033" text-anchor="start">Fixed rounds, increasing focus</text>
+<rect x="64" y="570" width="760" height="130" rx="16" fill="#E7F1FB" stroke="#1B4F8A" stroke-width="4"/>
+<text x="96" y="648" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="34" font-weight="800" fill="#1B4F8A" text-anchor="start">Worked examples</text>
+<line x1="840" y1="635" x2="980" y2="635" stroke="#142033" stroke-width="5" marker-end="url(#arrow)"/>
+<rect x="996" y="570" width="860" height="130" rx="16" fill="#FFFFFF" stroke="#142033" stroke-width="4"/>
+<text x="1028" y="648" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="32" font-weight="750" fill="#142033" text-anchor="start">Illustrated guide before and during play</text>
+<rect x="64" y="720" width="760" height="130" rx="16" fill="#E7F1FB" stroke="#1B4F8A" stroke-width="4"/>
+<text x="96" y="798" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="34" font-weight="800" fill="#1B4F8A" text-anchor="start">Authentic context</text>
+<line x1="840" y1="785" x2="980" y2="785" stroke="#142033" stroke-width="5" marker-end="url(#arrow)"/>
+<rect x="996" y="720" width="860" height="130" rx="16" fill="#FFFFFF" stroke="#142033" stroke-width="4"/>
+<text x="1028" y="798" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="32" font-weight="750" fill="#142033" text-anchor="start">LLM engineering scenarios</text>
+<rect x="64" y="980" width="1792" height="68" rx="16" fill="#FFFFFF" stroke="#142033" stroke-width="4"/>
+<text x="960" y="1024" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="30" font-weight="700" fill="#142033" text-anchor="middle">Black &amp; Wiliam  ·  Vygotsky  ·  Sweller  ·  Bloom.   Practice support, not a measured gain.</text>
+</svg>

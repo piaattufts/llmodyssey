@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0,0 L12,6 L0,12 Z" fill="#142033"/>
+    </marker>
+  </defs>
+  <rect width="1920" height="1080" fill="#F4F7FB"/>
+  <text x="72" y="68" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="48" font-weight="800" fill="#142033" text-anchor="start">Standalone architecture</text>
+<rect x="80" y="120" width="980" height="100" rx="16" fill="#FFFFFF" stroke="#1B4F8A" stroke-width="5"/>
+<text x="120" y="184" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="34" font-weight="800" fill="#142033" text-anchor="start">LEARNER</text>
+<line x1="570" y1="220" x2="570" y2="244" stroke="#142033" stroke-width="5" marker-end="url(#arrow)"/>
+<rect x="80" y="248" width="980" height="100" rx="16" fill="#FFFFFF" stroke="#1B4F8A" stroke-width="5"/>
+<text x="120" y="312" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="34" font-weight="800" fill="#142033" text-anchor="start">REACT + TYPESCRIPT UI</text>
+<line x1="570" y1="348" x2="570" y2="372" stroke="#142033" stroke-width="5" marker-end="url(#arrow)"/>
+<rect x="80" y="376" width="980" height="100" rx="16" fill="#FFFFFF" stroke="#1B4F8A" stroke-width="5"/>
+<text x="120" y="440" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="34" font-weight="800" fill="#142033" text-anchor="start">SHARED GAME COMPONENTS</text>
+<line x1="570" y1="476" x2="570" y2="500" stroke="#142033" stroke-width="5" marker-end="url(#arrow)"/>
+<rect x="80" y="504" width="980" height="100" rx="16" fill="#FFFFFF" stroke="#1B4F8A" stroke-width="5"/>
+<text x="120" y="568" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="34" font-weight="800" fill="#142033" text-anchor="start">13 GAME DEFINITIONS</text>
+<line x1="570" y1="604" x2="570" y2="628" stroke="#142033" stroke-width="5" marker-end="url(#arrow)"/>
+<rect x="80" y="632" width="980" height="100" rx="16" fill="#FFFFFF" stroke="#1B4F8A" stroke-width="5"/>
+<text x="120" y="696" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="34" font-weight="800" fill="#142033" text-anchor="start">GAME ENGINE</text>
+<line x1="570" y1="732" x2="570" y2="756" stroke="#142033" stroke-width="5" marker-end="url(#arrow)"/>
+<rect x="80" y="760" width="980" height="100" rx="16" fill="#FFFFFF" stroke="#1B4F8A" stroke-width="5"/>
+<text x="120" y="824" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="34" font-weight="800" fill="#142033" text-anchor="start">LOCAL PROGRESS STORE</text>
+<text x="120" y="912" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="28" font-weight="650" fill="#142033" text-anchor="start">IndexedDB, with localStorage if IndexedDB is unavailable.</text>
+<rect x="1140" y="140" width="720" height="760" rx="20" fill="#FFFFFF" stroke="#5C6B7A" stroke-width="4"/>
+<text x="1172" y="200" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="28" font-weight="800" fill="#5C6B7A" text-anchor="start">OPTIONAL</text>
+<text x="1172" y="260" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="30" font-weight="700" fill="#142033" text-anchor="start">Off unless configured</text>
+<rect x="1180" y="300" width="640" height="150" rx="14" fill="#F4E9FB" stroke="#5C2D91" stroke-width="4"/>
+<text x="1208" y="360" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="32" font-weight="800" fill="#5C2D91" text-anchor="start">Analytics adapter</text>
+<text x="1208" y="410" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="26" font-weight="650" fill="#142033" text-anchor="start">Supabase only with research</text>
+<text x="1208" y="448" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="26" font-weight="650" fill="#142033" text-anchor="start">mode and a project URL</text>
+<rect x="1180" y="480" width="640" height="180" rx="14" fill="#FFF4D8" stroke="#8A5A12" stroke-width="4"/>
+<text x="1208" y="540" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="32" font-weight="800" fill="#8A5A12" text-anchor="start">LLM provider adapter</text>
+<text x="1208" y="590" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="26" font-weight="650" fill="#142033" text-anchor="start">Default is a mock.</text>
+<text x="1208" y="628" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="26" font-weight="650" fill="#142033" text-anchor="start">The 13 games do not call it.</text>
+<text x="1172" y="740" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="28" font-weight="700" fill="#142033" text-anchor="start">A missing backend does not</text>
+<text x="1172" y="784" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="28" font-weight="700" fill="#142033" text-anchor="start">stop the games.</text>
+<rect x="64" y="980" width="1792" height="68" rx="16" fill="#FFFFFF" stroke="#142033" stroke-width="4"/>
+<text x="960" y="1024" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="30" font-weight="700" fill="#142033" text-anchor="middle">Core gameplay needs no backend and no paid model API.</text>
+</svg>

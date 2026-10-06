@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0,0 L12,6 L0,12 Z" fill="#142033"/>
+    </marker>
+  </defs>
+  <rect width="1920" height="1080" fill="#F4F7FB"/>
+  <text x="72" y="68" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="48" font-weight="800" fill="#142033" text-anchor="start">Curriculum journey</text>
+<rect x="64" y="130" width="433.0" height="200" rx="16" fill="#E7F1FB" stroke="#1B4F8A" stroke-width="4"/>
+<rect x="64" y="130" width="72" height="200" rx="16" fill="#1B4F8A" stroke="#1B4F8A" stroke-width="0"/>
+<rect x="120" y="130" width="20" height="200" rx="0" fill="#1B4F8A" stroke="#1B4F8A" stroke-width="0"/>
+<text x="100" y="242.0" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="28" font-weight="800" fill="#FFFFFF" text-anchor="middle">1</text>
+<text x="164" y="172" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="28" font-weight="800" fill="#1B4F8A" text-anchor="start">TOKENIZATION</text>
+<text x="164" y="210" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="26" font-weight="650" fill="#142033" text-anchor="start">Token Forge</text>
+<rect x="517.0" y="130" width="433.0" height="200" rx="16" fill="#E7F1FB" stroke="#1B4F8A" stroke-width="4"/>
+<rect x="517.0" y="130" width="72" height="200" rx="16" fill="#1B4F8A" stroke="#1B4F8A" stroke-width="0"/>
+<rect x="573.0" y="130" width="20" height="200" rx="0" fill="#1B4F8A" stroke="#1B4F8A" stroke-width="0"/>
+<text x="553.0" y="242.0" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="28" font-weight="800" fill="#FFFFFF" text-anchor="middle">2</text>
+<text x="617.0" y="172" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="28" font-weight="800" fill="#1B4F8A" text-anchor="start">ATTENTION</text>
+<text x="617.0" y="210" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="26" font-weight="650" fill="#142033" text-anchor="start">Attention Architect</text>
+<rect x="970.0" y="130" width="433.0" height="200" rx="16" fill="#E7F1FB" stroke="#1B4F8A" stroke-width="4"/>
+<rect x="970.0" y="130" width="72" height="200" rx="16" fill="#1B4F8A" stroke="#1B4F8A" stroke-width="0"/>
+<rect x="1026.0" y="130" width="20" height="200" rx="0" fill="#1B4F8A" stroke="#1B4F8A" stroke-width="0"/>
+<text x="1006.0" y="242.0" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="28" font-weight="800" fill="#FFFFFF" text-anchor="middle">3</text>
+<text x="1070.0" y="172" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="28" font-weight="800" fill="#1B4F8A" text-anchor="start">CONTEXT</text>
+<text x="1070.0" y="210" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="26" font-weight="650" fill="#142033" text-anchor="start">Context Compression</text>
+<rect x="1423.0" y="130" width="433.0" height="200" rx="16" fill="#E7F1FB" stroke="#1B4F8A" stroke-width="4"/>
+<rect x="1423.0" y="130" width="72" height="200" rx="16" fill="#1B4F8A" stroke="#1B4F8A" stroke-width="0"/>
+<rect x="1479.0" y="130" width="20" height="200" rx="0" fill="#1B4F8A" stroke="#1B4F8A" stroke-width="0"/>
+<text x="1459.0" y="242.0" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="28" font-weight="800" fill="#FFFFFF" text-anchor="middle">4</text>
+<text x="1523.0" y="172" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="28" font-weight="800" fill="#1B4F8A" text-anchor="start">TASK SPEC</text>
+<text x="1523.0" y="210" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="26" font-weight="650" fill="#142033" text-anchor="start">Promptsmith</text>
+<rect x="64" y="380" width="433.0" height="200" rx="16" fill="#E7F1FB" stroke="#1B4F8A" stroke-width="4"/>
+<rect x="64" y="380" width="72" height="200" rx="16" fill="#1B4F8A" stroke="#1B4F8A" stroke-width="0"/>
+<rect x="120" y="380" width="20" height="200" rx="0" fill="#1B4F8A" stroke="#1B4F8A" stroke-width="0"/>
+<text x="100" y="492.0" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="28" font-weight="800" fill="#FFFFFF" text-anchor="middle">5</text>
+<text x="164" y="422" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="28" font-weight="800" fill="#1B4F8A" text-anchor="start">ADAPTATION</text>
+<text x="164" y="460" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="26" font-weight="650" fill="#142033" text-anchor="start">Gradient Playground</text>
+<rect x="517.0" y="380" width="433.0" height="200" rx="16" fill="#E7F1FB" stroke="#1B4F8A" stroke-width="4"/>
+<rect x="517.0" y="380" width="72" height="200" rx="16" fill="#1B4F8A" stroke="#1B4F8A" stroke-width="0"/>
+<rect x="573.0" y="380" width="20" height="200" rx="0" fill="#1B4F8A" stroke="#1B4F8A" stroke-width="0"/>
+<text x="553.0" y="492.0" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="28" font-weight="800" fill="#FFFFFF" text-anchor="middle">6</text>
+<text x="617.0" y="422" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="28" font-weight="800" fill="#1B4F8A" text-anchor="start">GENERATION</text>
+<text x="617.0" y="460" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="26" font-weight="650" fill="#142033" text-anchor="start">Reasoning Reactor</text>
+<rect x="970.0" y="380" width="433.0" height="200" rx="16" fill="#E7F1FB" stroke="#1B4F8A" stroke-width="4"/>
+<rect x="970.0" y="380" width="72" height="200" rx="16" fill="#1B4F8A" stroke="#1B4F8A" stroke-width="0"/>
+<rect x="1026.0" y="380" width="20" height="200" rx="0" fill="#1B4F8A" stroke="#1B4F8A" stroke-width="0"/>
+<text x="1006.0" y="492.0" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="28" font-weight="800" fill="#FFFFFF" text-anchor="middle">7</text>
+<text x="1070.0" y="422" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="28" font-weight="800" fill="#1B4F8A" text-anchor="start">ALIGNMENT</text>
+<text x="1070.0" y="460" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="26" font-weight="650" fill="#142033" text-anchor="start">Alignment Arena</text>
+<rect x="1423.0" y="380" width="433.0" height="200" rx="16" fill="#F4E9FB" stroke="#5C2D91" stroke-width="4"/>
+<rect x="1423.0" y="380" width="72" height="200" rx="16" fill="#5C2D91" stroke="#5C2D91" stroke-width="0"/>
+<rect x="1479.0" y="380" width="20" height="200" rx="0" fill="#5C2D91" stroke="#5C2D91" stroke-width="0"/>
+<text x="1459.0" y="492.0" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="28" font-weight="800" fill="#FFFFFF" text-anchor="middle">8</text>
+<text x="1523.0" y="422" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="28" font-weight="800" fill="#5C2D91" text-anchor="start">DEPLOYMENT</text>
+<text x="1523.0" y="460" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="26" font-weight="650" fill="#142033" text-anchor="start">Ship-It Simulator</text>
+<rect x="64" y="630" width="342.4" height="200" rx="16" fill="#F4E9FB" stroke="#5C2D91" stroke-width="4"/>
+<rect x="64" y="630" width="72" height="200" rx="16" fill="#5C2D91" stroke="#5C2D91" stroke-width="0"/>
+<rect x="120" y="630" width="20" height="200" rx="0" fill="#5C2D91" stroke="#5C2D91" stroke-width="0"/>
+<text x="100" y="742.0" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="28" font-weight="800" fill="#FFFFFF" text-anchor="middle">9</text>
+<text x="164" y="672" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="28" font-weight="800" fill="#5C2D91" text-anchor="start">AGENTS</text>
+<text x="164" y="710" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="26" font-weight="650" fill="#142033" text-anchor="start">Agent Architect</text>
+<rect x="426.4" y="630" width="342.4" height="200" rx="16" fill="#F4E9FB" stroke="#5C2D91" stroke-width="4"/>
+<rect x="426.4" y="630" width="72" height="200" rx="16" fill="#5C2D91" stroke="#5C2D91" stroke-width="0"/>
+<rect x="482.4" y="630" width="20" height="200" rx="0" fill="#5C2D91" stroke="#5C2D91" stroke-width="0"/>
+<text x="462.4" y="742.0" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="28" font-weight="800" fill="#FFFFFF" text-anchor="middle">10</text>
+<text x="526.4" y="672" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="28" font-weight="800" fill="#5C2D91" text-anchor="start">RETRIEVAL</text>
+<text x="526.4" y="710" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="26" font-weight="650" fill="#142033" text-anchor="start">Retrieval Lab</text>
+<rect x="788.8" y="630" width="342.4" height="200" rx="16" fill="#F4E9FB" stroke="#5C2D91" stroke-width="4"/>
+<rect x="788.8" y="630" width="72" height="200" rx="16" fill="#5C2D91" stroke="#5C2D91" stroke-width="0"/>
+<rect x="844.8" y="630" width="20" height="200" rx="0" fill="#5C2D91" stroke="#5C2D91" stroke-width="0"/>
+<text x="824.8" y="742.0" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="28" font-weight="800" fill="#FFFFFF" text-anchor="middle">11</text>
+<text x="888.8" y="672" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="28" font-weight="800" fill="#5C2D91" text-anchor="start">INTEGRATION</text>
+<text x="888.8" y="710" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="26" font-weight="650" fill="#142033" text-anchor="start">System Composer</text>
+<rect x="1151.1999999999998" y="630" width="342.4" height="200" rx="16" fill="#F4E9FB" stroke="#5C2D91" stroke-width="4"/>
+<rect x="1151.1999999999998" y="630" width="72" height="200" rx="16" fill="#5C2D91" stroke="#5C2D91" stroke-width="0"/>
+<rect x="1207.1999999999998" y="630" width="20" height="200" rx="0" fill="#5C2D91" stroke="#5C2D91" stroke-width="0"/>
+<text x="1187.1999999999998" y="742.0" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="28" font-weight="800" fill="#FFFFFF" text-anchor="middle">12</text>
+<text x="1251.1999999999998" y="672" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="28" font-weight="800" fill="#5C2D91" text-anchor="start">OPERATIONS</text>
+<text x="1251.1999999999998" y="710" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="26" font-weight="650" fill="#142033" text-anchor="start">ProdOps Gauntlet</text>
+<rect x="1513.6" y="630" width="342.4" height="200" rx="16" fill="#FFF4D8" stroke="#8A5A12" stroke-width="4"/>
+<rect x="1513.6" y="630" width="72" height="200" rx="16" fill="#8A5A12" stroke="#8A5A12" stroke-width="0"/>
+<rect x="1569.6" y="630" width="20" height="200" rx="0" fill="#8A5A12" stroke="#8A5A12" stroke-width="0"/>
+<text x="1549.6" y="742.0" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="28" font-weight="800" fill="#FFFFFF" text-anchor="middle">13</text>
+<text x="1613.6" y="672" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="28" font-weight="800" fill="#8A5A12" text-anchor="start">SYNTHESIS</text>
+<text x="1613.6" y="710" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="26" font-weight="650" fill="#142033" text-anchor="start">Foundry Arena</text>
+<text x="960" y="955" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="28" font-weight="700" fill="#142033" text-anchor="middle">Read left to right, then the next row.</text>
+<rect x="64" y="980" width="1792" height="68" rx="16" fill="#FFFFFF" stroke="#142033" stroke-width="4"/>
+<text x="960" y="1024" font-family="Noto Sans, Liberation Sans, Arial, sans-serif" font-size="30" font-weight="700" fill="#142033" text-anchor="middle">Pedagogical progression  —  not a universal production pipeline.</text>
+</svg>
